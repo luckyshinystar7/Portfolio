@@ -8,6 +8,9 @@ import { ArrowCircleDown } from "@phosphor-icons/react";
 import IntervalLabel from "@/components/IntervalLabel";
 import Carousel from "@/components/Carousel/Carousel";
 
+import { useQuery } from "@tanstack/react-query";
+import { request } from "graphql-request";
+
 const LABELS = [
   "Creative Developer",
   "Frontend Engineer",
@@ -16,7 +19,44 @@ const LABELS = [
 ];
 
 export default function Home() {
-  const [projectButtonHover, setProjectButtonHover] = useState<boolean>(false);
+  const query = `query project($id: String!) {
+    project(id: $id) {
+      projectCollection(limit: 100) {
+        total
+        items {
+          ... on ProjectItem {
+            projectItemTitle
+            projectItemSkills
+            projectItemHyperlink
+            projectItemDescription {
+              json
+            }
+          }
+        }
+      }
+    }
+  }`;
+  const variables = {
+    id: "2Ntf4X5iFJuQLlnbWXhbWM",
+  };
+
+  const { data, error, isLoading } = useQuery<any>({
+    queryKey: ["project", variables?.id],
+    queryFn: async () =>
+      await request(
+        `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`,
+        query,
+        variables,
+        {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN}`,
+          "content-type": "application/json",
+        }
+      ),
+  });
+  
+  console.log(data?.project?.projectCollection?.items,' wtf projec')
+  //TODO: Memoize data from projects to make array of react elements to map
+
   return (
     <main className="flex flex-col">
       <section id="intro" className="grid grid-cols-12">
@@ -42,7 +82,7 @@ export default function Home() {
               }
             >
               <h5>
-                Let&apos;s Connect{" "}
+                Let&apos;s Connect
                 <ArrowCircleDown className="inline-flex" size={32} />
               </h5>
             </button>
@@ -85,7 +125,7 @@ export default function Home() {
       <section id="projects" className="grid grid-cols-12">
         <h2 className="col-span-12">Projects</h2>
         <div className="col-span-10 col-start-2 overflow-hidden">
-        <Carousel />
+          <Carousel />
         </div>
         {/* <div className="col-span-12 text-end">
           <Link
@@ -115,7 +155,8 @@ export default function Home() {
           </li>
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
-            add mail server for email form & captcha, s3 bucket for resume download
+            add mail server for email form & captcha, s3 bucket for resume
+            download
           </li>
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />

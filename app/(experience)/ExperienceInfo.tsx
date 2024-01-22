@@ -15,8 +15,8 @@ export default function ExperienceInfo() {
       total
       items{
         ... on CvItem{
-         cvTitle
-         cvDescription{
+         cvItemTitle
+         cvItemDescription{
             json
          }
         }
@@ -46,12 +46,12 @@ export default function ExperienceInfo() {
     if (data?.experience?.experienceCollection?.items?.length > 0) {
       let experienceItems = {} as any;
       data?.experience?.experienceCollection?.items.map(
-        (item: { cvTitle: string; cvDescription: any }, index: number) => {
+        (item: { cvItemTitle: string; cvItemDescription: any }, index: number) => {
           if (index === 0) {
             //set default state if cms data exists
-            setExperienceTab(item.cvTitle);
+            setExperienceTab(item.cvItemTitle);
           }
-          return (experienceItems[item.cvTitle] = item?.cvDescription.json);
+          return (experienceItems[item.cvItemTitle] = item?.cvItemDescription.json);
         }
       );
       return experienceItems;
@@ -63,18 +63,18 @@ export default function ExperienceInfo() {
       <div className="grid grid-cols-12">
         <div className="col-span-4 col-start-2">
           {data?.experience?.experienceCollection?.items?.map(
-            (item: { cvTitle: string; cvDescription: any }, index: number) => (
+            (item: { cvItemTitle: string; cvItemDescription: any }, index: number) => (
               <div
                 className={clsx(
                   `block p-4  border-l-2 dark:border-white border-black  hover:text-orange-600 hover:border-orange-600 hover:dark:border-orange-600 cursor-pointer mr-4 hover:transition-colors`,
-                  item?.cvTitle === experienceTabState &&
+                  item?.cvItemTitle === experienceTabState &&
                     "border-b-2 border-b-orange-400 dark:border-b-orange-400 text-orange-400"
                 )}
                 key={index}
-                onClick={() => setExperienceTab(item?.cvTitle)}
+                onClick={() => setExperienceTab(item?.cvItemTitle)}
               >
-                <h4>{item?.cvTitle}</h4>
-                {/* <div>{documentToReactComponents(item?.cvDescription.json)}</div> */}
+                <h4>{item?.cvItemTitle}</h4>
+                {/* <div>{documentToReactComponents(item?.cvItemDescription.json)}</div> */}
               </div>
             )
           )}
