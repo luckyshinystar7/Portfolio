@@ -74,7 +74,7 @@ export default function ExperienceInfo() {
             ) => (
               <div
                 className={clsx(
-                  `block p-4  border-l-2 dark:border-white border-black  hover:text-blue-600 hover:border-blue-600 hover:dark:border-orange-600 cursor-pointer mr-4 hover:transition-colors`,
+                  `block p-4  border-l-2 dark:border-white border-black  hover:text-blue-600 hover:border-blue-600 hover:dark:text-orange-600 hover:dark:border-orange-600 cursor-pointer mr-4 hover:transition-colors`,
                   item?.cvItemTitle === experienceTabState &&
                     "border-b-2 border-b-blue-400 dark:border-b-orange-400 text-blue-400 dark:text-orange-400"
                 )}
@@ -94,7 +94,11 @@ export default function ExperienceInfo() {
               experienceDescrptions[experienceTabState],
               {
                 renderMark: {
-                  [MARKS.ITALIC]: (text) => <div className="dark:text-white text-black italic">{text}</div>,
+                  [MARKS.ITALIC]: (text) => (
+                    <div className="dark:text-white text-black italic">
+                      {text}
+                    </div>
+                  ),
                 },
                 renderNode: {
                   [BLOCKS.LIST_ITEM]: (node, children) => {
