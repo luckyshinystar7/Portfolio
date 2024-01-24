@@ -36,7 +36,7 @@ export default function LayoutHeader({}: {}) {
       <div className="flex flex-row gap-2 dark:bg-slate-500 bg-slate-200 bg-opacity-65 dark:bg-opacity-65 rounded-md py-2 px-4">
         {NAVIGATION.map((item, index: number) => (
           <Link
-            className="hover:text-orange-400 hover:dark:text-orange-400 leading-6"
+            className="hover:text-blue-400 hover:dark:text-orange-400 leading-6"
             href={item.href}
             key={index}
           >

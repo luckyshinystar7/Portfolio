@@ -222,7 +222,7 @@ export default function Home() {
           </li>
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
-            add framer motion/GSAP animations/more design creativity/make logo
+            add framer motion/GSAP animations (what I&apos;m currently learning!)/more design creativity
           </li>
         </ul>
       </div>

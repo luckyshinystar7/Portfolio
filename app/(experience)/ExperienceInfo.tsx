@@ -17,6 +17,8 @@ export default function ExperienceInfo() {
       items{
         ... on CvItem{
          cvItemTitle
+         cvItemSkills
+         cvItemHyperlink
          cvItemDescription{
             json
          }
@@ -48,21 +50,28 @@ export default function ExperienceInfo() {
       let experienceItems = {} as any;
       data?.experience?.experienceCollection?.items.map(
         (
-          item: { cvItemTitle: string; cvItemDescription: any },
+          item: {
+            cvItemTitle: string;
+            cvItemDescription: any;
+            cvItemSkills: any;
+          },
           index: number
         ) => {
           if (index === 0) {
             //set default state if cms data exists
             setExperienceTab(item.cvItemTitle);
           }
-          return (experienceItems[item.cvItemTitle] =
-            item?.cvItemDescription.json);
+          return (experienceItems[item.cvItemTitle] = {
+            skills: item?.cvItemSkills,
+            json: item?.cvItemDescription.json,
+          });
         }
       );
       return experienceItems;
     }
   }, [data]);
 
+  console.log(data, "exp");
   return (
     <>
       <div className="grid grid-cols-12">
@@ -88,13 +97,13 @@ export default function ExperienceInfo() {
           )}
         </div>
         <div
-          className="col-span-7 ml-4 
-        max-h-[280px] md:max-h-[184px] overflow-y-scroll"
+          className="col-span-7 ml-4 "
+        // max-h-[280px] md:max-h-[184px]"
         >
           {!!experienceDescrptions &&
             experienceTabState &&
             documentToReactComponents(
-              experienceDescrptions[experienceTabState],
+              experienceDescrptions[experienceTabState].json,
               {
                 renderMark: {
                   [MARKS.ITALIC]: (text) => (
@@ -122,6 +131,21 @@ export default function ExperienceInfo() {
                 },
               }
             )}
+
+          {!!experienceDescrptions && experienceTabState && (
+            <div className="flex flex-row gap-2 flex-wrap mt-2">
+              {experienceDescrptions[experienceTabState].skills?.map(
+                (skill: string, index: number) => (
+                  <div
+                    key={`experience_skill_${index}`}
+                    className="col-span-1 p-1 rounded-md bg-slate-500 bg-opacity-65 h-fit"
+                  >
+                    {skill}
+                  </div>
+                )
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>
