@@ -87,7 +87,10 @@ export default function ExperienceInfo() {
             )
           )}
         </div>
-        <div className="col-span-7 ml-4">
+        <div
+          className="col-span-7 ml-4 
+        max-h-[280px] md:max-h-[184px] overflow-y-scroll"
+        >
           {!!experienceDescrptions &&
             experienceTabState &&
             documentToReactComponents(
