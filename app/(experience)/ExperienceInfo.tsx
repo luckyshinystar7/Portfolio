@@ -100,6 +100,7 @@ export default function ExperienceInfo() {
                   [BLOCKS.LIST_ITEM]: (node, children) => {
                     return (
                       <li className="list-disc list-inside">
+                        {/* @ts-ignore-error */}
                         {node?.content[0]?.content[0]?.value}
                       </li>
                     );
