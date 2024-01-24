@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { request, gql, GraphQLClient } from "graphql-request";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
+import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 export const getServerSideProps = (async () => {
@@ -81,5 +82,11 @@ export default function AboutInfo() {
   isLoading && <div>Loading...</div>;
   error && <div>error</div>;
 
-  return documentToReactComponents(data?.about?.biography?.json);
+  return documentToReactComponents(data?.about?.biography?.json, {
+    renderNode: {
+      [BLOCKS.PARAGRAPH]: (node, children) => (
+        <div className="mt-8 indent-4 text-justify">{children}</div>
+      ),
+    },
+  });
 }

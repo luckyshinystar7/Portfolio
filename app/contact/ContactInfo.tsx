@@ -13,9 +13,6 @@ export default function ContactInfo() {
         ... on Social{
           socialTitle
           socialHyperlink
-          image{
-           url 
-          }
         }
       }
     }

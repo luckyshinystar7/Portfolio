@@ -75,7 +75,6 @@ export default function Home() {
           },
           index: number
         ) => {
-          console.log(item?.projectItemTitle);
           projectData.push(
             <div
               className={clsx(
@@ -83,7 +82,7 @@ export default function Home() {
                 item.projectItemThumbnail?.url &&
                   "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills'] md:[grid-template-areas:'image_image_text_text_text'_'image_image_text_text_text'_'image_image_text_text_text'_'skills_skills_skills_skills_skills']",
                 !item.projectItemThumbnail?.url &&
-                  "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills'] md:[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills']"
+                  "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills']"
               )}
               key={`${item.projectItemTitle}_card`}
             >
@@ -187,7 +186,7 @@ export default function Home() {
         <div>
           <ExperienceInfo />
         </div>
-        <div className="text-end mt-16">
+        <div className="text-center md:text-end mt-16">
           <Link
             className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-slate-500 bg-slate-200 bg-opacity-65 dark:bg-opacity-65 rounded-md p-2 pointer-events-none opacity-60"
             href="/Portfolio"
@@ -211,11 +210,6 @@ export default function Home() {
             <input type="checkbox" disabled />
             come up with better mobile UI for header and
             &ldquo;Experience&rdquo;
-          </li>
-          <li className="flex flex-row gap-2">
-            <input type="checkbox" disabled />
-            update rich text renderer to allow bulletpoints, line breaks, etc.
-            from CMS
           </li>
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
