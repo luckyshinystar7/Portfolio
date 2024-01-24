@@ -75,7 +75,7 @@ export default function ExperienceInfo() {
   return (
     <>
       <div className="grid grid-cols-12">
-        <div className="col-span-4 col-start-2">
+        <div className="col-span-12 md:col-span-4 col-start-1 md:col-start-2">
           {data?.experience?.experienceCollection?.items?.map(
             (
               item: { cvItemTitle: string; cvItemDescription: any },
@@ -90,14 +90,14 @@ export default function ExperienceInfo() {
                 key={index}
                 onClick={() => setExperienceTab(item?.cvItemTitle)}
               >
-                <h4>{item?.cvItemTitle}</h4>
+                <div className="text-sm md:text-2xl">{item?.cvItemTitle}</div>
                 {/* <div>{documentToReactComponents(item?.cvItemDescription.json)}</div> */}
               </div>
             )
           )}
         </div>
         <div
-          className="col-span-7 ml-4 "
+          className="col-span-12 md:col-span-7 md:ml-4 mt-4"
         // max-h-[280px] md:max-h-[184px]"
         >
           {!!experienceDescrptions &&
