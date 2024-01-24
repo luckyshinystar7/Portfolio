@@ -74,9 +74,9 @@ export default function ExperienceInfo() {
             ) => (
               <div
                 className={clsx(
-                  `block p-4  border-l-2 dark:border-white border-black  hover:text-orange-600 hover:border-orange-600 hover:dark:border-orange-600 cursor-pointer mr-4 hover:transition-colors`,
+                  `block p-4  border-l-2 dark:border-white border-black  hover:text-blue-600 hover:border-blue-600 hover:dark:border-orange-600 cursor-pointer mr-4 hover:transition-colors`,
                   item?.cvItemTitle === experienceTabState &&
-                    "border-b-2 border-b-orange-400 dark:border-b-orange-400 text-orange-400"
+                    "border-b-2 border-b-blue-400 dark:border-b-orange-400 text-blue-400 dark:text-orange-400"
                 )}
                 key={index}
                 onClick={() => setExperienceTab(item?.cvItemTitle)}
@@ -107,7 +107,7 @@ export default function ExperienceInfo() {
                   },
                   [BLOCKS.PARAGRAPH]: (node, children) => {
                     return (
-                      <p className="text-orange-600 dark:text-orange-400">
+                      <p className="text-blue-400 dark:text-orange-400">
                         {children}
                       </p>
                     );

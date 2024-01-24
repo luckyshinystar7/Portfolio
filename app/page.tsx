@@ -155,7 +155,7 @@ export default function Home() {
             <button
               className="border-2 border-black leading-8
               dark:border-white rounded-sm p-4 hover:transition-colors
-              hover:bg-orange-600 hover:border-orange-600 hover:text-orange-100
+              hover:bg-blue-400 hover:border-blue-400 hover:text-blue-100
               hover:dark:bg-orange-600 hover:dark:border-orange-600 hover:dark:text-orange-100"
               onClick={() =>
                 window.scrollTo({
