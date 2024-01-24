@@ -90,7 +90,7 @@ export default function ExperienceInfo() {
                 key={index}
                 onClick={() => setExperienceTab(item?.cvItemTitle)}
               >
-                <div className="text-sm md:text-2xl">{item?.cvItemTitle}</div>
+                <h4>{item?.cvItemTitle}</h4>
                 {/* <div>{documentToReactComponents(item?.cvItemDescription.json)}</div> */}
               </div>
             )
@@ -123,7 +123,7 @@ export default function ExperienceInfo() {
                   },
                   [BLOCKS.PARAGRAPH]: (node, children) => {
                     return (
-                      <p className="text-blue-400 dark:text-orange-400">
+                      <p className="text-blue-400 dark:text-orange-400 text-justify">
                         {children}
                       </p>
                     );

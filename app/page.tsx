@@ -208,6 +208,10 @@ export default function Home() {
         <ul className="ml-4">
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
+            come up with better mobile UI for header
+          </li>
+          <li className="flex flex-row gap-2">
+            <input type="checkbox" disabled />
             move data fetching to SSR/add more &apos;use client&apos; directives
           </li>
           <li className="flex flex-row gap-2">
