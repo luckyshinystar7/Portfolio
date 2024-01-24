@@ -11,6 +11,8 @@ import Carousel from "@/components/Carousel/Carousel";
 import { useQuery } from "@tanstack/react-query";
 import { request } from "graphql-request";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import Image from "next/image";
+import clsx from "clsx";
 
 const LABELS = [
   "Frontend Engineer",
@@ -31,6 +33,9 @@ export default function Home() {
             projectItemHyperlink
             projectItemDescription {
               json
+            }
+            projectItemThumbnail{
+              url
             }
           }
         }
@@ -66,50 +71,56 @@ export default function Home() {
             projectItemHyperlink: string;
             projectItemSkills: string[];
             projectItemTitle: string;
+            projectItemThumbnail: { url: string };
           },
           index: number
         ) => {
           console.log(item?.projectItemTitle);
           projectData.push(
             <div
-              className="min-h-52 min-w-52 max-w-96
-            border-2 rounded-md p-4 grid gap-4
-            [grid-template-areas:'image_image_title_title_title'_'image_image_description_description_description'_'image_image_description_description_description'_'skills_skills_skills_skills_skills']
-            "
+              className={clsx(
+                "min-h-52 min-w-52 max-w-96 border-2 rounded-md p-4 grid gap-4",
+                item.projectItemThumbnail?.url &&
+                  "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills'] md:[grid-template-areas:'image_image_text_text_text'_'image_image_text_text_text'_'image_image_text_text_text'_'skills_skills_skills_skills_skills']",
+                !item.projectItemThumbnail?.url &&
+                  "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills'] md:[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills']"
+              )}
               key={`${item.projectItemTitle}_card`}
             >
-              <div
-                className="col-span-2 border h-full w-full 
-              [grid-area:image]
+              {item.projectItemThumbnail?.url && (
+                <Image
+                  src={item?.projectItemThumbnail?.url}
+                  alt={`${item.projectItemTitle}_thumbnail`}
+                  height={100}
+                  width={300}
+                  className="col-span-2 border rounded-md h-full w-full invisible md:visible
+                    [grid-area:image]
+                    "
+                />
+              )}
+              <div className="[grid-area:text]">
+                <div
+                  className="flex flex-row justify-between gap-4 h-fit
               "
-              >
-                Image
-              </div>
-              <div
-                className="flex flex-row justify-between gap-4 h-fit
-              [grid-area:title]
-              "
-              >
-                <span className="leading-6">{item.projectItemTitle}</span>
-                <Link
-                  href={item?.projectItemHyperlink}
-                  passHref
-                  target="_blank"
                 >
-                  <ArrowUpRight className="inline" size={24} />
-                </Link>
-              </div>
+                  <span className="leading-6 p-1">{item.projectItemTitle}</span>
+                  <Link
+                    href={item?.projectItemHyperlink}
+                    passHref
+                    target="_blank"
+                  >
+                    <div className="hover:bg-slate-200 hover:dark:bg-slate-500 bg-opacity-65 dark:bg-opacity-65 p-1 h-fit rounded-md my-auto ">
+                      <ArrowUpRight className="inline" size={24} />
+                    </div>
+                  </Link>
+                </div>
 
-              <div
-                className="
-              [grid-area:description]
-              "
-              >
-                {documentToReactComponents(item?.projectItemDescription.json)}
+                <div>
+                  {documentToReactComponents(item?.projectItemDescription.json)}
+                </div>
               </div>
-
               <div
-                className="flex flex-row gap-4
+                className="flex flex-row gap-4 pb-1
               [grid-area:skills]
               "
               >
