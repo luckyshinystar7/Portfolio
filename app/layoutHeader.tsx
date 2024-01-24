@@ -38,25 +38,17 @@ export default function LayoutHeader({}: {}) {
           </Link>
         ))}
       </div>
-      <div className="hover:bg-slate-200 hover:dark:bg-slate-500 bg-opacity-65 dark:bg-opacity-65 p-1 h-fit rounded-md my-auto ">
+      <div
+        className="hover:bg-slate-200 hover:dark:bg-slate-500 bg-opacity-65 dark:bg-opacity-65 p-1 h-fit rounded-md my-auto "
+        onClick={() => {
+          toggleDarkMode();
+          setDarkState(!darkState);
+        }}
+      >
         {!!darkState ? (
-          <Sun
-            className="cursor-pointer"
-            size={24}
-            onClick={() => {
-              toggleDarkMode();
-              setDarkState(false);
-            }}
-          />
+          <Sun className="cursor-pointer" size={24} />
         ) : (
-          <Sunglasses
-            className="cursor-pointer"
-            size={24}
-            onClick={() => {
-              toggleDarkMode();
-              setDarkState(true);
-            }}
-          />
+          <Sunglasses className="cursor-pointer" size={24} />
         )}
       </div>
     </div>

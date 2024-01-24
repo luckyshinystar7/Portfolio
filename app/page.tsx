@@ -2,20 +2,21 @@
 import AboutInfo from "@/components/AboutInfo";
 import ContactInfo from "./contact/ContactInfo";
 import ExperienceInfo from "./(experience)/ExperienceInfo";
-import { useState } from "react";
+import { JSX, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowCircleDown } from "@phosphor-icons/react";
+import { ArrowCircleDown, ArrowUpRight } from "@phosphor-icons/react";
 import IntervalLabel from "@/components/IntervalLabel";
 import Carousel from "@/components/Carousel/Carousel";
 
 import { useQuery } from "@tanstack/react-query";
 import { request } from "graphql-request";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const LABELS = [
-  "Creative Developer",
   "Frontend Engineer",
   "Designer",
   "Photographer",
+  "Creative Developer",
 ];
 
 export default function Home() {
@@ -53,9 +54,53 @@ export default function Home() {
         }
       ),
   });
-  
-  console.log(data?.project?.projectCollection?.items,' wtf projec')
-  //TODO: Memoize data from projects to make array of react elements to map
+
+  const projectCards = useMemo<JSX.Element[] | undefined>(() => {
+    if (data?.project?.projectCollection?.items?.length > 0) {
+      const projectData: JSX.Element[] = [];
+      data?.project?.projectCollection?.items.map(
+        (
+          item: {
+            projectItemDescription: any;
+            projectItemHyperlink: string;
+            projectItemSkills: string[];
+            projectItemTitle: string;
+          },
+          index: number
+        ) => {
+          console.log(item?.projectItemTitle);
+          projectData.push(
+            <div className="min-h-52 min-w-52 max-h-52 max-w-96
+            border-2 rounded-md p-4
+            " key={`${item.projectItemTitle}_card`}>
+              <div className="flex flex-row gap-4 items-start">
+                <span className="leading-6">{item.projectItemTitle}</span>
+                <Link
+                  href={item?.projectItemHyperlink}
+                  passHref
+                  target="_blank"
+                >
+                  <ArrowUpRight className="inline" size={24} />
+                </Link>
+              </div>
+
+              <div>
+                {documentToReactComponents(item?.projectItemDescription.json)}
+              </div>
+              <div className="flex flex-row gap-4">
+                {item?.projectItemSkills?.map((skill: string, index) => (
+                  <div className="col-span-1 p-1 rounded-md bg-slate-500 bg-opacity-65" key={`${item.projectItemTitle}_skill_${index}`}>
+                    {skill}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        }
+      );
+      return projectData;
+    }
+  }, [data]);
 
   return (
     <main className="flex flex-col">
@@ -83,7 +128,7 @@ export default function Home() {
             >
               <h5>
                 Let&apos;s Connect
-                <ArrowCircleDown className="inline-flex" size={32} />
+                <ArrowCircleDown className="inline-flex ml-2" size={32} />
               </h5>
             </button>
           </div>
@@ -95,16 +140,6 @@ export default function Home() {
           <AboutInfo />
         </div>
         {/* <div>
-          <h3>Tooling</h3>
-          <div className="grid grid-cols-7">
-            <div>React</div>
-            <div>NextJS</div>
-            <div>Postgresql</div>
-            <div>TRPC</div>
-            <div>Gatsby</div>
-          </div>
-        </div> */}
-        {/* <div>
           <div>Now Playing</div>
         </div> */}
       </section>
@@ -115,39 +150,27 @@ export default function Home() {
         </div>
         <div className="col-span-12 text-end">
           <Link
-            className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-slate-500 bg-slate-200 bg-opacity-65 dark:bg-opacity-65 rounded-md p-2"
+            className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-slate-500 bg-slate-200 bg-opacity-65 dark:bg-opacity-65 rounded-md p-2 pointer-events-none opacity-60"
             href="/Portfolio"
           >
-            View Full Resume
+            View Full Resume (coming soon)
           </Link>
         </div>
       </section>
       <section id="projects" className="grid grid-cols-12">
         <h2 className="col-span-12">Projects</h2>
         <div className="col-span-10 col-start-2 overflow-hidden">
-          <Carousel />
+          {projectCards && (
+            <Carousel>{projectCards?.map((item: any) => item)}</Carousel>
+          )}
         </div>
-        {/* <div className="col-span-12 text-end">
-          <Link
-            className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-slate-500 bg-slate-200 bg-opacity-65 dark:bg-opacity-65 
-            rounded-md p-2 
-            pointer-events-none opacity-65
-            "
-            href="/Portfolio"
-            aria-disabled="true"
-            onMouseOver={() => setProjectButtonHover(true)}
-            onMouseOut={() => setProjectButtonHover(false)}
-          >
-            View All Projects (Coming Soon)
-          </Link>
-        </div> */}
       </section>
       <div id="additional">
         <h5>Website Todos:</h5>
         <ul className="ml-4">
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
-            finish project card design
+            come up with better mobile UI for &ldquo;experience&rdquo; and &ldquo;projects&rdquo;
           </li>
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
@@ -160,7 +183,7 @@ export default function Home() {
           </li>
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
-            add framer motion/GSAP animations/more design work
+            add framer motion/GSAP animations/more design creativity
           </li>
         </ul>
       </div>
