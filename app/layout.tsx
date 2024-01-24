@@ -48,18 +48,20 @@ export default function RootLayout({
           <div className="fixed top-0 left-0 right-0 max-w-[1440px] w-full mx-auto px-2">
             <LayoutHeader />
           </div>
-          <div className="min-h-screen max-w-[1440px] px-12 mx-auto">
+          <div className="min-h-screen max-w-[1440px] px-8 md:px-12 mx-auto">
             {children}
           </div>
           <footer
             id="contact"
             className="border-t-2 border-slate-100 dark:border-slate-400"
           >
-             <div className="max-w-[1440px] mx-auto">
-              <h4>Let&apos;s Connect!</h4>
-              <div>Reach out to me on:</div>
-              <div className="flex flex-row gap-4">
-                <ContactInfo />
+            <div className="max-w-[1440px] mx-auto">
+              <div className="flex flex-col gap-2">
+                <h4>Let&apos;s Connect!</h4>
+                <div>Reach out to me on:</div>
+                <div className="flex flex-row gap-4">
+                  <ContactInfo />
+                </div>
               </div>
             </div>
           </footer>

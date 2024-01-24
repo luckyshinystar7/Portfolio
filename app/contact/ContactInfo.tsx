@@ -1,7 +1,9 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { request } from "graphql-request";
-
+import Image from "next/image";
+import Link from "next/link";
+import { InstagramLogo, LinkedinLogo } from "@phosphor-icons/react";
 export default function ContactInfo() {
   const query = `query contact($id: String!) {
     contact(id: $id) {
@@ -11,6 +13,9 @@ export default function ContactInfo() {
         ... on Social{
           socialTitle
           socialHyperlink
+          image{
+           url 
+          }
         }
       }
     }
@@ -34,13 +39,32 @@ export default function ContactInfo() {
       ),
   });
 
+  console.log("social data", data);
+  const renderLogo = (logo: string) => {
+    switch (logo) {
+      case "Linkedin":
+        return <LinkedinLogo size={24} />;
+      case "Instagram":
+        return <InstagramLogo size={24} />;
+      default:
+        return <></>;
+    }
+  };
+
   return (
     <>
-      {data?.contact?.socialCollection?.items?.map((item: any, index: number) => (
-        <a href={item?.socialHyperlink} target="_blank" key={index}>
-          {item?.socialTitle}
-        </a>
-      ))}
+      {data?.contact?.socialCollection?.items?.map(
+        (item: any, index: number) => (
+          <Link
+            href={item?.socialHyperlink}
+            target="_blank"
+            key={index}
+            passHref
+          >
+            {renderLogo(item?.socialTitle)}
+          </Link>
+        )
+      )}
     </>
   );
 }

@@ -55,6 +55,7 @@ export default function Home() {
       ),
   });
 
+  //TODO: move this into use client
   const projectCards = useMemo<JSX.Element[] | undefined>(() => {
     if (data?.project?.projectCollection?.items?.length > 0) {
       const projectData: JSX.Element[] = [];
@@ -70,10 +71,25 @@ export default function Home() {
         ) => {
           console.log(item?.projectItemTitle);
           projectData.push(
-            <div className="min-h-52 min-w-52 max-h-52 max-w-96
-            border-2 rounded-md p-4
-            " key={`${item.projectItemTitle}_card`}>
-              <div className="flex flex-row gap-4 items-start">
+            <div
+              className="min-h-52 min-w-52 max-w-96
+            border-2 rounded-md p-4 grid gap-4
+            [grid-template-areas:'image_image_title_title_title'_'image_image_description_description_description'_'image_image_description_description_description'_'skills_skills_skills_skills_skills']
+            "
+              key={`${item.projectItemTitle}_card`}
+            >
+              <div
+                className="col-span-2 border h-full w-full 
+              [grid-area:image]
+              "
+              >
+                Image
+              </div>
+              <div
+                className="flex flex-row justify-between gap-4 h-fit
+              [grid-area:title]
+              "
+              >
                 <span className="leading-6">{item.projectItemTitle}</span>
                 <Link
                   href={item?.projectItemHyperlink}
@@ -84,12 +100,24 @@ export default function Home() {
                 </Link>
               </div>
 
-              <div>
+              <div
+                className="
+              [grid-area:description]
+              "
+              >
                 {documentToReactComponents(item?.projectItemDescription.json)}
               </div>
-              <div className="flex flex-row gap-4">
+
+              <div
+                className="flex flex-row gap-4
+              [grid-area:skills]
+              "
+              >
                 {item?.projectItemSkills?.map((skill: string, index) => (
-                  <div className="col-span-1 p-1 rounded-md bg-slate-500 bg-opacity-65" key={`${item.projectItemTitle}_skill_${index}`}>
+                  <div
+                    className="col-span-1 p-1 rounded-md bg-slate-500 bg-opacity-65 h-fit"
+                    key={`${item.projectItemTitle}_skill_${index}`}
+                  >
                     {skill}
                   </div>
                 ))}
@@ -104,9 +132,9 @@ export default function Home() {
 
   return (
     <main className="flex flex-col">
-      <section id="intro" className="grid grid-cols-12">
+      <section id="intro" className="grid grid-cols-12 min-h-[36em]">
         <div className="col-span-12 md:col-span-6 flex flex-col justify-around">
-          <div>
+          <div className="mt-16">
             <h5>Hi, I&apos;m</h5>
             <h1>Frank Wei</h1>
             <h3>
@@ -136,19 +164,19 @@ export default function Home() {
       </section>
       <section id="about">
         <h2>About</h2>
-        <div className="mt-16">
+        <div>
           <AboutInfo />
         </div>
         {/* <div>
           <div>Now Playing</div>
         </div> */}
       </section>
-      <section id="experience" className="grid grid-cols-12">
-        <h2 className="col-span-12">Experience</h2>
-        <div className="col-span-12">
+      <section id="experience">
+        <h2>Experience</h2>
+        <div>
           <ExperienceInfo />
         </div>
-        <div className="col-span-12 text-end">
+        <div className="text-end mt-16">
           <Link
             className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-slate-500 bg-slate-200 bg-opacity-65 dark:bg-opacity-65 rounded-md p-2 pointer-events-none opacity-60"
             href="/Portfolio"
@@ -157,9 +185,9 @@ export default function Home() {
           </Link>
         </div>
       </section>
-      <section id="projects" className="grid grid-cols-12">
-        <h2 className="col-span-12">Projects</h2>
-        <div className="col-span-10 col-start-2 overflow-hidden">
+      <section id="projects">
+        <h2>Projects</h2>
+        <div className="md:mx-32 overflow-hidden mb-8">
           {projectCards && (
             <Carousel>{projectCards?.map((item: any) => item)}</Carousel>
           )}
@@ -170,7 +198,13 @@ export default function Home() {
         <ul className="ml-4">
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
-            come up with better mobile UI for &ldquo;experience&rdquo; and &ldquo;projects&rdquo;
+            come up with better mobile UI for header and
+            &ldquo;Experience&rdquo;
+          </li>
+          <li className="flex flex-row gap-2">
+            <input type="checkbox" disabled />
+            update rich text renderer to allow bulletpoints, line breaks, etc.
+            from CMS
           </li>
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
@@ -183,7 +217,7 @@ export default function Home() {
           </li>
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
-            add framer motion/GSAP animations/more design creativity
+            add framer motion/GSAP animations/more design creativity/make logo
           </li>
         </ul>
       </div>

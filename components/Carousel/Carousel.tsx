@@ -8,7 +8,7 @@ export default function Carousel({ children }: { children: any }) {
 
   return (
     <div ref={emblaRef}>
-      <div className="w-full flex flex-row text-center items-center gap-4">
+      <div className="w-full flex flex-row gap-4">
         {children}
       </div>
     </div>

@@ -10,22 +10,23 @@
     transition-duration: 150ms;
   }
   h1 {
-    @apply text-8xl;
+    @apply text-6xl md:text-8xl;
   }
   h2 {
-    @apply text-5xl;
+    @apply text-3xl md:text-5xl mb-8 md:mb-16;
   }
   h3 {
-    @apply text-3xl;
+    @apply text-2xl md:text-3xl mb-2 md:mb-4;
   }
   h4 {
-    @apply text-2xl;
+    @apply text-xl md:text-2xl;
   }
   h5 {
-    @apply text-xl;
+    @apply text-lg md:text-xl;
   }
   section {
-    @apply min-h-[36em];
+    /* @apply my-8 */
+    @apply min-h-[24em] my-8;
   }
   footer {
     @apply mt-8 pt-8 px-8 pb-36 min-h-28 dark:bg-slate-500 dark:bg-opacity-65 bg-slate-200 bg-opacity-65;

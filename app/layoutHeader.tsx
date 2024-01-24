@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { toggleDarkMode } from "../public/scripts/darkMode";
-import { Sun, Sunglasses } from "@phosphor-icons/react";
+import { Sun, Sunglasses, House } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 const NAVIGATION = [
   { label: "About", href: "#about" },
@@ -26,7 +26,12 @@ export default function LayoutHeader({}: {}) {
 
   return (
     <div className="flex flex-row justify-between mt-2 mb-2">
-      <a href="/">Main</a>
+      {/* <a href="/">Main</a> */}
+      <Link href="/" passHref>
+        <div className="hover:bg-slate-200 hover:dark:bg-slate-500 bg-opacity-65 dark:bg-opacity-65 p-1 h-fit rounded-md my-auto ">
+          <House size={24} />
+        </div>
+      </Link>
       <div className="flex flex-row gap-2 dark:bg-slate-500 bg-slate-200 bg-opacity-65 dark:bg-opacity-65 rounded-md py-2 px-4">
         {NAVIGATION.map((item, index: number) => (
           <Link
