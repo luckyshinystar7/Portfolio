@@ -209,13 +209,13 @@ export default function Home() {
         <ul className="ml-4">
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
-            move data fetching to SSR/add more &apos;use client&apos; directives
+            maybe move data fetching to SSR (thinking about trade-offs if I want
+            to use context for animations or something)
           </li>
 
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
-            add mail server for email form & captcha, s3 bucket for resume
-            download
+            s3 bucket for resume download
           </li>
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />

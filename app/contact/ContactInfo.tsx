@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { request } from "graphql-request";
 import Image from "next/image";
 import Link from "next/link";
-import { InstagramLogo, LinkedinLogo } from "@phosphor-icons/react";
+import { Envelope, InstagramLogo, LinkedinLogo } from "@phosphor-icons/react";
 export default function ContactInfo() {
   const query = `query contact($id: String!) {
     contact(id: $id) {
@@ -61,6 +61,7 @@ export default function ContactInfo() {
           </Link>
         )
       )}
+      {/* <div>frankmailforward@email.com</div> */}
     </>
   );
 }

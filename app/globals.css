@@ -9,6 +9,9 @@
   .button-icon {
     @apply p-1;
   }
+  .border-highlight{
+
+  }
 }
 
 @layer base {

@@ -18,22 +18,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const NameSlider = () => (
-    <div className="flex flex-col gap-28 items-center">
-      <div className="text-6xl">Wei</div>
-      <div className="rotate-270 text-9xl">Frank</div>
-    </div>
-  );
-
-  const NAME_REPEATS = 6;
-
   return (
     <html lang="en">
-      {/* <div id="wrapper" className="absolute top-0 min-h-screen grid grid-flow-row grid-cols-6">
-        {[...Array(NAME_REPEATS)].map((e, i) => (
-          <NameSlider key={i} />
-        ))}
-      </div> */}
       <head>
         <Script
           id="setDarkMode"
