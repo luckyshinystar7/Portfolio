@@ -149,7 +149,7 @@ export default function ExperienceInfo() {
                 (skill: string, index: number) => (
                   <div
                     key={`experience_skill_${index}`}
-                    className="col-span-1 p-1 rounded-md bg-slate-500 bg-opacity-65 h-fit"
+                    className="col-span-1 p-1 rounded-md bg-slate-200 dark:bg-slate-500 bg-opacity-65 h-fit"
                   >
                     {skill}
                   </div>
