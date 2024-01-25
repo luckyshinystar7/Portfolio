@@ -4,6 +4,7 @@ import { request, gql, GraphQLClient } from "graphql-request";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import Link from "next/link";
 
 export const getServerSideProps = (async () => {
   // Fetch data from external API
@@ -88,7 +89,13 @@ export default function AboutInfo() {
         <div className="mt-8 indent-4 text-justify">{children}</div>
       ),
       [INLINES.HYPERLINK]: (node, children) => (
-        <span className="underline text-blue-600 dark:text-orange-400">{children}</span>
+        <Link
+          href={node?.data?.uri}
+          target="_blank"
+          className="underline text-blue-600 dark:text-orange-400"
+        >
+          {children}
+        </Link>
       ),
     },
   });
