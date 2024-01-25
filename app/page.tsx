@@ -152,7 +152,8 @@ export default function Home() {
           <div>
             <button
               className="border-2 border-black leading-8
-              dark:border-white rounded-sm p-4 hover:transition-colors
+              dark:border-orange-400 rounded-sm p-4 hover:transition-colors
+              text-blue-600 dark:text-white
               hover:bg-blue-400 hover:border-blue-400 hover:text-blue-100
               hover:dark:bg-orange-600 hover:dark:border-orange-600 hover:dark:text-orange-100"
               onClick={() =>
