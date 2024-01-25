@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { request, gql, GraphQLClient } from "graphql-request";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
-import { BLOCKS, MARKS } from "@contentful/rich-text-types";
+import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 export const getServerSideProps = (async () => {
@@ -86,6 +86,9 @@ export default function AboutInfo() {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => (
         <div className="mt-8 indent-4 text-justify">{children}</div>
+      ),
+      [INLINES.HYPERLINK]: (node, children) => (
+        <span className="underline text-blue-600 dark:text-orange-400">{children}</span>
       ),
     },
   });
