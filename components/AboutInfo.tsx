@@ -92,7 +92,7 @@ export default function AboutInfo() {
         <Link
           href={node?.data?.uri}
           target="_blank"
-          className="text-blue-600 dark:text-orange-400"
+          className="text-blue-600 dark:text-orange-400 hover:bg-slate-200 hover:dark:bg-slate-500"
         >
           {children}
         </Link>
