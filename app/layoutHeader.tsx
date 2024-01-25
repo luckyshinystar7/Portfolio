@@ -29,7 +29,7 @@ export default function LayoutHeader({}: {}) {
       {/* <a href="/">Main</a> */}
       <Link
         href="/"
-        className="hover:bg-slate-200 hover:dark:bg-slate-500 bg-opacity-65 dark:bg-opacity-65 p-1 h-fit rounded-md my-auto"
+        className="button-hover button-icon my-auto"
       >
         <House size={24} />
       </Link>
@@ -44,8 +44,8 @@ export default function LayoutHeader({}: {}) {
           </Link>
         ))}
       </div>
-      <div
-        className="hover:bg-slate-200 hover:dark:bg-slate-500 bg-opacity-65 dark:bg-opacity-65 p-1 h-fit rounded-md my-auto "
+      <button
+        className="button-hover button-icon my-auto"
         onClick={() => {
           toggleDarkMode();
           setDarkState(!darkState);
@@ -56,7 +56,7 @@ export default function LayoutHeader({}: {}) {
         ) : (
           <Sunglasses className="cursor-pointer" size={24} />
         )}
-      </div>
+      </button>
     </div>
   );
 }

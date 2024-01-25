@@ -5,6 +5,8 @@ import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { useMemo, useState } from "react";
 import clsx from "clsx";
+import Link from "next/link";
+import { Link as LinkIcon } from "@phosphor-icons/react";
 export default function ExperienceInfo() {
   const [experienceTabState, setExperienceTab] = useState<string | undefined>(
     undefined
@@ -54,6 +56,7 @@ export default function ExperienceInfo() {
             cvItemTitle: string;
             cvItemDescription: any;
             cvItemSkills: any;
+            cvItemHyperlink: string;
           },
           index: number
         ) => {
@@ -64,6 +67,7 @@ export default function ExperienceInfo() {
           return (experienceItems[item.cvItemTitle] = {
             skills: item?.cvItemSkills,
             json: item?.cvItemDescription.json,
+            link: item?.cvItemHyperlink,
           });
         }
       );
@@ -71,7 +75,6 @@ export default function ExperienceInfo() {
     }
   }, [data]);
 
-  console.log(data, "exp");
   return (
     <>
       <div className="grid grid-cols-12">
@@ -98,7 +101,7 @@ export default function ExperienceInfo() {
         </div>
         <div
           className="col-span-12 md:col-span-7 md:ml-4 mt-4 text-sm md:text-base"
-        // max-h-[280px] md:max-h-[184px]"
+          // max-h-[280px] md:max-h-[184px]"
         >
           {!!experienceDescrptions &&
             experienceTabState &&
@@ -107,8 +110,16 @@ export default function ExperienceInfo() {
               {
                 renderMark: {
                   [MARKS.ITALIC]: (text) => (
-                    <div className="dark:text-white text-black italic text-sm">
+                    <div className="dark:text-white text-black italic text-sm flex flex-row justify-between">
                       {text}
+                      <Link
+                        href={experienceDescrptions[experienceTabState]?.link}
+                        target="_blank"
+                      >
+                        <button className="button-hover button-icon my-auto w-6">
+                          <LinkIcon className="inline" size={16} />
+                        </button>
+                      </Link>
                     </div>
                   ),
                 },
@@ -123,9 +134,9 @@ export default function ExperienceInfo() {
                   },
                   [BLOCKS.PARAGRAPH]: (node, children) => {
                     return (
-                      <p className="text-blue-400 dark:text-orange-400 text-justify">
+                      <div className="text-blue-400 dark:text-orange-400 text-justify">
                         {children}
-                      </p>
+                      </div>
                     );
                   },
                 },

@@ -4,7 +4,7 @@ import ContactInfo from "./contact/ContactInfo";
 import ExperienceInfo from "./(experience)/ExperienceInfo";
 import { JSX, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowCircleDown, ArrowUpRight } from "@phosphor-icons/react";
+import { ArrowCircleDown, Link as LinkIcon } from "@phosphor-icons/react";
 import IntervalLabel from "@/components/IntervalLabel";
 import Carousel from "@/components/Carousel/Carousel";
 
@@ -82,7 +82,7 @@ export default function Home() {
                 // item.projectItemThumbnail?.url &&
                 //   "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills'] md:[grid-template-areas:'image_image_text_text_text'_'image_image_text_text_text'_'image_image_text_text_text'_'skills_skills_skills_skills_skills']",
                 // !item.projectItemThumbnail?.url &&
-                  "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills']"
+                "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills']"
               )}
               key={`${item.projectItemTitle}_card`}
             >
@@ -99,18 +99,16 @@ export default function Home() {
               )} */}
               <div className="[grid-area:text]">
                 <div
-                  className="flex flex-row justify-between gap-4 h-fit
+                  className="flex flex-row justify-between gap-4
               "
                 >
-                  <h5 className="leading-6 p-1 inline">{item.projectItemTitle}</h5>
-                  <Link
-                    href={item?.projectItemHyperlink}
-                    passHref
-                    target="_blank"
-                  >
-                    <div className="hover:bg-slate-200 hover:dark:bg-slate-500 bg-opacity-65 dark:bg-opacity-65 p-1 h-fit rounded-md my-auto ">
-                      <ArrowUpRight className="inline" size={24} />
-                    </div>
+                  <h5 className="leading-6 p-1 inline">
+                    {item.projectItemTitle}
+                  </h5>
+                  <Link href={item?.projectItemHyperlink} target="_blank">
+                    <button className="button-hover button-icon w-8">
+                      <LinkIcon className="inline" size={16} />
+                    </button>
                   </Link>
                 </div>
 
@@ -199,7 +197,7 @@ export default function Home() {
       </section>
       <section id="projects">
         <h2>Projects</h2>
-        <div className="md:mx-32 overflow-hidden mb-8">
+        <div className="mb-8">
           {projectCards && (
             <Carousel>{projectCards?.map((item: any) => item)}</Carousel>
           )}
@@ -212,7 +210,7 @@ export default function Home() {
             <input type="checkbox" disabled />
             move data fetching to SSR/add more &apos;use client&apos; directives
           </li>
-       
+
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
             add mail server for email form & captcha, s3 bucket for resume

@@ -36,7 +36,6 @@ export default function ContactInfo() {
       ),
   });
 
-  console.log("social data", data);
   const renderLogo = (logo: string) => {
     switch (logo) {
       case "Linkedin":

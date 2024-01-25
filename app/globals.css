@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .button-hover {
+    @apply hover:bg-slate-200 hover:dark:bg-slate-500 bg-opacity-65 dark:bg-opacity-65 rounded-md;
+  }
+  .button-icon {
+    @apply p-1;
+  }
+}
+
 @layer base {
   body {
     @apply dark:bg-black dark:text-white bg-off-white;
