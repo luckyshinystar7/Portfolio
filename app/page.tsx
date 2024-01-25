@@ -78,7 +78,7 @@ export default function Home() {
           projectData.push(
             <div
               className={clsx(
-                "min-h-52 min-w-52 max-w-96 border-2 rounded-md p-4 grid gap-4",
+                "min-h-52 min-w-52 max-w-96 border-2 rounded-md p-4 grid gap-4 text-sm md:text-base",
                 item.projectItemThumbnail?.url &&
                   "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills'] md:[grid-template-areas:'image_image_text_text_text'_'image_image_text_text_text'_'image_image_text_text_text'_'skills_skills_skills_skills_skills']",
                 !item.projectItemThumbnail?.url &&
@@ -102,7 +102,7 @@ export default function Home() {
                   className="flex flex-row justify-between gap-4 h-fit
               "
                 >
-                  <span className="leading-6 p-1">{item.projectItemTitle}</span>
+                  <h5 className="leading-6 p-1 inline">{item.projectItemTitle}</h5>
                   <Link
                     href={item?.projectItemHyperlink}
                     passHref
@@ -174,7 +174,7 @@ export default function Home() {
       </section>
       <section id="about">
         <h2>About</h2>
-        <div>
+        <div className="text-sm md:text-base">
           <AboutInfo />
         </div>
         {/* <div>
@@ -188,7 +188,9 @@ export default function Home() {
         </div>
         <div className="text-center md:text-end mt-16">
           <Link
-            className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-slate-500 bg-slate-200 bg-opacity-65 dark:bg-opacity-65 rounded-md p-2 pointer-events-none opacity-60"
+            className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-slate-500 bg-slate-200 bg-opacity-65 dark:bg-opacity-65 
+            text-sm md:text-base rounded-md p-2 
+            pointer-events-none opacity-65 dark:opacity-65"
             href="/Portfolio"
           >
             View Full Resume (coming soon)
@@ -203,13 +205,9 @@ export default function Home() {
           )}
         </div>
       </section>
-      <div id="additional">
+      <div id="additional" className="text-sm md:text-base">
         <h5>Website Todos:</h5>
         <ul className="ml-4">
-          <li className="flex flex-row gap-2">
-            <input type="checkbox" disabled />
-            come up with better mobile UI for header
-          </li>
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
             move data fetching to SSR/add more &apos;use client&apos; directives
@@ -221,7 +219,8 @@ export default function Home() {
           </li>
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
-            add framer motion/GSAP animations (what I&apos;m currently learning!)/more design creativity
+            add framer motion/GSAP animations (what I&apos;m currently
+            learning!)/more design creativity
           </li>
         </ul>
       </div>

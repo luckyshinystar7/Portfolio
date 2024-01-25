@@ -97,7 +97,7 @@ export default function ExperienceInfo() {
           )}
         </div>
         <div
-          className="col-span-12 md:col-span-7 md:ml-4 mt-4"
+          className="col-span-12 md:col-span-7 md:ml-4 mt-4 text-sm md:text-base"
         // max-h-[280px] md:max-h-[184px]"
         >
           {!!experienceDescrptions &&
@@ -107,7 +107,7 @@ export default function ExperienceInfo() {
               {
                 renderMark: {
                   [MARKS.ITALIC]: (text) => (
-                    <div className="dark:text-white text-black italic">
+                    <div className="dark:text-white text-black italic text-sm">
                       {text}
                     </div>
                   ),
