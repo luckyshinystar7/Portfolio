@@ -28,6 +28,7 @@ export default function RootLayout({
         >
           {setDarkMode}
         </Script>
+        <title>Frank Wei | Portfolio</title>
       </head>
       <body className={inter.className}>
         <QueryProvider>
