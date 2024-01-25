@@ -114,7 +114,7 @@ export default function Home() {
                   </Link>
                 </div>
 
-                <div>
+                <div className="text-blue-600 dark:text-orange-400">
                   {documentToReactComponents(item?.projectItemDescription.json)}
                 </div>
               </div>
