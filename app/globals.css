@@ -13,7 +13,7 @@
     @apply text-6xl md:text-8xl;
   }
   h2 {
-    @apply text-3xl md:text-5xl mb-8 md:mb-16;
+    @apply text-3xl md:text-5xl mb-8 md:mb-16 text-blue-600 dark:text-orange-600;
   }
   h3 {
     @apply text-2xl md:text-3xl mb-2 md:mb-4;
