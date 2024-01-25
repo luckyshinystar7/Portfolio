@@ -78,15 +78,15 @@ export default function Home() {
           projectData.push(
             <div
               className={clsx(
-                "min-h-52 min-w-52 max-w-96 border-2 rounded-md p-4 grid gap-4 text-sm md:text-base",
-                item.projectItemThumbnail?.url &&
-                  "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills'] md:[grid-template-areas:'image_image_text_text_text'_'image_image_text_text_text'_'image_image_text_text_text'_'skills_skills_skills_skills_skills']",
-                !item.projectItemThumbnail?.url &&
+                "min-h-52 border-2 rounded-md p-4 grid gap-4 text-sm md:text-base min-w-80",
+                // item.projectItemThumbnail?.url &&
+                //   "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills'] md:[grid-template-areas:'image_image_text_text_text'_'image_image_text_text_text'_'image_image_text_text_text'_'skills_skills_skills_skills_skills']",
+                // !item.projectItemThumbnail?.url &&
                   "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills']"
               )}
               key={`${item.projectItemTitle}_card`}
             >
-              {item.projectItemThumbnail?.url && (
+              {/* {item.projectItemThumbnail?.url && (
                 <Image
                   src={item?.projectItemThumbnail?.url}
                   alt={`${item.projectItemTitle}_thumbnail`}
@@ -96,7 +96,7 @@ export default function Home() {
                     [grid-area:image]
                     "
                 />
-              )}
+              )} */}
               <div className="[grid-area:text]">
                 <div
                   className="flex flex-row justify-between gap-4 h-fit
@@ -114,18 +114,18 @@ export default function Home() {
                   </Link>
                 </div>
 
-                <div className="text-blue-600 dark:text-orange-400">
+                <div className="text-blue-600 dark:text-orange-400 break-words ">
                   {documentToReactComponents(item?.projectItemDescription.json)}
                 </div>
               </div>
               <div
-                className="flex flex-row gap-4 pb-1
+                className="flex flex-row gap-4 pb-1 items-end
               [grid-area:skills]
               "
               >
                 {item?.projectItemSkills?.map((skill: string, index) => (
                   <div
-                    className="col-span-1 p-1 rounded-md bg-slate-500 bg-opacity-65 h-fit"
+                    className="col-span-1 p-1 rounded-md bg-slate-500 bg-opacity-65 h-fit text-nowrap"
                     key={`${item.projectItemTitle}_skill_${index}`}
                   >
                     {skill}
@@ -206,12 +206,13 @@ export default function Home() {
         </div>
       </section>
       <div id="additional" className="text-sm md:text-base">
-        <h5>Website Todos:</h5>
+        <div>Website Todos:</div>
         <ul className="ml-4">
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
             move data fetching to SSR/add more &apos;use client&apos; directives
           </li>
+       
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
             add mail server for email form & captcha, s3 bucket for resume
@@ -220,7 +221,7 @@ export default function Home() {
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
             add framer motion/GSAP animations (what I&apos;m currently
-            learning!)/more design creativity
+            learning!)/add images(?)/more design creativity(!!)
           </li>
         </ul>
       </div>

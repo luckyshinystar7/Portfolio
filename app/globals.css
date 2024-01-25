@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply dark:bg-black dark:text-white;
+    @apply dark:bg-black dark:text-white bg-off-white;
     transition-property: background-color, filter, backdrop-filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
@@ -13,7 +13,7 @@
     @apply text-6xl md:text-8xl;
   }
   h2 {
-    @apply text-3xl md:text-5xl mb-8 md:mb-16 text-blue-600 dark:text-orange-600;
+    @apply text-3xl md:text-5xl mb-8 md:mb-16 text-slate-500 dark:text-off-white;
   }
   h3 {
     @apply text-2xl md:text-3xl mb-2 md:mb-4;
