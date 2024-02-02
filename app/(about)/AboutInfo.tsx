@@ -86,7 +86,7 @@ export default function AboutInfo() {
   return documentToReactComponents(data?.about?.biography?.json, {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => (
-        <div className="mt-8 indent-4 text-justify">{children}</div>
+        <p className="mt-8 indent-4 text-justify">{children}</p>
       ),
       [INLINES.HYPERLINK]: (node, children) => (
         <Link

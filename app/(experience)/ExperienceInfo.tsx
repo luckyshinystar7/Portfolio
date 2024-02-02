@@ -134,9 +134,9 @@ export default function ExperienceInfo() {
                   },
                   [BLOCKS.PARAGRAPH]: (node, children) => {
                     return (
-                      <div className="text-blue-600 dark:text-orange-400 text-justify">
+                      <p className="text-blue-600 dark:text-orange-400 text-justify">
                         {children}
-                      </div>
+                      </p>
                     );
                   },
                 },
