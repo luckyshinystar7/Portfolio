@@ -1,6 +1,6 @@
 "use client";
-import AboutInfo from "@/components/AboutInfo";
-import ContactInfo from "./contact/ContactInfo";
+import AboutInfo from "@/app/(about)/AboutInfo";
+import ContactInfo from "./(contact)/ContactInfo";
 import ExperienceInfo from "./(experience)/ExperienceInfo";
 import { JSX, useMemo, useState } from "react";
 import Link from "next/link";

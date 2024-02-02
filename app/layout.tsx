@@ -5,7 +5,7 @@ import LayoutHeader from "./layoutHeader";
 import Script from "next/script";
 import { setDarkMode } from "@/public/scripts/darkMode";
 import QueryProvider from "@/utils/queryProvider";
-import ContactInfo from "./contact/ContactInfo";
+import ContactInfo from "./(contact)/ContactInfo";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
