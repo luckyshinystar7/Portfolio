@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
 import { Link as LinkIcon } from "@phosphor-icons/react";
+
 export default function ProjectInfo() {
   const query = `query project($id: String!) {
     project(id: $id) {

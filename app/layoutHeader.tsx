@@ -33,7 +33,7 @@ export default function LayoutHeader({}: {}) {
       >
         <House size={24} />
       </Link>
-      <div className="flex flex-row gap-2 dark:bg-slate-500 bg-slate-200 bg-opacity-65 dark:bg-opacity-65 rounded-md py-2 px-4 text-sm md:text-base">
+      <div className="flex flex-row gap-4 dark:bg-off-white dark:text-black bg-slate-500 bg-opacity-90 dark:bg-opacity-90 text-off-white rounded-md py-2 px-4 text-sm md:text-base">
         {NAVIGATION.map((item, index: number) => (
           <Link
             className="hover:text-blue-400 hover:dark:text-orange-400 leading-6"

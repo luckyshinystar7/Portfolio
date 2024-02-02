@@ -1,18 +1,10 @@
 "use client";
 import AboutInfo from "@/app/(about)/AboutInfo";
-import ContactInfo from "./(contact)/ContactInfo";
 import ExperienceInfo from "./(experience)/ExperienceInfo";
-import { JSX, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowCircleDown, Link as LinkIcon } from "@phosphor-icons/react";
+import { ArrowCircleDown, } from "@phosphor-icons/react";
 import IntervalLabel from "@/components/IntervalLabel";
 import Carousel from "@/components/Carousel/Carousel";
-
-import { useQuery } from "@tanstack/react-query";
-import { request } from "graphql-request";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import Image from "next/image";
-import clsx from "clsx";
 import ProjectInfo from "./(projects)/ProjectInfo";
 
 const LABELS = [
@@ -92,8 +84,7 @@ export default function Home() {
         <ul className="ml-4">
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
-            maybe move data fetching to SSR (thinking about trade-offs if I want
-            to use context for animations or something)
+            maybe move data fetching to SSR
           </li>
 
           <li className="flex flex-row gap-2">
@@ -102,7 +93,7 @@ export default function Home() {
           </li>
           <li className="flex flex-row gap-2">
             <input type="checkbox" disabled />
-            add framer motion/GSAP animations (what I&apos;m currently
+            add animations/ some kind of webgl thing (what I&apos;m currently
             learning!)/add images(?)/more design creativity(!!)
           </li>
         </ul>
