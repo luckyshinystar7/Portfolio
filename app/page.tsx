@@ -114,20 +114,6 @@ export default function Home() {
           <div>
             <ProjectInfo />
           </div>
-          <div id="additional" className="text-sm md:text-base">
-            <div>Website Todos:</div>
-            <ul className="ml-4">
-              <li className="flex flex-row gap-2">
-                <input type="checkbox" disabled />
-                s3 bucket for resume download
-              </li>
-              <li className="flex flex-row gap-2">
-                <input type="checkbox" disabled />
-                add animations/ some kind of webgl thing (what I&apos;m
-                currently learning!)/add images(?)/more design creativity(!!)
-              </li>
-            </ul>
-          </div>
         </div>
       </section>
 
