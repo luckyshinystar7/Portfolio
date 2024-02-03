@@ -36,18 +36,22 @@ export default function Home() {
 
   return (
     <main>
-      <section className="grid grid-cols-12">
-        <div className="col-span-12 md:col-span-6 flex flex-col md:justify-around">
-          <div className="mt-4 md:mt-16">
-            <h5>Hi, I&apos;m</h5>
-            <h1>Frank Wei</h1>
-            <h3>
-              <IntervalLabel labels={LABELS} />
-            </h3>
-          </div>
+      <section
+        className="grid grid-cols-1 md:grid-cols-2 
+      [grid-template-areas:'intro'_'splash'_'interval']
+      md:[grid-template-areas:'intro_splash'_'interval_splash']"
+      >
+        <div className="mt-4 md:mt-32 [grid-area:intro]">
+          <h5>Hi, I&apos;m</h5>
+          <h1>Frank Wei</h1>
+        </div>
+        <div className="[grid-area:interval] md:mt-auto md:mb-32">
+          <h3>
+            <IntervalLabel labels={LABELS} />
+          </h3>
         </div>
 
-        <div className="col-span-12 md:col-span-6 mb-auto md:mt-auto mx-auto md:mr-0">
+        <div className="[grid-area:splash]  mb-auto md:my-auto mx-auto md:mr-0">
           <button
             className="button-icon transition-colors"
             onClick={() => {
