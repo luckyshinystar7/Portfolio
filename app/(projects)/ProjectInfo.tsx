@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { request } from "graphql-request";
 import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { useMemo, useRef, useState } from "react";
+import { createRef, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
 import { Link as LinkIcon, ArrowUpRight } from "@phosphor-icons/react";
@@ -44,7 +44,7 @@ export default function ProjectInfo() {
 
   const [showMoreProjects, setShowMoreProjects] = useState<boolean>(false);
   const revealRef = useRef(null);
-
+  const listRef = createRef<HTMLDivElement>();
   const { data, error, isLoading } = useQuery<any>({
     queryKey: ["project", variables?.id],
     queryFn: async () =>
@@ -109,25 +109,14 @@ export default function ProjectInfo() {
   };
 
   return (
-    <>
-      <ul className="flex flex-col">
-        {isBelowMd && data?.project?.projectCollection?.items.length > 2 ? (
-          <>
-            {data?.project?.projectCollection?.items
-              .slice(0, 2)
-              .map((item: ProjectItemType, index: number) => (
-                <LinkRow
-                  projectItemDescription={item?.projectItemDescription}
-                  projectItemHyperlink={item?.projectItemHyperlink}
-                  projectItemSkills={item?.projectItemSkills}
-                  projectItemTitle={item?.projectItemTitle}
-                  key={index}
-                />
-              ))}
-
-            {showMoreProjects &&
-              data?.project?.projectCollection?.items
-                .slice(2)
+    <div ref={listRef}>
+      <h3>Projects</h3>
+      <div>
+        <ul className="flex flex-col">
+          {isBelowMd && data?.project?.projectCollection?.items.length > 2 ? (
+            <>
+              {data?.project?.projectCollection?.items
+                .slice(0, 2)
                 .map((item: ProjectItemType, index: number) => (
                   <LinkRow
                     projectItemDescription={item?.projectItemDescription}
@@ -137,34 +126,51 @@ export default function ProjectInfo() {
                     key={index}
                   />
                 ))}
-            <div className="text-end my-4">
-              <button
-                className="hover:text-blue-600 hover:dark:text-orange-400 dark:bg-slate-500 bg-slate-200
+
+              {showMoreProjects &&
+                data?.project?.projectCollection?.items
+                  .slice(2)
+                  .map((item: ProjectItemType, index: number) => (
+                    <LinkRow
+                      projectItemDescription={item?.projectItemDescription}
+                      projectItemHyperlink={item?.projectItemHyperlink}
+                      projectItemSkills={item?.projectItemSkills}
+                      projectItemTitle={item?.projectItemTitle}
+                      key={index}
+                    />
+                  ))}
+              <div className="text-end my-4">
+                <button
+                  className="hover:text-blue-600 hover:dark:text-orange-400 dark:bg-slate-500 bg-slate-200
             text-sm md:text-base rounded-md p-2 "
-                onClick={() => setShowMoreProjects(!showMoreProjects)}
-              >
-                {showMoreProjects ? "Show Less" : "Show More"}
-              </button>
-            </div>
-          </>
-        ) : (
-          data?.project?.projectCollection?.items.map(
-            (item: ProjectItemType, index: number) => (
-              <LinkRow
-                projectItemDescription={item?.projectItemDescription}
-                projectItemHyperlink={item?.projectItemHyperlink}
-                projectItemSkills={item?.projectItemSkills}
-                projectItemTitle={item?.projectItemTitle}
-                key={index}
-              />
+                  onClick={() => {
+                    setShowMoreProjects(!showMoreProjects);
+                    showMoreProjects && listRef.current?.scrollIntoView();
+                  }}
+                >
+                  {showMoreProjects ? "Show Less" : "Show More"}
+                </button>
+              </div>
+            </>
+          ) : (
+            data?.project?.projectCollection?.items.map(
+              (item: ProjectItemType, index: number) => (
+                <LinkRow
+                  projectItemDescription={item?.projectItemDescription}
+                  projectItemHyperlink={item?.projectItemHyperlink}
+                  projectItemSkills={item?.projectItemSkills}
+                  projectItemTitle={item?.projectItemTitle}
+                  key={index}
+                />
+              )
             )
-          )
-        )}
-      </ul>
-      <div
-        className="pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[220px] rounded-lg bg-cover bg-center opacity-0 transition-[background] duration-300"
-        ref={revealRef}
-      ></div>
-    </>
+          )}
+        </ul>
+        <div
+          className="pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[220px] rounded-lg bg-cover bg-center opacity-0 transition-[background] duration-300"
+          ref={revealRef}
+        ></div>
+      </div>
+    </div>
   );
 }
