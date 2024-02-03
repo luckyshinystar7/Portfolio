@@ -37,8 +37,8 @@ export default function Home() {
   return (
     <main>
       <section className="grid grid-cols-12">
-        <div className="col-span-12 md:col-span-6 flex flex-col justify-around ">
-          <div className="mt-16">
+        <div className="col-span-12 md:col-span-6 flex flex-col md:justify-around">
+          <div className="mt-4 md:mt-16">
             <h5>Hi, I&apos;m</h5>
             <h1>Frank Wei</h1>
             <h3>
@@ -47,7 +47,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="col-span-12 md:col-span-6 my-auto mx-auto md:mr-0">
+        <div className="col-span-12 md:col-span-6 mb-auto md:mt-auto mx-auto md:mr-0">
           <button
             className="button-icon"
             onClick={() => {
@@ -75,19 +75,19 @@ export default function Home() {
           className="flex flex-row flex-wrap-reverse md:flex-nowrap gap-x-16
                [grid-area:bio]"
         >
-          <div className="mt-16 md:mt-auto w-96 border">
+          {/* <div className="mt-16 md:mt-auto w-96 border">
             <div>Now Playing</div>
-          </div>
+          </div> */}
           <div className="text-sm md:text-base  md:mt-auto h-fit">
             <AboutInfo />
           </div>
         </div>
         <div
-          className="border border-white w-full
+          className="border border-black dark:border-off-white w-full
             min-h-96
-          [grid-area:image]"
+          [grid-area:image] p-8"
         >
-          Image
+          Image Coming Soon :)
         </div>
       </section>
 
@@ -120,10 +120,6 @@ export default function Home() {
           <div id="additional" className="text-sm md:text-base">
             <div>Website Todos:</div>
             <ul className="ml-4">
-              <li className="flex flex-row gap-2">
-                <input type="checkbox" disabled />
-                maybe move data fetching to SSR
-              </li>
               <li className="flex flex-row gap-2">
                 <input type="checkbox" disabled />
                 s3 bucket for resume download
