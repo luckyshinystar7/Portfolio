@@ -49,16 +49,16 @@ export default function Home() {
 
         <div className="col-span-12 md:col-span-6 mb-auto md:mt-auto mx-auto md:mr-0">
           <button
-            className="button-icon"
+            className="button-icon transition-colors"
             onClick={() => {
               toggleDarkMode();
               setDarkState(!darkState);
             }}
           >
             {!!darkState ? (
-              <Sun size={"24rem"} />
+              <Sun size={"20rem"} className="hover:dark:text-orange-600" />
             ) : (
-              <Sunglasses size={"24rem"} />
+              <Sunglasses size={"20rem"} className="hover:text-blue-600" />
             )}
           </button>
         </div>
@@ -111,11 +111,7 @@ export default function Home() {
             </Link>
           </div>
           <div>
-            <h3>Projects</h3>
-            <div>
-              {/* <Carousel>{<ProjectCards />}</Carousel> */}
-              <ProjectInfo />
-            </div>
+            <ProjectInfo />
           </div>
           <div id="additional" className="text-sm md:text-base">
             <div>Website Todos:</div>
@@ -135,18 +131,17 @@ export default function Home() {
       </section>
 
       <section id="contact" className="flex flex-col">
-          <h4>Let&apos;s Connect!</h4>
-          <h3>Reach out to me on:</h3>
-          <div className="grow flex flex-col">
-            <div className="border-b w-fit ml-auto self-end mt-auto mb-32">
-              <ArrowUpRight size={18} className="inline" />
-              <h3 className="inline">email@email.com</h3>
-            </div>
+        <h4>Let&apos;s Connect!</h4>
+        <h3>Reach out to me on:</h3>
+        <div className="grow flex flex-col">
+          <div className="border-b w-fit ml-auto self-end mt-auto mb-32">
+            <ArrowUpRight size={32} className="inline" />
+            <h3 className="inline">email@email.com</h3>
           </div>
-          <div className="flex flex-row gap-4 mt-auto">
-            <ContactInfo />
-          </div>
-    
+        </div>
+        <div className="flex flex-row gap-4 mt-auto">
+          <ContactInfo />
+        </div>
       </section>
     </main>
   );
