@@ -6,7 +6,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { useMemo, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
-import { Link as LinkIcon } from "@phosphor-icons/react";
+import { Link as LinkIcon, ArrowUpRight } from "@phosphor-icons/react";
 export default function ExperienceInfo() {
   const [experienceTabState, setExperienceTab] = useState<string | undefined>(
     undefined
@@ -65,6 +65,7 @@ export default function ExperienceInfo() {
             setExperienceTab(item.cvItemTitle);
           }
           return (experienceItems[item.cvItemTitle] = {
+            title: item?.cvItemTitle,
             skills: item?.cvItemSkills,
             json: item?.cvItemDescription.json,
             link: item?.cvItemHyperlink,
@@ -78,29 +79,29 @@ export default function ExperienceInfo() {
   return (
     <>
       <div className="grid grid-cols-12">
-        <div className="col-span-12 md:col-span-4 col-start-1 md:col-start-2">
+        <ul className="col-span-12 md:col-span-4">
           {data?.experience?.experienceCollection?.items?.map(
             (
               item: { cvItemTitle: string; cvItemDescription: any },
               index: number
             ) => (
-              <div
+              <li
                 className={clsx(
-                  `block p-4  border-l-2 dark:border-white border-black  hover:text-blue-600 hover:border-blue-600 hover:dark:text-orange-600 hover:dark:border-orange-600 cursor-pointer mr-4 hover:transition-colors`,
+                  `transition-colors ease-out block p-4  border-l-2 dark:border-white border-black  hover:text-blue-600 hover:border-blue-600 hover:dark:text-orange-600 hover:dark:border-orange-600 cursor-pointer mr-4 hover:transition-colors`,
                   item?.cvItemTitle === experienceTabState &&
                     "border-b-2 border-b-blue-400 dark:border-b-orange-400 text-blue-400 dark:text-orange-400"
                 )}
                 key={index}
                 onClick={() => setExperienceTab(item?.cvItemTitle)}
               >
-                <h4>{item?.cvItemTitle}</h4>
+                <h5>{item?.cvItemTitle}</h5>
                 {/* <div>{documentToReactComponents(item?.cvItemDescription.json)}</div> */}
-              </div>
+              </li>
             )
           )}
-        </div>
+        </ul>
         <div
-          className="col-span-12 md:col-span-7 md:ml-4 mt-4 text-sm md:text-base"
+          className="col-span-12 md:col-span-8 md:ml-4 mt-4 text-sm md:text-base"
           // max-h-[280px] md:max-h-[184px]"
         >
           {!!experienceDescrptions &&
@@ -111,15 +112,16 @@ export default function ExperienceInfo() {
                 renderMark: {
                   [MARKS.ITALIC]: (text) => (
                     <div className="dark:text-white text-black italic text-sm flex flex-row justify-between">
-                      {text}
-                      <Link
-                        href={experienceDescrptions[experienceTabState]?.link}
-                        target="_blank"
-                      >
-                        <button className="button-hover button-icon my-auto w-6">
-                          <LinkIcon className="inline" size={16} />
-                        </button>
-                      </Link>
+                        {text}
+                      <div className="border-b w-fit">
+                        <Link
+                          href={experienceDescrptions[experienceTabState]?.link}
+                          target="_blank"
+                        >
+                          <ArrowUpRight className="inline" size={16} />
+                          {experienceDescrptions[experienceTabState]?.title}
+                        </Link>
+                      </div>
                     </div>
                   ),
                 },

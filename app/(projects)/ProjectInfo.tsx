@@ -3,10 +3,19 @@ import { useQuery } from "@tanstack/react-query";
 import { request } from "graphql-request";
 import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
-import { Link as LinkIcon } from "@phosphor-icons/react";
+import { Link as LinkIcon, ArrowUpRight } from "@phosphor-icons/react";
+import { useBreakpoint } from "@/utils/hooks/useBreakpoint";
+
+interface ProjectItemType {
+  projectItemDescription: any;
+  projectItemHyperlink: string;
+  projectItemSkills: string[];
+  projectItemTitle: string;
+  projectItemThumbnail?: { url: string };
+}
 
 export default function ProjectInfo() {
   const query = `query project($id: String!) {
@@ -33,6 +42,9 @@ export default function ProjectInfo() {
     id: "2Ntf4X5iFJuQLlnbWXhbWM",
   };
 
+  const [showMoreProjects, setShowMoreProjects] = useState<boolean>(false);
+  const revealRef = useRef(null);
+
   const { data, error, isLoading } = useQuery<any>({
     queryKey: ["project", variables?.id],
     queryFn: async () =>
@@ -47,83 +59,112 @@ export default function ProjectInfo() {
       ),
   });
 
-  //TODO: move this into use client
-  const projectCards = useMemo<JSX.Element[] | undefined>(() => {
-    if (data?.project?.projectCollection?.items?.length > 0) {
-      const projectData: JSX.Element[] = [];
-      data?.project?.projectCollection?.items.map(
-        (
-          item: {
-            projectItemDescription: any;
-            projectItemHyperlink: string;
-            projectItemSkills: string[];
-            projectItemTitle: string;
-            projectItemThumbnail: { url: string };
-          },
-          index: number
-        ) => {
-          projectData.push(
-            <div
-              className={clsx(
-                "min-h-52 border-2 rounded-md p-4 grid gap-4 text-sm md:text-base min-w-80",
-                // item.projectItemThumbnail?.url &&
-                //   "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills'] md:[grid-template-areas:'image_image_text_text_text'_'image_image_text_text_text'_'image_image_text_text_text'_'skills_skills_skills_skills_skills']",
-                // !item.projectItemThumbnail?.url &&
-                "[grid-template-areas:'text_text_text_text_text'_'text_text_text_text_text'_'text_text_text_text_text'_'skills_skills_skills_skills_skills']"
-              )}
-              key={`${item.projectItemTitle}_card`}
-            >
-              {/* {item.projectItemThumbnail?.url && (
-                <Image
-                  src={item?.projectItemThumbnail?.url}
-                  alt={`${item.projectItemTitle}_thumbnail`}
-                  height={100}
-                  width={300}
-                  className="col-span-2 border rounded-md h-full w-full invisible md:visible
-                    [grid-area:image]
-                    "
-                />
-              )} */}
-              <div className="[grid-area:text]">
+  const { isAboveMd, isBelowMd, md } = useBreakpoint("md");
+  console.log(isAboveMd, "wtf");
+  const LinkRow = ({
+    projectItemDescription,
+    projectItemHyperlink,
+    projectItemSkills,
+    projectItemTitle,
+  }: ProjectItemType) => {
+    return (
+      <Link href={projectItemHyperlink} target="_blank" passHref>
+        <li
+          className="grid grid-cols-3 md:grid-cols-12 gap-x-8 border-b-2 py-4 pl-4 group
+      hover:text-blue-600 hover:dark:text-orange-600 hover:dark:border-orange-600 hover:border-blue-600
+    [grid-template-areas:'title_title_link'_'info_info_info'] 
+    md:[grid-template-areas:'title_title_title_title_info_info_info_info_info_info_info_link']"
+        >
+          <h5
+            className="my-auto text-blue-400 dark:text-orange-400 group-hover:text-blue-600 group-hover:dark:text-orange-600 
+      [grid-area:title]"
+          >
+            {projectItemTitle}
+          </h5>
+          <div
+            className="flex-col gap-2 flex
+      [grid-area:info]"
+          >
+            {documentToReactComponents(projectItemDescription.json)}
+            <div className="flex flex-row gap-2 text-black dark:text-off-white flex-wrap">
+              {projectItemSkills?.map((skill: string, index) => (
                 <div
-                  className="flex flex-row justify-between gap-4
-              "
+                  className="p-1 rounded-md bg-slate-200 dark:bg-slate-500 bg-opacity-65 h-fit w-fit text-nowrap"
+                  key={`${projectItemTitle}_skill_${index}`}
                 >
-                  <h5 className="leading-6 p-1 inline">
-                    {item.projectItemTitle}
-                  </h5>
-                  <Link href={item?.projectItemHyperlink} target="_blank">
-                    <button className="button-hover button-icon w-8">
-                      <LinkIcon className="inline" size={16} />
-                    </button>
-                  </Link>
+                  {skill}
                 </div>
-
-                <div className="text-blue-600 dark:text-orange-400 break-words ">
-                  {documentToReactComponents(item?.projectItemDescription.json)}
-                </div>
-              </div>
-              <div
-                className="flex flex-row gap-4 pb-1 items-end
-              [grid-area:skills]
-              "
-              >
-                {item?.projectItemSkills?.map((skill: string, index) => (
-                  <div
-                    className="col-span-1 p-1 rounded-md bg-slate-200 dark:bg-slate-500 bg-opacity-65 h-fit text-nowrap"
-                    key={`${item.projectItemTitle}_skill_${index}`}
-                  >
-                    {skill}
-                  </div>
-                ))}
-              </div>
+              ))}
             </div>
-          );
-        }
-      );
-      return projectData;
-    }
-  }, [data]);
+          </div>
+          <div
+            className=" my-auto ml-auto
+      [grid-area:link]"
+          >
+            <ArrowUpRight className="inline" size={24} />
+          </div>
+        </li>
+      </Link>
+    );
+  };
 
-  return <>{projectCards?.map((item: any) => item)}</>;
+  return (
+    <>
+      <ul className="flex flex-col">
+        {isBelowMd && data?.project?.projectCollection?.items.length > 2 ? (
+          <>
+            {data?.project?.projectCollection?.items
+              .slice(0, 2)
+              .map((item: ProjectItemType, index: number) => (
+                <LinkRow
+                  projectItemDescription={item?.projectItemDescription}
+                  projectItemHyperlink={item?.projectItemHyperlink}
+                  projectItemSkills={item?.projectItemSkills}
+                  projectItemTitle={item?.projectItemTitle}
+                  key={index}
+                />
+              ))}
+
+            {showMoreProjects &&
+              data?.project?.projectCollection?.items
+                .slice(2)
+                .map((item: ProjectItemType, index: number) => (
+                  <LinkRow
+                    projectItemDescription={item?.projectItemDescription}
+                    projectItemHyperlink={item?.projectItemHyperlink}
+                    projectItemSkills={item?.projectItemSkills}
+                    projectItemTitle={item?.projectItemTitle}
+                    key={index}
+                  />
+                ))}
+            <div className="text-end my-4">
+              <button
+                className="hover:text-blue-600 hover:dark:text-orange-400 dark:bg-slate-500 bg-slate-200
+            text-sm md:text-base rounded-md p-2 "
+                onClick={() => setShowMoreProjects(!showMoreProjects)}
+              >
+                {showMoreProjects ? "Show Less" : "Show More"}
+              </button>
+            </div>
+          </>
+        ) : (
+          data?.project?.projectCollection?.items.map(
+            (item: ProjectItemType, index: number) => (
+              <LinkRow
+                projectItemDescription={item?.projectItemDescription}
+                projectItemHyperlink={item?.projectItemHyperlink}
+                projectItemSkills={item?.projectItemSkills}
+                projectItemTitle={item?.projectItemTitle}
+                key={index}
+              />
+            )
+          )
+        )}
+      </ul>
+      <div
+        className="pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[220px] rounded-lg bg-cover bg-center opacity-0 transition-[background] duration-300"
+        ref={revealRef}
+      ></div>
+    </>
+  );
 }

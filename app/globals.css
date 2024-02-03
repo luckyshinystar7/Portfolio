@@ -38,7 +38,7 @@
   }
   section {
     /* @apply my-8 */
-    @apply min-h-[24em] my-8;
+    @apply min-h-screen py-8;
   }
   footer {
     @apply mt-8 pt-8 px-8 pb-36 min-h-28 dark:bg-slate-500 dark:bg-opacity-65 bg-slate-200 bg-opacity-65;
