@@ -47,7 +47,8 @@ export default function LayoutHeader({}: {}) {
                   href={item.href}
                   key={index}
                 >
-                  {item.label} <ArrowUpRight size={18} className="inline" />
+                  {item.label} 
+                  <ArrowUpRight size={18} className="inline" />
                 </Link>
               ) : (
                 <Link
