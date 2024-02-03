@@ -6,6 +6,8 @@ import Script from "next/script";
 import { setDarkMode } from "@/public/scripts/darkMode";
 import QueryProvider from "@/utils/queryProvider";
 import ContactInfo from "./(contact)/ContactInfo";
+
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -32,13 +34,14 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <QueryProvider>
-          <div className="fixed top-0 left-0 right-0 max-w-[1440px] w-full mx-auto px-2">
-            <LayoutHeader />
-          </div>
-          <div className="min-h-screen max-w-[1440px] px-8 md:px-12 mx-auto">
+          <LayoutHeader />
+          <div
+            id="root"
+            className="min-h-screen max-w-[1440px] px-8 md:px-12 mx-auto"
+          >
             {children}
           </div>
-          <footer
+          {/* <footer
             id="contact"
             className="border-t-2 border-slate-100 dark:border-slate-400"
           >
@@ -51,7 +54,7 @@ export default function RootLayout({
                 </div>
               </div>
             </div>
-          </footer>
+          </footer> */}
         </QueryProvider>
       </body>
     </html>

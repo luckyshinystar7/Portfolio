@@ -25,7 +25,7 @@ export default function Carousel({ children }: { children: any }) {
   return (
     <div
       className="w-full grid
-      [grid-template-areas:'carouselPrev_carouselNext'_'carouselContent_carouselContent']
+      [grid-template-areas:'carouselContent_carouselContent'_'carouselPrev_carouselNext']
       md:[grid-template-areas:'carouselPrev_carouselContent_carouselContent_carouselContent_carouselContent_carouselContent_carouselContent_carouselContent_carouselContent_carouselContent_carouselContent_carouselNext']"
     >
       <div
@@ -34,7 +34,7 @@ export default function Carousel({ children }: { children: any }) {
       >
         <button
           className={clsx(
-            "button-hover button-icon mx-4 mb-4 md:my-4",
+            "button-hover button-icon mx-4 mt-4 md:my-4",
             // emblaApi?.slidesInView().includes(0) && "opacity-65"
           )}
           onClick={scrollPrev}
@@ -56,7 +56,7 @@ export default function Carousel({ children }: { children: any }) {
       >
         <button
           className={clsx(
-            "button-hover button-icon mx-4 mb-4 md:my-4",
+            "button-hover button-icon mx-4 mt-4 md:my-4",
             // emblaApi?.slidesInView().includes(slideNodeLength - 1) && "opacity-65"
           )}
           onClick={scrollNext}
