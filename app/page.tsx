@@ -36,22 +36,19 @@ export default function Home() {
 
   return (
     <main>
-      <section
-        className="grid grid-cols-1 md:grid-cols-2 
-      [grid-template-areas:'intro'_'splash'_'interval']
-      md:[grid-template-areas:'intro_splash'_'interval_splash']"
-      >
-        <div className="mt-4 md:mt-32 [grid-area:intro]">
-          <h5>Hi, I&apos;m</h5>
-          <h1>Frank Wei</h1>
+      <section className="grid grid-cols-2 auto-rows-min md:auto-rows-auto">
+        <div className="col-span-2 md:col-span-1">
+          <div className="mt-16 md:mt-64">
+            <h5>Hi, I&apos;m</h5>
+            <h1>Frank Wei</h1>
+          </div>
+          <div className="">
+            <h3>
+              <IntervalLabel labels={LABELS} />
+            </h3>
+          </div>
         </div>
-        <div className="[grid-area:interval] md:mt-auto md:mb-32">
-          <h3>
-            <IntervalLabel labels={LABELS} />
-          </h3>
-        </div>
-
-        <div className="[grid-area:splash]  mb-auto md:my-auto mx-auto md:mr-0">
+        <div className="col-span-2 md:col-span-1 mt-16 md:my-auto mx-auto">
           <button
             className="button-icon transition-colors"
             onClick={() => {
@@ -70,7 +67,7 @@ export default function Home() {
 
       <section
         id="about"
-        className="grid gap-x-16 md:grid-cols-5
+        className="grid gap-x-16 grid-cols-1 md:grid-cols-5
         [grid-template-areas:'title'_'image'_'bio']
         md:[grid-template-areas:'title_title_title_image_image'_'bio_bio_bio_image_image'] auto-rows-min md:auto-rows-auto"
       >

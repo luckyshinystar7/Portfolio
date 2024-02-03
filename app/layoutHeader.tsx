@@ -34,20 +34,24 @@ export default function LayoutHeader({}: {}) {
   return (
     <>
       <div className="z-10 sticky top-2 px-8 md:px-12 my-2 max-w-[1440px] w-full mx-auto flex flex-row justify-end">
-        <div className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-off-white  dark:text-black bg-slate-500 bg-opacity-90 dark:bg-opacity-90 text-off-white rounded-md py-2 px-4 text-sm md:text-base">
-          {isBelowMd ? (
+        {isBelowMd ? (
+          <div className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-off-white  dark:text-black bg-slate-500 bg-opacity-90 dark:bg-opacity-90 text-off-white rounded-md py-2 px-4 text-sm md:text-base">
             <button onClick={() => setNavOpen(true)}>
               <List size={24} />
             </button>
-          ) : (
-            NAVIGATION.map((item, index: number) =>
+          </div>
+        ) : (
+          <nav className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-off-white  dark:text-black bg-slate-500 bg-opacity-90 dark:bg-opacity-90 text-off-white rounded-md py-2 px-4 text-sm md:text-base">
+            {NAVIGATION.map((item, index: number) =>
               item.href === "#contact" ? (
                 <Link
-                  className="hover:text-off-white hover:dark:text-off-white hover:bg-blue-400  hover:dark:bg-orange-400 leading-6 border-blue-400 dark:border-orange-400 border-2 p-2 rounded-md"
+                  className="hover:drop-shadow-md hover:text-off-white hover:dark:text-off-white hover:bg-blue-400  hover:dark:bg-orange-400 leading-6 border-blue-400 dark:border-orange-400 border-2 p-2 rounded-md
+                  flex flex-row gap-1 items-center"
                   href={item.href}
                   key={index}
                 >
-                  {item.label} <ArrowUpRight size={18} className="inline" />
+                  <ArrowUpRight size={18} className="inline" />
+                  {item.label}
                 </Link>
               ) : (
                 <Link
@@ -58,26 +62,41 @@ export default function LayoutHeader({}: {}) {
                   {item.label}
                 </Link>
               )
-            )
-          )}
-        </div>
+            )}
+          </nav>
+        )}
       </div>
       {navOpen && (
         <Modal>
-          <div className="bg-slate-500 dark:bg-off-white text-off-white dark:text-black flex flex-col pt-4 px-12 w-full h-full items-end">
+          <div className="bg-slate-500 dark:bg-off-white text-off-white dark:text-black h-full w-full text-end py-4 px-12">
             <button onClick={() => setNavOpen(false)}>
               <X size={24} />
             </button>
-            {NAVIGATION.map((item, index: number) => (
-              <Link
-                className="hover:text-blue-400 hover:dark:text-orange-400 leading-6"
-                href={item.href}
-                key={index}
-                onClick={() => setNavOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
+            <nav className="flex flex-col gap-4 items-end mt-4">
+              {NAVIGATION.map((item, index: number) =>
+                item.href === "#contact" ? (
+                  <Link
+                    className="hover:drop-shadow-md hover:text-off-white hover:dark:text-off-white hover:bg-blue-400  hover:dark:bg-orange-400 leading-6 border-blue-400 dark:border-orange-400 border-2 p-2 rounded-md
+                  flex flex-row gap-1 items-center"
+                    href={item.href}
+                    key={index}
+                    onClick={() => setNavOpen(false)}
+                  >
+                    <ArrowUpRight size={18} className="inline" />
+                    {item.label}
+                  </Link>
+                ) : (
+                  <Link
+                    className="hover:text-blue-400 hover:dark:text-orange-400 leading-6"
+                    href={item.href}
+                    key={index}
+                    onClick={() => setNavOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              )}
+            </nav>
           </div>
         </Modal>
       )}
