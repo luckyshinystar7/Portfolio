@@ -38,7 +38,7 @@ export default function Home() {
     <main>
       <section className="grid grid-cols-2 auto-rows-min md:auto-rows-auto">
         <div className="col-span-2 md:col-span-1">
-          <div className="mt-8 md:mt-64">
+          <div className="mt-2 md:mt-64">
             <h5>Hi, I&apos;m</h5>
             <h1>Frank Wei</h1>
           </div>

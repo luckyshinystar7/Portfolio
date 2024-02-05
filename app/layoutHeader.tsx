@@ -68,7 +68,7 @@ export default function LayoutHeader({}: {}) {
       </div>
       {navOpen && (
         <Modal>
-          <div className="bg-slate-500 dark:bg-off-white text-off-white dark:text-black h-full w-full text-end py-4 px-12">
+          <div className="bg-slate-500 dark:bg-off-white text-off-white dark:text-black h-full w-full text-end py-4 px-2">
             <button onClick={() => setNavOpen(false)}>
               <X size={24} />
             </button>
