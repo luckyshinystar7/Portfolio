@@ -33,7 +33,7 @@ export default function LayoutHeader({}: {}) {
 
   return (
     <>
-      <div className="z-10 sticky top-2 px-8 md:px-12 my-2 max-w-[1440px] w-full mx-auto flex flex-row justify-end drop-shadow-md">
+      <div className="z-10 sticky top-2 px-2 md:px-12 my-2 max-w-[1440px] w-full mx-auto flex flex-row justify-end drop-shadow-md">
         {isBelowMd ? (
           <div className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-off-white  dark:text-black bg-slate-500 bg-opacity-90 dark:bg-opacity-90 text-off-white rounded-md py-2 px-4 text-sm md:text-base">
             <button onClick={() => setNavOpen(true)}>

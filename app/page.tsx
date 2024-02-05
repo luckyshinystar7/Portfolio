@@ -38,7 +38,7 @@ export default function Home() {
     <main>
       <section className="grid grid-cols-2 auto-rows-min md:auto-rows-auto">
         <div className="col-span-2 md:col-span-1">
-          <div className="mt-16 md:mt-64">
+          <div className="mt-8 md:mt-64">
             <h5>Hi, I&apos;m</h5>
             <h1>Frank Wei</h1>
           </div>
@@ -84,7 +84,7 @@ export default function Home() {
           </div>
         </div>
         <div
-          className="border border-black dark:border-off-white w-full
+          className="w-full bg-slate-500 dark:bg-off-white rounded-md bg-opacity-65 dark:bg-opacity-65
             min-h-96
           [grid-area:image] p-8"
         >

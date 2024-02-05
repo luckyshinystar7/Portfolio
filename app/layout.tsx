@@ -37,7 +37,7 @@ export default function RootLayout({
           <LayoutHeader />
           <div
             id="root"
-            className="min-h-screen max-w-[1440px] px-8 md:px-12 mx-auto"
+            className="min-h-screen max-w-[1440px] px-4 md:px-12 mx-auto"
           >
             {children}
           </div>
