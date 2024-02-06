@@ -68,11 +68,11 @@ export default function LayoutHeader({}: {}) {
       </div>
       {navOpen && (
         <Modal>
-          <div className="bg-base-300 dark:bg-base-100 text-base-100 dark:text-base-400 h-full w-full text-end py-4 px-4">
+          <div className="bg-base-300 dark:bg-base-100 text-base-100 dark:text-base-400 h-full w-full text-end py-4 px-6">
             <button onClick={() => setNavOpen(false)}>
               <X size={24} />
             </button>
-            <nav className="flex flex-col gap-4 items-end mt-4">
+            <nav className="flex flex-col gap-4 items-end mt-4 mr-2">
               {NAVIGATION.map((item, index: number) =>
                 item.href === "#contact" ? (
                   <Link
