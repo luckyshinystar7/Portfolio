@@ -18,7 +18,14 @@ const tailwindConfig: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        "off-white": "#FAF9F6",
+        "base-100": "#FAF9F6",
+        "base-200": "#e1e0dd",
+        "base-300": "#4b4a49",
+        "base-400": "#191818",
+        "primary-100": "#60a5fa",
+        "primary-200": "#2563eb",
+        "secondary-100": "#fb923c",
+        "secondary-200": "#ea580c",
       },
       rotate: {
         "270": "270deg",

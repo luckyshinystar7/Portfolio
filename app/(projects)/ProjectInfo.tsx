@@ -75,7 +75,7 @@ export default function ProjectInfo() {
           md:[grid-template-areas:'title_title_title_title_info_info_info_info_info_info_info_link']"
         >
           <h5
-            className="my-auto text-theme group-hover:text-blue-600 group-hover:dark:text-orange-600 
+            className="my-auto text-theme group-hover:text-theme-hover
       [grid-area:title]"
           >
             {projectItemTitle}
@@ -85,7 +85,7 @@ export default function ProjectInfo() {
       [grid-area:info]"
           >
             {documentToReactComponents(projectItemDescription.json)}
-            <div className="flex flex-row gap-2 text-black dark:text-off-white flex-wrap">
+            <div className="flex flex-row gap-2 text-base-400 dark:text-base-100 flex-wrap">
               {projectItemSkills?.map((skill: string, index) => (
                 <div
                   className="pill"
@@ -140,7 +140,7 @@ export default function ProjectInfo() {
                   ))}
               <div className="text-end my-4">
                 <button
-                  className="hover:text-blue-600 hover:dark:text-orange-400 dark:bg-slate-500 bg-slate-200
+                  className="hover:text-theme-hover dark:bg-base-300 bg-base-200
             text-sm md:text-base rounded-md p-2 "
                   onClick={() => {
                     setShowMoreProjects(!showMoreProjects);

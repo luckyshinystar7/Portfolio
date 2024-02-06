@@ -92,7 +92,7 @@ export default function ExperienceInfo() {
                     `transition-colors ease-out block p-4 border-l-2 hover:border-theme-hover hover:text-theme-hover cursor-pointer mr-4`,
                     item?.cvItemTitle === experienceTabState
                       ? "border-b-2 border-theme text-theme"
-                      : "dark:border-white border-black"
+                      : "dark:border-base-100 border-base-400"
                   )
                 )}
                 key={index}
@@ -115,7 +115,7 @@ export default function ExperienceInfo() {
               {
                 renderMark: {
                   [MARKS.ITALIC]: (text) => (
-                    <div className="dark:text-white text-black italic text-sm flex flex-row justify-between">
+                    <div className="dark:text-base-100 text-base-400 italic text-sm flex flex-row justify-between">
                       {text}
                       <div className="border-b w-fit">
                         <Link
