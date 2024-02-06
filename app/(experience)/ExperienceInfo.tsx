@@ -87,19 +87,20 @@ export default function ExperienceInfo() {
               index: number
             ) => (
               <li
-                className={twMerge(
+               
+                key={index}
+              >
+                <button onClick={() => setExperienceTab(item?.cvItemTitle)}  className={twMerge(
                   clsx(
-                    `transition-colors ease-out block p-4 border-l-2 hover:border-theme-hover hover:text-theme-hover cursor-pointer mr-4`,
+                    `transition-colors ease-out w-full text-start block p-4 border-l-2 hover:border-theme-hover hover:text-theme-hover cursor-pointer mr-4`,
                     item?.cvItemTitle === experienceTabState
                       ? "border-b-2 border-theme text-theme"
                       : "dark:border-base-100 border-base-400"
                   )
-                )}
-                key={index}
-                onClick={() => setExperienceTab(item?.cvItemTitle)}
-              >
-                <h5>{item?.cvItemTitle}</h5>
-                {/* <div>{documentToReactComponents(item?.cvItemDescription.json)}</div> */}
+                )}>
+                  <h5>{item?.cvItemTitle}</h5>
+                  {/* <div>{documentToReactComponents(item?.cvItemDescription.json)}</div> */}
+                </button>
               </li>
             )
           )}
@@ -115,7 +116,7 @@ export default function ExperienceInfo() {
               {
                 renderMark: {
                   [MARKS.ITALIC]: (text) => (
-                    <div className="dark:text-base-100 text-base-400 italic text-sm flex flex-row justify-between">
+                    <div className="dark:text-base-100 text-base-400 italic text-sm flex flex-row justify-between mb-2">
                       {text}
                       <div className="border-b w-fit">
                         <Link

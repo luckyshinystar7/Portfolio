@@ -4,7 +4,7 @@
 
 @layer components {
   .pill {
-    @apply bg-base-200 dark:bg-base-300 p-1 rounded-md h-fit w-fit text-nowrap;
+    @apply bg-base-200 dark:bg-base-300 p-1 rounded-md h-fit w-fit text-nowrap text-base-300 dark:text-base-200;
   }
   .text-theme {
     @apply text-primary-100 dark:text-secondary-100;
