@@ -85,7 +85,7 @@ export default function ProjectInfo() {
       [grid-area:info]"
           >
             {documentToReactComponents(projectItemDescription.json)}
-            <div className="flex flex-row gap-2 text-black dark:text-base-100 flex-wrap">
+            <div className="flex flex-row gap-2 text-base-400 dark:text-base-100 flex-wrap">
               {projectItemSkills?.map((skill: string, index) => (
                 <div
                   className="pill"

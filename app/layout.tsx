@@ -41,20 +41,6 @@ export default function RootLayout({
           >
             {children}
           </div>
-          {/* <footer
-            id="contact"
-            className="border-t-2 border-slate-100 dark:border-slate-400"
-          >
-            <div className="max-w-[1440px] mx-auto">
-              <div className="flex flex-col gap-2">
-                <h4>Let&apos;s Connect!</h4>
-                <div>Reach out to me on:</div>
-                <div className="flex flex-row gap-4">
-                  <ContactInfo />
-                </div>
-              </div>
-            </div>
-          </footer> */}
         </QueryProvider>
       </body>
     </html>

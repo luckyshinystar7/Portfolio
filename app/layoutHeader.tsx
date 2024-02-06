@@ -35,13 +35,13 @@ export default function LayoutHeader({}: {}) {
     <>
       <div className="z-10 sticky top-2 breakpoint-x flex flex-row justify-end drop-shadow-md">
         {isBelowMd ? (
-          <div className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-base-100  dark:text-black bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md py-2 px-4 text-sm md:text-base">
+          <div className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-base-100  dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md py-2 px-4 text-sm md:text-base">
             <button onClick={() => setNavOpen(true)}>
               <List size={24} />
             </button>
           </div>
         ) : (
-          <nav className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-base-100  dark:text-black bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md py-2 px-4 text-sm md:text-base">
+          <nav className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-base-100  dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md py-2 px-4 text-sm md:text-base">
             {NAVIGATION.map((item, index: number) =>
               item.href === "#contact" ? (
                 <Link
@@ -68,7 +68,7 @@ export default function LayoutHeader({}: {}) {
       </div>
       {navOpen && (
         <Modal>
-          <div className="bg-base-300 dark:bg-base-100 text-base-100 dark:text-black h-full w-full text-end py-4 px-4">
+          <div className="bg-base-300 dark:bg-base-100 text-base-100 dark:text-base-400 h-full w-full text-end py-4 px-4">
             <button onClick={() => setNavOpen(false)}>
               <X size={24} />
             </button>
