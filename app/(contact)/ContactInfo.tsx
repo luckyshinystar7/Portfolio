@@ -56,6 +56,7 @@ export default function ContactInfo() {
             target="_blank"
             key={index}
             passHref
+            className="hover:text-theme-hover"
           >
             {renderLogo(item?.socialTitle)}
           </Link>
