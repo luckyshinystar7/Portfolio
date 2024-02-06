@@ -123,7 +123,7 @@ export default function ExperienceInfo() {
                           target="_blank"
                         >
                           <ArrowUpRight className="inline" size={16} />
-                          {experienceDescrptions[experienceTabState]?.title}
+                          {/* {experienceDescrptions[experienceTabState]?.title} */}
                         </Link>
                       </div>
                     </div>
