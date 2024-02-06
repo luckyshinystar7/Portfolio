@@ -84,7 +84,7 @@ export default function Home() {
           </div>
         </div>
         <div
-          className="w-full bg-slate-500 dark:bg-off-white rounded-md bg-opacity-65 dark:bg-opacity-65
+          className="w-full bg-base-300 dark:bg-base-100 rounded-md bg-opacity-65 dark:bg-opacity-65
             min-h-96
           [grid-area:image] p-8"
         >
@@ -103,7 +103,7 @@ export default function Home() {
           </div>
           <div className="text-end mt-16">
             <Link
-              className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-slate-500 bg-slate-200 bg-opacity-65 dark:bg-opacity-65 
+              className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-base-300 bg-base-200 bg-opacity-65 dark:bg-opacity-65 
             text-sm md:text-base rounded-md p-2 
             pointer-events-none opacity-65 dark:opacity-65"
               href="/Portfolio"

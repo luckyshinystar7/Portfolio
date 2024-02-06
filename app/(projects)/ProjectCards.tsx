@@ -104,7 +104,7 @@ export default function ProjectCards() {
               >
                 {item?.projectItemSkills?.map((skill: string, index) => (
                   <div
-                    className="col-span-1 p-1 rounded-md bg-slate-200 dark:bg-slate-500 bg-opacity-65 h-fit text-nowrap"
+                    className="col-span-1 p-1 rounded-md bg-base-200 dark:bg-base-300 bg-opacity-65 h-fit text-nowrap"
                     key={`${item.projectItemTitle}_skill_${index}`}
                   >
                     {skill}

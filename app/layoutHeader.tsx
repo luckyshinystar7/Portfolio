@@ -35,17 +35,17 @@ export default function LayoutHeader({}: {}) {
     <>
       <div className="z-10 sticky top-2 breakpoint-x flex flex-row justify-end drop-shadow-md">
         {isBelowMd ? (
-          <div className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-off-white  dark:text-black bg-slate-500 bg-opacity-90 dark:bg-opacity-90 text-off-white rounded-md py-2 px-4 text-sm md:text-base">
+          <div className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-base-100  dark:text-black bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md py-2 px-4 text-sm md:text-base">
             <button onClick={() => setNavOpen(true)}>
               <List size={24} />
             </button>
           </div>
         ) : (
-          <nav className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-off-white  dark:text-black bg-slate-500 bg-opacity-90 dark:bg-opacity-90 text-off-white rounded-md py-2 px-4 text-sm md:text-base">
+          <nav className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-base-100  dark:text-black bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md py-2 px-4 text-sm md:text-base">
             {NAVIGATION.map((item, index: number) =>
               item.href === "#contact" ? (
                 <Link
-                  className="hover:drop-shadow-md hover:text-off-white hover:dark:text-off-white hover:bg-blue-400  hover:dark:bg-orange-400 leading-6 border-theme border-2 p-2 rounded-md
+                  className="hover:drop-shadow-md hover:text-base-100 hover:dark:text-base-100 hover:bg-blue-400  hover:dark:bg-orange-400 leading-6 border-theme border-2 p-2 rounded-md
                   flex flex-row gap-1 items-center"
                   href={item.href}
                   key={index}
@@ -68,7 +68,7 @@ export default function LayoutHeader({}: {}) {
       </div>
       {navOpen && (
         <Modal>
-          <div className="bg-slate-500 dark:bg-off-white text-off-white dark:text-black h-full w-full text-end py-4 px-4">
+          <div className="bg-base-300 dark:bg-base-100 text-base-100 dark:text-black h-full w-full text-end py-4 px-4">
             <button onClick={() => setNavOpen(false)}>
               <X size={24} />
             </button>
@@ -76,7 +76,7 @@ export default function LayoutHeader({}: {}) {
               {NAVIGATION.map((item, index: number) =>
                 item.href === "#contact" ? (
                   <Link
-                    className="hover:drop-shadow-md hover:text-off-white hover:dark:text-off-white hover:bg-blue-400  hover:dark:bg-orange-400 leading-6 border-theme border-2 p-2 rounded-md
+                    className="hover:drop-shadow-md hover:text-base-100 hover:dark:text-base-100 hover:bg-blue-400  hover:dark:bg-orange-400 leading-6 border-theme border-2 p-2 rounded-md
                   flex flex-row gap-1 items-center"
                     href={item.href}
                     key={index}
