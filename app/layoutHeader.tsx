@@ -35,17 +35,17 @@ export default function LayoutHeader({}: {}) {
     <>
       <div className="z-10 sticky top-2 breakpoint-x flex flex-row justify-end drop-shadow-md">
         {isBelowMd ? (
-          <div className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-base-100  dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md py-2 px-4 text-sm md:text-base">
+          <div className="dark:bg-base-100 dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md px-4 py-2 flex flex-row ">
             <button onClick={() => setNavOpen(true)}>
               <List size={24} />
             </button>
           </div>
         ) : (
-          <nav className="md:min-w-[20rem] md:justify-evenly items-center flex flex-row gap-4 dark:bg-base-100  dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md py-2 px-4 text-sm md:text-base">
+          <nav className="justify-evenly items-center flex flex-row gap-4 dark:bg-base-100  dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md px-4 py-2 text-sm md:text-base">
             {NAVIGATION.map((item, index: number) =>
               item.href === "#contact" ? (
                 <Link
-                  className="hover:drop-shadow-md hover:text-base-100 hover:dark:text-base-100 hover:bg-blue-400  hover:dark:bg-orange-400 leading-6 border-theme border-2 p-2 rounded-md
+                  className="hover:drop-shadow-md hover:text-base-100 hover:dark:text-base-100 hover:bg-primary-100  hover:dark:bg-secondary-100 leading-6 border-theme border-2 p-2 rounded-md
                   flex flex-row gap-1 items-center"
                   href={item.href}
                   key={index}
@@ -76,7 +76,7 @@ export default function LayoutHeader({}: {}) {
               {NAVIGATION.map((item, index: number) =>
                 item.href === "#contact" ? (
                   <Link
-                    className="hover:drop-shadow-md hover:text-base-100 hover:dark:text-base-100 hover:bg-blue-400  hover:dark:bg-orange-400 leading-6 border-theme border-2 p-2 rounded-md
+                    className="hover:drop-shadow-md hover:text-base-100 hover:dark:text-base-100 hover:bg-primary-100  hover:dark:bg-secondary-100 leading-6 border-theme border-2 p-2 rounded-md
                   flex flex-row gap-1 items-center"
                     href={item.href}
                     key={index}
