@@ -35,11 +35,12 @@ export default function LayoutHeader({}: {}) {
     <>
       <div className="z-10 sticky top-2 breakpoint-x flex flex-row justify-end drop-shadow-md">
         {isBelowMd ? (
-          <div className="dark:bg-base-100 dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md px-4 py-2 flex flex-row ">
-            <button onClick={() => setNavOpen(true)}>
-              <List size={24} />
-            </button>
-          </div>
+          <button
+            className="dark:bg-base-100 dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md px-4 py-2 flex flex-row "
+            onClick={() => setNavOpen(true)}
+          >
+            <List size={24} />
+          </button>
         ) : (
           <nav className="justify-evenly items-center flex flex-row gap-4 dark:bg-base-100  dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md px-4 py-2 text-sm md:text-base">
             {NAVIGATION.map((item, index: number) =>
