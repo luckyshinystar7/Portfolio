@@ -115,7 +115,7 @@ export default function ExperienceInfo() {
               {
                 renderMark: {
                   [MARKS.ITALIC]: (text) => (
-                    <div className="dark:text-base-100 text-base-400 italic text-sm flex flex-row justify-between">
+                    <div className="dark:text-base-100 text-base-400 italic text-sm flex flex-row justify-between mb-2">
                       {text}
                       <div className="border-b w-fit">
                         <Link
