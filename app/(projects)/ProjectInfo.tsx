@@ -70,13 +70,12 @@ export default function ProjectInfo() {
     return (
       <Link href={projectItemHyperlink} target="_blank" passHref>
         <li
-          className="grid grid-cols-3 md:grid-cols-12 gap-x-8 border-b-2 py-4 pl-4 group
-      hover:text-blue-600 hover:dark:text-orange-600 hover:dark:border-orange-600 hover:border-blue-600
-    [grid-template-areas:'title_title_link'_'info_info_info'] 
-    md:[grid-template-areas:'title_title_title_title_info_info_info_info_info_info_info_link']"
+          className="grid grid-cols-3 md:grid-cols-12 gap-x-8 border-b-2 py-4 pl-4 group hover:text-theme-hover hover:border-theme-hover
+          [grid-template-areas:'title_title_link'_'info_info_info'] 
+          md:[grid-template-areas:'title_title_title_title_info_info_info_info_info_info_info_link']"
         >
           <h5
-            className="my-auto text-blue-400 dark:text-orange-400 group-hover:text-blue-600 group-hover:dark:text-orange-600 
+            className="my-auto text-theme group-hover:text-blue-600 group-hover:dark:text-orange-600 
       [grid-area:title]"
           >
             {projectItemTitle}
@@ -89,7 +88,7 @@ export default function ProjectInfo() {
             <div className="flex flex-row gap-2 text-black dark:text-off-white flex-wrap">
               {projectItemSkills?.map((skill: string, index) => (
                 <div
-                  className="p-1 rounded-md bg-slate-200 dark:bg-slate-500 bg-opacity-65 h-fit w-fit text-nowrap"
+                  className="pill"
                   key={`${projectItemTitle}_skill_${index}`}
                 >
                   {skill}

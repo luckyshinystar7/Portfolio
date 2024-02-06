@@ -121,9 +121,9 @@ export default function Home() {
         <h4>Let&apos;s Connect!</h4>
         <h3>Reach out to me on:</h3>
         <div className="grow flex flex-col">
-          <div className="border-b w-fit ml-auto self-end mt-auto mb-32">
+          <div className="border-b w-fit ml-auto self-end mt-auto mb-32 hover:anchor-hover text-theme border-theme text-theme-hover">
             <ArrowUpRight size={32} className="inline" />
-            <h3 className="inline">email@email.com</h3>
+            <h3 className="inline ">email@email.com</h3>
           </div>
         </div>
         <div className="flex flex-row gap-4 mt-auto">

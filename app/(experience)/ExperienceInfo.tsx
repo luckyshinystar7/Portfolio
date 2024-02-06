@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
 import { Link as LinkIcon, ArrowUpRight } from "@phosphor-icons/react";
+import { twMerge } from "tailwind-merge";
 export default function ExperienceInfo() {
   const [experienceTabState, setExperienceTab] = useState<string | undefined>(
     undefined
@@ -86,10 +87,13 @@ export default function ExperienceInfo() {
               index: number
             ) => (
               <li
-                className={clsx(
-                  `transition-colors ease-out block p-4  border-l-2 dark:border-white border-black  hover:text-blue-600 hover:border-blue-600 hover:dark:text-orange-600 hover:dark:border-orange-600 cursor-pointer mr-4 hover:transition-colors`,
-                  item?.cvItemTitle === experienceTabState &&
-                    "border-b-2 border-b-blue-400 dark:border-b-orange-400 text-blue-400 dark:text-orange-400"
+                className={twMerge(
+                  clsx(
+                    `transition-colors ease-out block p-4 border-l-2 hover:border-theme-hover hover:text-theme-hover cursor-pointer mr-4`,
+                    item?.cvItemTitle === experienceTabState
+                      ? "border-b-2 border-theme text-theme"
+                      : "dark:border-white border-black"
+                  )
                 )}
                 key={index}
                 onClick={() => setExperienceTab(item?.cvItemTitle)}
@@ -112,7 +116,7 @@ export default function ExperienceInfo() {
                 renderMark: {
                   [MARKS.ITALIC]: (text) => (
                     <div className="dark:text-white text-black italic text-sm flex flex-row justify-between">
-                        {text}
+                      {text}
                       <div className="border-b w-fit">
                         <Link
                           href={experienceDescrptions[experienceTabState]?.link}
@@ -136,9 +140,7 @@ export default function ExperienceInfo() {
                   },
                   [BLOCKS.PARAGRAPH]: (node, children) => {
                     return (
-                      <p className="text-blue-600 dark:text-orange-400 text-justify">
-                        {children}
-                      </p>
+                      <p className="text-theme text-justify">{children}</p>
                     );
                   },
                 },
@@ -151,7 +153,7 @@ export default function ExperienceInfo() {
                 (skill: string, index: number) => (
                   <div
                     key={`experience_skill_${index}`}
-                    className="col-span-1 p-1 rounded-md bg-slate-200 dark:bg-slate-500 bg-opacity-65 h-fit"
+                    className="col-span-1 pill"
                   >
                     {skill}
                   </div>

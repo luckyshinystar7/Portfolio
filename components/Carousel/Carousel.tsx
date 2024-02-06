@@ -34,7 +34,7 @@ export default function Carousel({ children }: { children: any }) {
       >
         <button
           className={clsx(
-            "button-hover button-icon mx-4 mt-4 md:my-4",
+            "hover:button-hover button-icon mx-4 mt-4 md:my-4",
             // emblaApi?.slidesInView().includes(0) && "opacity-65"
           )}
           onClick={scrollPrev}
@@ -56,7 +56,7 @@ export default function Carousel({ children }: { children: any }) {
       >
         <button
           className={clsx(
-            "button-hover button-icon mx-4 mt-4 md:my-4",
+            "hover:button-hover button-icon mx-4 mt-4 md:my-4",
             // emblaApi?.slidesInView().includes(slideNodeLength - 1) && "opacity-65"
           )}
           onClick={scrollNext}

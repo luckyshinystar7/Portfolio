@@ -3,20 +3,35 @@
 @tailwind utilities;
 
 @layer components {
+  .pill {
+    @apply bg-slate-200 dark:bg-slate-500 p-1 rounded-md h-fit w-fit text-nowrap;
+  }
+  .text-theme {
+    @apply text-blue-400 dark:text-orange-400;
+  }
+  .text-theme-hover {
+    @apply text-blue-600 dark:text-orange-600 transition-colors;
+  }
+  .border-theme {
+    @apply border-blue-400 dark:border-orange-400;
+  }
+  .border-theme-hover {
+    @apply border-blue-600 dark:border-orange-600 transition-colors;
+  }
   .button-hover {
-    @apply hover:bg-slate-200 hover:dark:bg-slate-500 bg-opacity-65 dark:bg-opacity-65 rounded-md;
+    @apply bg-slate-200 dark:bg-slate-500 bg-opacity-65 dark:bg-opacity-65 rounded-md transition-colors;
   }
   .button-icon {
     @apply p-1;
   }
-  .border-highlight{
-
+  .anchor-hover {
+    @apply bg-slate-200 dark:bg-slate-500;
   }
 }
 
 @layer base {
   body {
-    @apply dark:bg-black dark:text-white bg-off-white;
+    @apply dark:bg-black dark:text-off-white bg-off-white;
     transition-property: background-color, filter, backdrop-filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
