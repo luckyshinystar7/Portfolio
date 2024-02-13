@@ -125,7 +125,7 @@ export default function ProjectInfo() {
                   projectItemHyperlink={item?.projectItemHyperlink}
                   projectItemSkills={item?.projectItemSkills}
                   projectItemTitle={item?.projectItemTitle}
-                  key={index}
+                  key={item?.projectItemTitle}
                 />
               ))}
 
@@ -138,7 +138,7 @@ export default function ProjectInfo() {
                     projectItemHyperlink={item?.projectItemHyperlink}
                     projectItemSkills={item?.projectItemSkills}
                     projectItemTitle={item?.projectItemTitle}
-                    key={index}
+                    key={item?.projectItemTitle}
                   />
                 ))}
             <div className="text-end my-4">
@@ -162,7 +162,7 @@ export default function ProjectInfo() {
                 projectItemHyperlink={item?.projectItemHyperlink}
                 projectItemSkills={item?.projectItemSkills}
                 projectItemTitle={item?.projectItemTitle}
-                key={index}
+                key={item?.projectItemTitle}
               />
             )
           )

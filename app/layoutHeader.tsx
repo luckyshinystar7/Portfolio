@@ -39,7 +39,7 @@ export default function LayoutHeader({}: {}) {
     <>
       <motion.div
         // className={`h-1 w-full bg-red-50 scale-x-[${scrollYProgress}]`}
-        className={`h-2 w-full bg-primary-100 dark:bg-secondary-100 fixed top-0 left-0 right-0`}
+        className={`h-2 w-full bg-primary-100 dark:bg-secondary-100 fixed top-0 left-0 right-0 z-10`}
         style={{ scaleX: scrollYProgress }}
       />
       <motion.div
@@ -50,7 +50,7 @@ export default function LayoutHeader({}: {}) {
       >
         <div className="flex flex-row justify-end drop-shadow-md">
           {/* #TODO: maybe make a useClient context thing if more window undefineds are required */}
-          {window !== undefined && isBelowMd ? (
+          {typeof window !== undefined && isBelowMd ? (
             <button
               className="dark:bg-base-100 dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md px-4 py-2 flex flex-row "
               onClick={() => setNavOpen(true)}
@@ -62,15 +62,19 @@ export default function LayoutHeader({}: {}) {
               {NAVIGATION.map((item, index: number) =>
                 item.href === "#contact" ? (
                   <Link
-                    className="hover:drop-shadow-md text-base-100 hover:text-base-100  bg-primary-100 dark:bg-secondary-100 leading-6 rounded-md bg-opacity-80"
+                    className="hover:drop-shadow-md text-base-100 hover:text-base-100  bg-primary-100 dark:bg-secondary-100 leading-6 rounded-md bg-opacity-65 group relative overflow-hidden isolate"
                     href={item.href}
                     key={index}
                   >
-                    <div className="flex flex-row gap-1 items-center pt-2 pb-0 px-2">
+                    <div className="flex flex-row gap-1 items-center p-2 z-20">
                       <ArrowUpRight size={18} className="inline" />
                       {item.label}
                     </div>
-                    <motion.div className="w-full h-2 bg-primary-200 dark:bg-secondary-200 relative bottom-0 left-0 right-0 rounded-b-md" />
+                    <motion.span
+                      className="w-full h-full  bg-primary-200 dark:bg-secondary-200 absolute rounded-b-md inset-0 
+                    translate-y-9 group-hover:translate-y-0 group-hover:rounded-md transition-transform ease-out -z-10 opacity-65"
+                      // TODO:fix group hover
+                    />
                   </Link>
                 ) : (
                   <Link
@@ -90,11 +94,11 @@ export default function LayoutHeader({}: {}) {
         {navOpen && (
           <Modal>
             <motion.div
-              className="bg-base-300 dark:bg-base-100 text-base-100 dark:text-base-400 h-full text-end py-4 breakpoint-x px-8"
-              initial={{ width: 0, right: 0 }}
-              animate={{ width: "100%", right: 0 }}
-              exit={{ width: 0, right: 0 }}
-              transition={{ duration: 0.5 }}
+              className="bg-base-300 dark:bg-base-100 text-base-100 dark:text-base-400 h-full text-end py-4 breakpoint-x px-8 relative"
+              initial={{ width: 0, left: "100%" }}
+              animate={{ width: "100%", left: 0 }}
+              exit={{ width: 0, left: "100%" }}
+              transition={{ duration: 0.2 }}
             >
               <button onClick={() => setNavOpen(false)}>
                 <X size={24} />
@@ -104,6 +108,7 @@ export default function LayoutHeader({}: {}) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                transition={{ staggerChildren: 1, delayChildren: 1 }}
               >
                 {NAVIGATION.map((item, index: number) =>
                   item.href === "#contact" ? (

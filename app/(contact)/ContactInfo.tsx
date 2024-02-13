@@ -4,6 +4,8 @@ import { request } from "graphql-request";
 import Image from "next/image";
 import Link from "next/link";
 import { Envelope, InstagramLogo, LinkedinLogo } from "@phosphor-icons/react";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+
 export default function ContactInfo() {
   const query = `query contact($id: String!) {
     contact(id: $id) {
@@ -47,22 +49,39 @@ export default function ContactInfo() {
     }
   };
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.5,
+        staggerChildren: 2,
+      },
+    },
+  };
+
   return (
-    <>
+    <motion.ul
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="flex flex-row gap-4"
+    >
       {data?.contact?.socialCollection?.items?.map(
         (item: any, index: number) => (
-          <Link
-            href={item?.socialHyperlink}
-            target="_blank"
-            key={index}
-            passHref
-            className="hover:text-theme-hover"
-          >
-            {renderLogo(item?.socialTitle)}
-          </Link>
+          <motion.div key={item?.socialTitle} variants={container}>
+            <Link
+              href={item?.socialHyperlink}
+              target="_blank"
+              passHref
+              className="hover:text-theme-hover"
+            >
+              <li className="list-none">{renderLogo(item?.socialTitle)}</li>
+            </Link>
+          </motion.div>
         )
       )}
       {/* <div>frankmailforward@email.com</div> */}
-    </>
+    </motion.ul>
   );
 }

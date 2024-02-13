@@ -94,7 +94,7 @@ export default function ExperienceInfo() {
               index: number
             ) => (
               <li
-                key={`${item?.cvItemTitle}_tab}`}
+                key={`${item?.cvItemTitle}}`}
                 className={twMerge(
                   clsx(
                     `transition-colors ease-out  block  border-l-2 hover:border-theme-hover hover:text-theme cursor-pointer mr-4`,
@@ -116,8 +116,8 @@ export default function ExperienceInfo() {
                 </motion.button>
                 {item?.cvItemTitle === experienceTabState && (
                   <motion.div
-                    layoutId="wtf"
-                    className="w-full h-2 bg-primary-200 dark:bg-secondary-200 relative bottom-2=0 left-0 right-0"
+                    layoutId="experience_divider"
+                    className="w-full h-2 bg-primary-200 dark:bg-secondary-200 relative left-0 right-0"
                   />
                 )}
               </li>
@@ -125,14 +125,13 @@ export default function ExperienceInfo() {
           )}
         </motion.ul>
 
-        <div className="col-span-12 md:col-span-8 md:ml-4 mt-4 text-sm md:text-base">
+        <div className="col-span-12 md:col-span-8 md:ml-4 mt-4 text-sm md:text-base overflow-x-hidden">
           <AnimatePresence mode="wait">
             <motion.div
-              //TODO: breakpoint animate from top
               key={`${experienceTabState}_content`}
               initial={{ x: -200, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ y: -10, opacity: 0 }}
+              exit={{ x: 200, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
               {!!experienceDescrptions &&

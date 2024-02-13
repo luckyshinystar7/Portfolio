@@ -206,15 +206,15 @@ export default function Home() {
             <h3 className="inline ">email@(coming soon)</h3>
           </div>
         </div>
-        <motion.div
-          className="flex flex-row gap-4 mt-auto"
+        {/* <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 2 }}
           viewport={{ once: true, amount: 0.5 }}
         >
           <ContactInfo />
-        </motion.div>
+        </motion.div> */}
+                <ContactInfo />
       </section>
     </main>
   );
