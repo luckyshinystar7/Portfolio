@@ -8,6 +8,8 @@ import clsx from "clsx";
 import Link from "next/link";
 import { Link as LinkIcon, ArrowUpRight } from "@phosphor-icons/react";
 import { twMerge } from "tailwind-merge";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+
 export default function ExperienceInfo() {
   const [experienceTabState, setExperienceTab] = useState<string | undefined>(
     undefined
@@ -80,88 +82,116 @@ export default function ExperienceInfo() {
   return (
     <>
       <div className="grid grid-cols-12">
-        <ul className="col-span-12 md:col-span-4">
+        <motion.ul
+          className="col-span-12 md:col-span-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ staggerChildren: 1 }}
+        >
           {data?.experience?.experienceCollection?.items?.map(
             (
               item: { cvItemTitle: string; cvItemDescription: any },
               index: number
             ) => (
               <li
-               
-                key={index}
-              >
-                <button onClick={() => setExperienceTab(item?.cvItemTitle)}  className={twMerge(
+                key={`${item?.cvItemTitle}_tab}`}
+                className={twMerge(
                   clsx(
-                    `transition-colors ease-out w-full text-start block p-4 border-l-2 hover:border-theme-hover hover:text-theme-hover cursor-pointer mr-4`,
+                    `transition-colors ease-out  block  border-l-2 hover:border-theme-hover hover:text-theme cursor-pointer mr-4`,
                     item?.cvItemTitle === experienceTabState
-                      ? "border-b-2 border-theme text-theme"
+                      ? "border-theme text-theme-hover pointer-events-none"
                       : "dark:border-base-100 border-base-400"
                   )
-                )}>
+                )}
+              >
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ staggerChildren: 1, delayChildren: 1 }}
+                  onClick={() => setExperienceTab(item?.cvItemTitle)}
+                  className="w-full h-full text-start p-4"
+                >
                   <h5>{item?.cvItemTitle}</h5>
                   {/* <div>{documentToReactComponents(item?.cvItemDescription.json)}</div> */}
-                </button>
+                </motion.button>
+                {item?.cvItemTitle === experienceTabState && (
+                  <motion.div
+                    layoutId="wtf"
+                    className="w-full h-2 bg-primary-200 dark:bg-secondary-200 relative bottom-2=0 left-0 right-0"
+                  />
+                )}
               </li>
             )
           )}
-        </ul>
-        <div
-          className="col-span-12 md:col-span-8 md:ml-4 mt-4 text-sm md:text-base"
-          // max-h-[280px] md:max-h-[184px]"
-        >
-          {!!experienceDescrptions &&
-            experienceTabState &&
-            documentToReactComponents(
-              experienceDescrptions[experienceTabState].json,
-              {
-                renderMark: {
-                  [MARKS.ITALIC]: (text) => (
-                    <div className="dark:text-base-100 text-base-400 italic text-sm flex flex-row justify-between mb-2">
-                      {text}
-                      <div className="border-b w-fit">
-                        <Link
-                          href={experienceDescrptions[experienceTabState]?.link}
-                          target="_blank"
-                        >
-                          <ArrowUpRight className="inline" size={16} />
-                          {/* {experienceDescrptions[experienceTabState]?.title} */}
-                        </Link>
-                      </div>
-                    </div>
-                  ),
-                },
-                renderNode: {
-                  [BLOCKS.LIST_ITEM]: (node, children) => {
-                    return (
-                      <li className="list-disc list-inside">
-                        {/* @ts-ignore-error */}
-                        {node?.content[0]?.content[0]?.value}
-                      </li>
-                    );
-                  },
-                  [BLOCKS.PARAGRAPH]: (node, children) => {
-                    return (
-                      <p className="text-theme text-justify">{children}</p>
-                    );
-                  },
-                },
-              }
-            )}
+        </motion.ul>
 
-          {!!experienceDescrptions && experienceTabState && (
-            <div className="flex flex-row gap-2 flex-wrap mt-2">
-              {experienceDescrptions[experienceTabState].skills?.map(
-                (skill: string, index: number) => (
-                  <div
-                    key={`experience_skill_${index}`}
-                    className="col-span-1 pill"
-                  >
-                    {skill}
-                  </div>
-                )
+        <div className="col-span-12 md:col-span-8 md:ml-4 mt-4 text-sm md:text-base">
+          <AnimatePresence mode="wait">
+            <motion.div
+              //TODO: breakpoint animate from top
+              key={`${experienceTabState}_content`}
+              initial={{ x: -200, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ y: -10, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {!!experienceDescrptions &&
+                experienceTabState &&
+                documentToReactComponents(
+                  experienceDescrptions[experienceTabState].json,
+                  {
+                    renderMark: {
+                      [MARKS.ITALIC]: (text) => (
+                        <div className="dark:text-base-100 text-base-400 italic text-sm flex flex-row justify-between mb-2">
+                          {text}
+                          <div className="border-b w-fit hover:text-theme-hover">
+                            <Link
+                              href={
+                                experienceDescrptions[experienceTabState]?.link
+                              }
+                              target="_blank"
+                            >
+                              <ArrowUpRight className="inline" size={16} />
+                              {/* {experienceDescrptions[experienceTabState]?.title} */}
+                            </Link>
+                          </div>
+                        </div>
+                      ),
+                    },
+                    renderNode: {
+                      [BLOCKS.LIST_ITEM]: (node, children) => {
+                        return (
+                          <li className="list-disc list-inside">
+                            {/* @ts-ignore-error */}
+                            {node?.content[0]?.content[0]?.value}
+                          </li>
+                        );
+                      },
+                      [BLOCKS.PARAGRAPH]: (node, children) => {
+                        return (
+                          <p className="text-theme text-justify">{children}</p>
+                        );
+                      },
+                    },
+                  }
+                )}
+
+              {!!experienceDescrptions && experienceTabState && (
+                <div className="flex flex-row gap-2 flex-wrap mt-2">
+                  {experienceDescrptions[experienceTabState].skills?.map(
+                    (skill: string, index: number) => (
+                      <div
+                        key={`experience_skill_${index}`}
+                        className="col-span-1 pill"
+                      >
+                        {skill}
+                      </div>
+                    )
+                  )}
+                </div>
               )}
-            </div>
-          )}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </>

@@ -13,13 +13,10 @@
     @apply text-primary-200 dark:text-secondary-200 transition-colors;
   }
   .border-theme {
-    @apply border-primary-100 dark:border-secondary-100;
-  }
-  .border-theme-hover {
     @apply border-primary-200 dark:border-secondary-200 transition-colors;
   }
-  .button-hover {
-    @apply bg-base-200 dark:bg-base-300 bg-opacity-65 dark:bg-opacity-65 rounded-md transition-colors;
+  .border-theme-hover {
+    @apply border-primary-100 dark:border-secondary-100;
   }
   .button-icon {
     @apply p-1;
@@ -27,7 +24,7 @@
   .anchor-hover {
     @apply bg-base-200 dark:bg-base-300;
   }
-  .breakpoint-x{
+  .breakpoint-x {
     @apply max-w-[1440px] px-4 md:px-12 mx-auto;
   }
 }
