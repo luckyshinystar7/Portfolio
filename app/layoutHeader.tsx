@@ -50,7 +50,6 @@ export default function LayoutHeader({}: {}) {
         transition={{ duration: 2 }}
       >
         <div className="flex flex-row ml-auto w-fit justify-end drop-shadow-md px-4 py-2 dark:bg-base-100  dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md">
-          {/* #TODO: maybe make a useClient context thing if more window undefineds are required */}
           {isClient && isBelowMd ? (
             <button
               onClick={() => setNavOpen(true)}
@@ -73,7 +72,6 @@ export default function LayoutHeader({}: {}) {
                     <motion.span
                       className="w-full h-full  bg-primary-200 dark:bg-secondary-200 absolute rounded-b-md inset-0 
                     translate-y-9 group-hover:translate-y-0 group-hover:rounded-md transition-transform ease-out -z-10 opacity-65"
-                      // TODO:fix group hover
                     />
                   </Link>
                 ) : (

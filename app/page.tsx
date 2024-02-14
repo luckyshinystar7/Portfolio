@@ -4,15 +4,14 @@ import ExperienceInfo from "./(experience)/ExperienceInfo";
 import Link from "next/link";
 import { ArrowCircleDown, ArrowUpRight } from "@phosphor-icons/react";
 import IntervalLabel from "@/components/IntervalLabel";
-import Carousel from "@/components/Carousel/Carousel";
 import ProjectInfo from "./(projects)/ProjectInfo";
 import { useEffect, useRef, useState } from "react";
 import { toggleDarkMode } from "@/public/scripts/darkMode";
 import { Sun, Sunglasses, House } from "@phosphor-icons/react";
 import ContactInfo from "./(contact)/ContactInfo";
-import ProjectCards from "./(projects)/ProjectCards";
 import { motion } from "framer-motion";
 import Parallax from "@/components/Parallax";
+import Email from "./(contact)/Email";
 
 const LABELS = [
   "Frontend Engineer",
@@ -38,7 +37,10 @@ export default function Home() {
 
   return (
     <main>
-      <section className="grid grid-cols-2 auto-rows-min md:auto-rows-auto">
+      <section
+        id="home"
+        className="grid grid-cols-2 auto-rows-min md:auto-rows-auto"
+      >
         <div className="col-span-2 md:col-span-1">
           <div className="md:mt-64">
             <motion.h5
@@ -197,10 +199,13 @@ export default function Home() {
           </motion.h4>
           <h3>Reach out to me on:</h3>
           <div className="grow flex flex-col">
-            <div className="border-b w-fit ml-auto self-end mt-auto mb-32 hover:anchor-hover text-theme border-theme hover:text-theme-hover">
+            <Link
+              href={`mailto:${Email().email}`}
+              className="border-b w-fit ml-auto self-end mt-auto mb-32 hover:anchor-hover text-theme border-theme hover:text-theme-hover"
+            >
               <ArrowUpRight size={32} className="inline" />
-              <h3 className="inline ">email@(coming soon)</h3>
-            </div>
+              <h3 className="inline ">{Email().email}</h3>
+            </Link>
           </div>
           <motion.div
             initial={{ opacity: 0 }}
