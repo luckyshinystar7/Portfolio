@@ -8,6 +8,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { Link as LinkIcon, ArrowUpRight } from "@phosphor-icons/react";
 import { useBreakpoint } from "@/utils/hooks/useBreakpoint";
+import { motion } from "framer-motion";
 
 interface ProjectItemType {
   projectItemDescription: any;
@@ -60,7 +61,6 @@ export default function ProjectInfo() {
   });
 
   const { isAboveMd, isBelowMd, md } = useBreakpoint("md");
-  console.log(isAboveMd, "wtf");
   const LinkRow = ({
     projectItemDescription,
     projectItemHyperlink,
@@ -108,68 +108,70 @@ export default function ProjectInfo() {
   };
 
   return (
-    <div ref={listRef}>
-      <h3>Projects</h3>
-      <div>
-        <ul className="flex flex-col">
-          {isBelowMd && data?.project?.projectCollection?.items.length > 2 ? (
-            <>
-              {data?.project?.projectCollection?.items
-                .slice(0, 2)
+    <motion.div layout ref={listRef} transition={{ when: "beforeChildren" }}>
+      <motion.ul
+        className="flex flex-col"
+        initial={{ opacity: 0, left: -100 }}
+        animate={{ opacity: 1, left: 0 }}
+        transition={{ staggerChildren: 4, delayChildren: 20 }}
+      >
+        {isBelowMd && data?.project?.projectCollection?.items.length > 2 ? (
+          <>
+            {data?.project?.projectCollection?.items
+              .slice(0, 2)
+              .map((item: ProjectItemType, index: number) => (
+                <LinkRow
+                  projectItemDescription={item?.projectItemDescription}
+                  projectItemHyperlink={item?.projectItemHyperlink}
+                  projectItemSkills={item?.projectItemSkills}
+                  projectItemTitle={item?.projectItemTitle}
+                  key={item?.projectItemTitle}
+                />
+              ))}
+
+            {showMoreProjects &&
+              data?.project?.projectCollection?.items
+                .slice(2)
                 .map((item: ProjectItemType, index: number) => (
                   <LinkRow
                     projectItemDescription={item?.projectItemDescription}
                     projectItemHyperlink={item?.projectItemHyperlink}
                     projectItemSkills={item?.projectItemSkills}
                     projectItemTitle={item?.projectItemTitle}
-                    key={index}
+                    key={item?.projectItemTitle}
                   />
                 ))}
-
-              {showMoreProjects &&
-                data?.project?.projectCollection?.items
-                  .slice(2)
-                  .map((item: ProjectItemType, index: number) => (
-                    <LinkRow
-                      projectItemDescription={item?.projectItemDescription}
-                      projectItemHyperlink={item?.projectItemHyperlink}
-                      projectItemSkills={item?.projectItemSkills}
-                      projectItemTitle={item?.projectItemTitle}
-                      key={index}
-                    />
-                  ))}
-              <div className="text-end my-4">
-                <button
-                  className="hover:text-theme-hover dark:bg-base-300 bg-base-200
+            <div className="text-end my-4">
+              <button
+                className="hover:text-theme-hover dark:bg-base-300 bg-base-200
             text-sm md:text-base rounded-md p-2 "
-                  onClick={() => {
-                    setShowMoreProjects(!showMoreProjects);
-                    showMoreProjects && listRef.current?.scrollIntoView();
-                  }}
-                >
-                  {showMoreProjects ? "Show Less" : "Show More"}
-                </button>
-              </div>
-            </>
-          ) : (
-            data?.project?.projectCollection?.items.map(
-              (item: ProjectItemType, index: number) => (
-                <LinkRow
-                  projectItemDescription={item?.projectItemDescription}
-                  projectItemHyperlink={item?.projectItemHyperlink}
-                  projectItemSkills={item?.projectItemSkills}
-                  projectItemTitle={item?.projectItemTitle}
-                  key={index}
-                />
-              )
+                onClick={() => {
+                  setShowMoreProjects(!showMoreProjects);
+                  showMoreProjects && listRef.current?.scrollIntoView();
+                }}
+              >
+                {showMoreProjects ? "Show Less" : "Show More"}
+              </button>
+            </div>
+          </>
+        ) : (
+          data?.project?.projectCollection?.items.map(
+            (item: ProjectItemType, index: number) => (
+              <LinkRow
+                projectItemDescription={item?.projectItemDescription}
+                projectItemHyperlink={item?.projectItemHyperlink}
+                projectItemSkills={item?.projectItemSkills}
+                projectItemTitle={item?.projectItemTitle}
+                key={item?.projectItemTitle}
+              />
             )
-          )}
-        </ul>
-        <div
-          className="pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[220px] rounded-lg bg-cover bg-center opacity-0 transition-[background] duration-300"
-          ref={revealRef}
-        ></div>
-      </div>
-    </div>
+          )
+        )}
+      </motion.ul>
+      <div
+        className="pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[220px] rounded-lg bg-cover bg-center opacity-0 transition-[background] duration-300"
+        ref={revealRef}
+      ></div>
+    </motion.div>
   );
 }
