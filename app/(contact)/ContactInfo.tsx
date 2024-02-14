@@ -7,6 +7,7 @@ import { Envelope, InstagramLogo, LinkedinLogo } from "@phosphor-icons/react";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 export default function ContactInfo() {
+  
   const query = `query contact($id: String!) {
     contact(id: $id) {
      socialCollection(limit:100){
@@ -81,7 +82,6 @@ export default function ContactInfo() {
           </motion.div>
         )
       )}
-      {/* <div>frankmailforward@email.com</div> */}
     </motion.ul>
   );
 }
