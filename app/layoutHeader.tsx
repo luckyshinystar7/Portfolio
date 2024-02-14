@@ -18,7 +18,7 @@ const NAVIGATION = [
 export default function LayoutHeader({}: {}) {
   const [darkState, setDarkState] = useState<boolean>(false);
   const [navOpen, setNavOpen] = useState<boolean>(false);
-
+  const [isClient, setIsClient] = useState<boolean>(false);
   const { scrollYProgress } = useScroll();
 
   useEffect(() => {
@@ -31,6 +31,7 @@ export default function LayoutHeader({}: {}) {
     } else {
       setDarkState(false);
     }
+    setIsClient(true);
   }, []);
 
   const { isAboveMd, isBelowMd, md } = useBreakpoint("md");
@@ -48,21 +49,20 @@ export default function LayoutHeader({}: {}) {
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
       >
-        <div className="flex flex-row justify-end drop-shadow-md">
+        <div className="flex flex-row ml-auto w-fit justify-end drop-shadow-md px-4 py-2 dark:bg-base-100  dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md">
           {/* #TODO: maybe make a useClient context thing if more window undefineds are required */}
-          {typeof window !== undefined && isBelowMd ? (
+          {isClient && isBelowMd ? (
             <button
-              className="dark:bg-base-100 dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md px-4 py-2 flex flex-row "
               onClick={() => setNavOpen(true)}
             >
               <List size={24} />
             </button>
           ) : (
-            <nav className="justify-evenly items-center flex flex-row gap-4 dark:bg-base-100  dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md px-4 py-2 text-sm md:text-base">
+            <nav className="justify-evenly items-center flex flex-row gap-4 text-sm md:text-base">
               {NAVIGATION.map((item, index: number) =>
                 item.href === "#contact" ? (
                   <Link
-                    className="hover:drop-shadow-md text-base-100 hover:text-base-100  bg-primary-100 dark:bg-secondary-100 leading-6 rounded-md bg-opacity-65 group relative overflow-hidden isolate"
+                    className="hover:drop-shadow-md text-base-100 hover:text-base-100  bg-primary-100 dark:bg-secondary-100 leading-6 bg-opacity-65 group relative overflow-hidden isolate rounded-md"
                     href={item.href}
                     key={index}
                   >

@@ -168,7 +168,7 @@ export default function ExperienceInfo() {
                       },
                       [BLOCKS.PARAGRAPH]: (node, children) => {
                         return (
-                          <p className="text-theme text-justify">{children}</p>
+                          <div className="text-theme text-justify">{children}</div>
                         );
                       },
                     },
