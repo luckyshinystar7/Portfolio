@@ -11,6 +11,12 @@ export const getServerSideProps = (async () => {
   const query = `query about($id: String!) {
     about(id: $id) {
       biography {json}
+      photosCollection {
+        total
+        items {
+          url
+        }
+      }
     }
   }
   `;
@@ -48,7 +54,17 @@ export const getServerSideProps = (async () => {
 }) satisfies GetServerSideProps<{ repo: any }>;
 
 export default function AboutInfo() {
-  const query = `query about($id: String!) {about(id: $id) {biography {json}}}`;
+  const query = `query about($id: String!) {
+    about(id: $id) {
+      biography {json}
+      photosCollection {
+        total
+        items {
+          url
+        }
+      }
+  }
+}`;
   const variables = {
     id: "4MXUZL1kYom5Ycxn8RhKBa",
   };
@@ -80,6 +96,7 @@ export default function AboutInfo() {
       ),
   });
 
+  console.log("data", data);
   isLoading && <div>Loading...</div>;
   error && <div>error</div>;
 
