@@ -100,7 +100,7 @@ export default function Home() {
           >
             About
           </motion.h2>
-          <motion.div
+          {/* <motion.div
             className="[grid-area:playlist] mt-8 md:mt-0"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -108,7 +108,7 @@ export default function Home() {
             viewport={{ once: true, amount: 0.5 }}
           >
             <div className="w-full h-40 border">Now Playing</div>
-          </motion.div>
+          </motion.div> */}
           <motion.div
             className="flex flex-row flex-wrap-reverse md:flex-nowrap gap-x-16
                [grid-area:bio]"

@@ -8,10 +8,17 @@ import Link from "next/link";
 import Image from "next/image";
 import useInterval from "@/utils/hooks/useInterval";
 import { useState } from "react";
+import { AnimatePresence, motion, useScroll } from "framer-motion";
 
 export default function AboutImage() {
   const query = `query about($id: String!) {
     about(id: $id) {
+      biography {
+        json
+      }
+      hoverPhoto{
+        url
+      }
       photosCollection {
         total
         items {
@@ -24,14 +31,17 @@ export default function AboutImage() {
     id: "4MXUZL1kYom5Ycxn8RhKBa",
   };
 
+  const MotionImage = motion(Image);
   const [counter, setCounter] = useState<number>(0);
+  const [hover, setHover] = useState<boolean>(false);
+
   useInterval(() => {
-    if (counter < data?.about?.photosCollection?.items?.length-1) {
+    if (counter < data?.about?.photosCollection?.items?.length - 1) {
       setCounter(counter + 1);
     } else {
       setCounter(0);
     }
-  }, 10000);
+  }, 7000);
 
   const { data, error, isLoading } = useQuery<any>({
     queryKey: ["about", variables?.id],
@@ -47,17 +57,28 @@ export default function AboutImage() {
       ),
   });
 
-  console.log("data", data, data?.about?.photosCollection?.items[0]?.url);
+  console.log("data", data?.about);
   isLoading && <div>Loading...</div>;
   error && <div>error</div>;
 
   return (
     <div className="relative w-full h-full">
-      <Image
-        alt="bio image"
-        src={data?.about?.photosCollection?.items[counter]?.url}
-        fill
-      />
+      <AnimatePresence mode="wait">
+        <MotionImage
+          alt="bio image"
+          src={
+            !hover
+              ? data?.about?.photosCollection?.items[counter]?.url
+              : data?.about?.hoverPhoto?.url
+          }
+          fill
+          initial={{ y: !hover ? -700 : 0, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: !hover ? 700 : 0, opacity: 0 }}
+          onMouseOver={() => setHover(true)}
+          onMouseOut={() => setHover(false)}
+        />
+      </AnimatePresence>
     </div>
   );
 }
