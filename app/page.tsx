@@ -12,6 +12,7 @@ import ContactInfo from "./(contact)/ContactInfo";
 import { motion } from "framer-motion";
 import Parallax from "@/components/Parallax";
 import Email from "./(contact)/Email";
+import AboutImage from "./(about)/AboutImage";
 
 const LABELS = [
   "Frontend Engineer",
@@ -87,8 +88,8 @@ export default function Home() {
         <section
           id="about"
           className="grid gap-x-16 grid-cols-1 md:grid-cols-5
-        [grid-template-areas:'title'_'image'_'bio']
-        md:[grid-template-areas:'title_title_title_image_image'_'bio_bio_bio_image_image'] auto-rows-min md:auto-rows-auto"
+        [grid-template-areas:'title'_'image'_'bio'_'playlist']
+        md:[grid-template-areas:'title_title_title_playlist_playlist'_'bio_bio_bio_image_image'] auto-rows-min md:auto-rows-auto"
         >
           <motion.h2
             initial={{ opacity: 0 }}
@@ -99,6 +100,15 @@ export default function Home() {
           >
             About
           </motion.h2>
+          {/* <motion.div
+            className="[grid-area:playlist] mt-8 md:mt-0"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 2 }}
+            viewport={{ once: true, amount: 0.5 }}
+          >
+            <div className="w-full h-40 border">Now Playing</div>
+          </motion.div> */}
           <motion.div
             className="flex flex-row flex-wrap-reverse md:flex-nowrap gap-x-16
                [grid-area:bio]"
@@ -107,23 +117,23 @@ export default function Home() {
             transition={{ duration: 2 }}
             viewport={{ once: true, amount: 0.5 }}
           >
-            {/* <div className="mt-16 md:mt-auto w-96 border">
-            <div>Now Playing</div>
-          </div> */}
-            <div className="text-sm md:text-base  md:mt-auto h-fit">
+            <div className="text-sm md:text-base md:mt-auto h-fit">
               <AboutInfo />
             </div>
           </motion.div>
           <motion.div
-            className="w-full bg-base-300 dark:bg-base-100 rounded-md bg-opacity-65 dark:bg-opacity-65
-            min-h-96
-          [grid-area:image] p-8"
+            //   className="w-full bg-base-300 dark:bg-base-100 rounded-md bg-opacity-65 dark:bg-opacity-65
+            //   min-h-96
+            // [grid-area:image] p-8"
+            className="mt-auto [grid-area:image] flex flex-col justify-between gap-8"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 2 }}
             viewport={{ once: true, amount: 0.5 }}
           >
-            Image Coming Soon :)
+            <div className="w-full aspect-[3/4]">
+              <AboutImage />
+            </div>
           </motion.div>
         </section>
       </Parallax>

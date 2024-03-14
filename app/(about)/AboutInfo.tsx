@@ -11,6 +11,12 @@ export const getServerSideProps = (async () => {
   const query = `query about($id: String!) {
     about(id: $id) {
       biography {json}
+      photosCollection {
+        total
+        items {
+          url
+        }
+      }
     }
   }
   `;
@@ -29,7 +35,7 @@ export const getServerSideProps = (async () => {
       body: JSON.stringify({ query, variables }),
     }
   );
-  console.log(res, "test");
+
   // const res = async () =>
   //   await request(
   //     `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`,
@@ -48,7 +54,22 @@ export const getServerSideProps = (async () => {
 }) satisfies GetServerSideProps<{ repo: any }>;
 
 export default function AboutInfo() {
-  const query = `query about($id: String!) {about(id: $id) {biography {json}}}`;
+  const query = `query about($id: String!) {
+    about(id: $id) {
+      biography {
+        json
+      }
+      hoverPhoto{
+        url
+      }
+      photosCollection {
+        total
+        items {
+          url
+        }
+      }
+  }
+}`;
   const variables = {
     id: "4MXUZL1kYom5Ycxn8RhKBa",
   };
