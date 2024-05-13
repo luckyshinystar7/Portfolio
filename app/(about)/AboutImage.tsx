@@ -29,7 +29,7 @@ export default function AboutImage() {
 }`;
   const variables = {
     id: "4MXUZL1kYom5Ycxn8RhKBa",
-  };
+  } as const;
 
   const MotionImage = motion(Image);
   const [counter, setCounter] = useState<number>(0);
