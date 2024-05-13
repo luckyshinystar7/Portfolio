@@ -176,7 +176,7 @@ export default function Home() {
                 </div> */}
               </motion.div>
             </div>
-            <div>
+            <div className="mt-16">
               <motion.h3
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
