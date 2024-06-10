@@ -164,7 +164,7 @@ export default function Home() {
                 viewport={{ once: true, amount: 0.5 }}
               >
                 <ExperienceInfo />
-                <div className="text-end mt-16">
+                {/* <div className="text-end mt-16">
                   <Link
                     className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-base-300 bg-base-200 bg-opacity-65 dark:bg-opacity-65 
             text-sm md:text-base rounded-md p-2 
@@ -173,10 +173,10 @@ export default function Home() {
                   >
                     View Full Resume (coming soon)
                   </Link>
-                </div>
+                </div> */}
               </motion.div>
             </div>
-            <div>
+            <div className="mt-16">
               <motion.h3
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
