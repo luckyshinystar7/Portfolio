@@ -149,11 +149,11 @@ export default function ProjectInfo() {
               projectItemHyperlinks.map((link, index) =>
                 link.includes("github.com") ? (
                   <Link href={link} key={index}>
-                    <GithubLogo className="inline" size={18} />
+                    <GithubLogo className="inline text-base-100 hover:text-secondary-200" size={18} />
                   </Link>
                 ) : link ? (
                   <LinkPreview url={link} key={index}>
-                    <LinkSimpleHorizontal className="inline" size={18} />
+                    <LinkSimpleHorizontal className="inline text-base-100 hover:text-secondary-200" size={18} />
                   </LinkPreview>
                 ) : (
                   <div className="w-[18px]" />
@@ -190,8 +190,6 @@ export default function ProjectInfo() {
             <Pagination
               className="flex flex-row justify-end"
               totalCount={data?.project?.projectCollection?.total}
-              skip={pagination?.skip}
-              setSkip={() => {}}
               pagination={pagination}
               setPagination={setPagination}
             />

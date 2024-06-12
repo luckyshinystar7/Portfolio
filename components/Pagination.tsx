@@ -11,8 +11,6 @@ const NAVIGATION_DIRECTION = {
 
 type Props = {
   totalCount: number;
-  skip: number;
-  setSkip: (skipValue: number) => void;
   hideText?: boolean;
   className?: string;
   pagination: any;
@@ -21,9 +19,6 @@ type Props = {
 
 export const Pagination = ({
   totalCount,
-  skip,
-  setSkip,
-
   hideText = false,
   className = "",
   pagination,
@@ -93,11 +88,16 @@ export const Pagination = ({
               <button
                 className={cn(
                   "inline-flex h-6 w-6 items-center justify-center leading-loose",
-                  "hover:rounded  hover:bg-primary-100 dark:hover:bg-secondary-100 hover:text-neutral-100 dark:hover:text-neutral-100 hover:font-bold ",
+                  "hover:rounded  hover:bg-primary-100 dark:hover:bg-secondary-100 hover:text-base-100 dark:hover:text-base-100 hover:font-bold ",
                   pageIndex === 0 &&
                     "rounded bg-neutral-3 font-bold text-primary-100 dark:text-secondary-100"
                 )}
-                onClick={() => setSkip(0)}
+                onClick={() =>
+                  setPagination({
+                    ...pagination,
+                    skip: 0,
+                  })
+                }
               >
                 1
               </button>
@@ -109,7 +109,7 @@ export const Pagination = ({
               key={pageNumber}
               className={cn(
                 "inline-flex h-6 w-6 items-center justify-center leading-loose",
-                "hover:rounded  hover:bg-primary-100 dark:hover:bg-secondary-100 hover:text-neutral-100 dark:hover:text-neutral-100 hover:font-bold ",
+                "hover:rounded  hover:bg-primary-100 dark:hover:bg-secondary-100 hover:text-base-100 dark:hover:text-base-100 hover:font-bold ",
                 pageIndex === pageNumber &&
                   "rounded bg-neutral-3 font-bold text-primary-100 dark:text-secondary-100"
               )}
@@ -134,7 +134,7 @@ export const Pagination = ({
               <button
                 className={cn(
                   "inline-flex h-6 w-6 items-center justify-center leading-loose",
-                  "hover:rounded hover:bg-primary-100 dark:hover:bg-secondary-100 hover:text-neutral-100 dark:hover:text-neutral-100 hover:font-bold",
+                  "hover:rounded hover:bg-primary-100 dark:hover:bg-secondary-100 hover:text-base-100 dark:hover:text-base-100 hover:font-bold",
                   pageIndex === pageCount - 1 &&
                     "rounded bg-neutral-3 font-bold text-primary-100 dark:text-secondary-100"
                 )}
@@ -157,10 +157,6 @@ export const Pagination = ({
           onClick={() =>
             setPagination({
               ...pagination,
-              //   skip: Math.min(
-              //     totalCount - pagination?.take,
-              //     pagination?.skip + pagination?.take
-              //   ),
               skip: pagination?.skip + pagination?.take,
             })
           }
