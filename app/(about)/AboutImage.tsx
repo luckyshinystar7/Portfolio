@@ -70,47 +70,23 @@ export default function AboutImage() {
   error && <div>error</div>;
 
   return (
-    // <div className="relative w-full h-full">
-    //   <AnimatePresence mode="wait">
-    //     <MotionImage
-    //       alt="bio image"
-    //       src={
-    //         !hover
-    //           ? data?.about?.photosCollection?.items[counter]?.url
-    //           : data?.about?.hoverPhoto?.url
-    //       }
-    //       fill
-    //       initial={{ y: !hover ? -700 : 0, opacity: 0 }}
-    //       animate={{ y: 0, opacity: 1 }}
-    //       exit={{ y: !hover ? 700 : 0, opacity: 0 }}
-    //       onMouseOver={() => setHover(true)}
-    //       onMouseOut={() => setHover(false)}
-    //     />
-    //   </AnimatePresence>
-    // </div>
     images && (
       <div
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
       >
         {!hover ? (
-          <ImagesSlider className="h-[30rem] md:h-[50rem]" images={images} />
+          <ImagesSlider
+            className="h-[30rem] md:h-[50rem] rounded-md"
+            images={images}
+          />
         ) : (
-          // <div className="overflow-hidden w-full relative flex items-center justify-center h-[30rem] md:h-[50rem]">
-          //   <Image
-          //     alt="bio image"
-          //     src={data?.about?.hoverPhoto?.url}
-          //     fill
-          //     className="image h-full w-full absolute inset-0 object-cover object-center"
-          //   />
-          // </div>
           <ImageContainer
             image={data?.about?.hoverPhoto?.url}
             alt="hover image"
-            className="h-[30rem] md:h-[50rem]"
+            className="h-[30rem] md:h-[50rem] rounded-md"
           />
         )}
-        
       </div>
     )
   );

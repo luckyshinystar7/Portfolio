@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { request } from "graphql-request";
 import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { createRef, useMemo, useRef, useState } from "react";
+import { createRef, useEffect, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
 import {
@@ -15,6 +15,7 @@ import {
 import { useBreakpoint } from "@/utils/hooks/useBreakpoint";
 import { motion } from "framer-motion";
 import { LinkPreview } from "@/components/LinkPreview";
+import { Pagination } from "@/components/Pagination";
 
 interface ProjectItemType {
   projectItemDescription: any;
@@ -25,9 +26,9 @@ interface ProjectItemType {
 }
 
 export default function ProjectInfo() {
-  const query = `query project($id: String!) {
+  const query = `query project($id: String!, $skip: Int!, $take: Int!) {
     project(id: $id) {
-      projectCollection(limit: 100) {
+      projectCollection(limit: $take, skip:$skip,) {
         total
         items {
           ... on ProjectItem {
@@ -46,20 +47,43 @@ export default function ProjectInfo() {
       }
     }
   }`;
+
   const variables = {
     id: "2Ntf4X5iFJuQLlnbWXhbWM",
   };
+  const { isAboveMd, isBelowMd, md } = useBreakpoint("md");
 
-  const [showMoreProjects, setShowMoreProjects] = useState<boolean>(false);
+  const [pagination, setPagination] = useState<{
+    skip: number;
+    take: number;
+    currentPage: number;
+  }>({
+    skip: 0,
+    take: !isBelowMd ? 3 : 2,
+    currentPage: 1,
+  });
+
+  useEffect(() => {
+    setPagination({ ...pagination, take: !isBelowMd ? 3 : 2 });
+  }, [isBelowMd]);
+
+  const changePage = (page: number) => {
+    setPagination({ ...pagination, skip: (page - 1) * pagination?.take });
+  };
+
   const revealRef = useRef(null);
   const listRef = createRef<HTMLDivElement>();
   const { data, error, isLoading } = useQuery<any>({
-    queryKey: ["project", variables?.id],
+    queryKey: ["project", variables?.id, pagination?.skip, pagination?.take],
     queryFn: async () =>
       await request(
         `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`,
         query,
-        variables,
+        {
+          id: variables?.id,
+          skip: pagination.skip,
+          take: pagination.take,
+        },
         {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN}`,
           "content-type": "application/json",
@@ -67,7 +91,21 @@ export default function ProjectInfo() {
       ),
   });
 
-  const { isAboveMd, isBelowMd, md } = useBreakpoint("md");
+  useEffect(() => {
+    if (data?.project?.projectCollection?.total) {
+      setPagination({
+        ...pagination,
+        currentPage:
+          pagination?.skip === 0
+            ? 1
+            : Math.floor(
+                data?.project?.projectCollection?.total / pagination.skip
+              ),
+      });
+    }
+  }, [data?.project?.projectCollection?.total, pagination.skip]);
+
+  console.log(pagination);
   const LinkRow = ({
     projectItemDescription,
     projectItemSkills,
@@ -118,7 +156,7 @@ export default function ProjectInfo() {
                     <LinkSimpleHorizontal className="inline" size={18} />
                   </LinkPreview>
                 ) : (
-                  <div className="w-[18px]"/>
+                  <div className="w-[18px]" />
                 )
               )}
           </div>
@@ -135,58 +173,30 @@ export default function ProjectInfo() {
         animate={{ opacity: 1, left: 0 }}
         transition={{ staggerChildren: 4, delayChildren: 20 }}
       >
-        {isBelowMd && data?.project?.projectCollection?.items.length > 2 ? (
-          <>
-            {data?.project?.projectCollection?.items
-              .slice(0, 2)
-              .map((item: ProjectItemType, index: number) => (
-                <LinkRow
-                  projectItemDescription={item?.projectItemDescription}
-                  projectItemHyperlinks={item?.projectItemHyperlinks}
-                  projectItemSkills={item?.projectItemSkills}
-                  projectItemTitle={item?.projectItemTitle}
-                  key={item?.projectItemTitle}
-                />
-              ))}
-
-            {showMoreProjects &&
-              data?.project?.projectCollection?.items
-                .slice(2)
-                .map((item: ProjectItemType, index: number) => (
-                  <LinkRow
-                    projectItemDescription={item?.projectItemDescription}
-                    projectItemHyperlinks={item?.projectItemHyperlinks}
-                    projectItemSkills={item?.projectItemSkills}
-                    projectItemTitle={item?.projectItemTitle}
-                    key={item?.projectItemTitle}
-                  />
-                ))}
-            <div className="text-end my-4">
-              <button
-                className="hover:text-theme-hover dark:bg-base-300 bg-base-200
-            text-sm md:text-base rounded-md p-2 "
-                onClick={() => {
-                  setShowMoreProjects(!showMoreProjects);
-                  showMoreProjects && listRef.current?.scrollIntoView();
-                }}
-              >
-                {showMoreProjects ? "Show Less" : "Show More"}
-              </button>
-            </div>
-          </>
-        ) : (
-          data?.project?.projectCollection?.items.map(
-            (item: ProjectItemType, index: number) => (
-              <LinkRow
-                projectItemDescription={item?.projectItemDescription}
-                projectItemHyperlinks={item?.projectItemHyperlinks}
-                projectItemSkills={item?.projectItemSkills}
-                projectItemTitle={item?.projectItemTitle}
-                key={item?.projectItemTitle}
-              />
-            )
+        {data?.project?.projectCollection?.items.map(
+          (item: ProjectItemType, index: number) => (
+            <LinkRow
+              projectItemDescription={item?.projectItemDescription}
+              projectItemHyperlinks={item?.projectItemHyperlinks}
+              projectItemSkills={item?.projectItemSkills}
+              projectItemTitle={item?.projectItemTitle}
+              key={item?.projectItemTitle}
+            />
           )
         )}
+
+        <div className="my-4">
+          {data && (
+            <Pagination
+              className="flex flex-row justify-end"
+              totalCount={data?.project?.projectCollection?.total}
+              skip={pagination?.skip}
+              setSkip={() => {}}
+              pagination={pagination}
+              setPagination={setPagination}
+            />
+          )}
+        </div>
       </motion.ul>
       <div
         className="pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[220px] rounded-lg bg-cover bg-center opacity-0 transition-[background] duration-300"
