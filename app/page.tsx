@@ -2,7 +2,12 @@
 import AboutInfo from "@/app/(about)/AboutInfo";
 import ExperienceInfo from "./(experience)/ExperienceInfo";
 import Link from "next/link";
-import { ArrowCircleDown, ArrowUpRight, EnvelopeSimple, PaperPlaneTilt } from "@phosphor-icons/react";
+import {
+  ArrowCircleDown,
+  ArrowUpRight,
+  EnvelopeSimple,
+  PaperPlaneTilt,
+} from "@phosphor-icons/react";
 import IntervalLabel from "@/components/IntervalLabel";
 import ProjectInfo from "./(projects)/ProjectInfo";
 import { useEffect, useRef, useState } from "react";
@@ -14,12 +19,13 @@ import Parallax from "@/components/Parallax";
 import Email from "./(contact)/Email";
 import AboutImage from "./(about)/AboutImage";
 import { Button } from "@/components/MovingBorder";
+import { Typewriter, TypewriterSmooth } from "@/components/Typewriter";
+
 
 const LABELS = [
-  "Software Engineer",
+  "Software Developer",
   "Designer",
   "Photographer",
-  "Creative Developer",
 ];
 
 export default function Home() {
@@ -46,14 +52,15 @@ export default function Home() {
       >
         <div className="col-span-2 md:col-span-1">
           <div className="md:mt-64">
-            <motion.h5
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 2 }}
-              viewport={{ once: true, amount: 0.5 }}
-            >
-              Hi, I&apos;m
-            </motion.h5>
+            <Typewriter
+              className="text-left text-lg md:text-xl flex items-start" 
+              cursorClassName="hidden"
+              words={[
+                { text: "Hi" },
+                { text: "," },
+                { text: "I'm" },
+              ]}
+            />
             <h1>Frank Wei</h1>
           </div>
           <motion.h3
@@ -209,17 +216,26 @@ export default function Home() {
           >
             Let&apos;s Connect!
           </motion.h4>
-          <h3>Reach out to me on:</h3>
+          <Typewriter
+            className="text-left text-2xl md:text-3xl flex items-start font-bold"
+            words={[
+              { text: "Reach" },
+              { text: "out" },
+              { text: "to" },
+              { text: "me" },
+              { text: "at:" },
+            ]}
+          />
 
           <div className="grow flex flex-col">
             <Link
               href={`mailto:${Email().email}`}
               // className="border-b w-fit ml-auto self-end mt-auto mb-32 hover:anchor-hover text-theme border-theme hover:text-theme-hover"
-              className="w-fit ml-auto self-end mt-auto mb-32 hover:anchor-hover text-theme border-theme hover:text-theme-hover bg-opacity-10 rounded-md"
+              className="w-fit ml-auto self-end mt-auto mb-32"
               passHref
             >
-              <Button>
-                <div className="p-2 flex items-center" >
+              <Button className="bg-base-100 dark:bg-base-400 rounded-md text-theme hover:anchor-hover hover:text-theme-hover">
+                <div className="p-2 flex items-center">
                   <EnvelopeSimple size={32} className="inline p-1" />
                   <h3 className="inline mb-0 ">{Email().email}</h3>
                 </div>
