@@ -6,9 +6,10 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { useMemo, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
-import { Link as LinkIcon, ArrowUpRight } from "@phosphor-icons/react";
+import { Link as LinkIcon, ArrowUpRight, LinkSimpleHorizontal } from "@phosphor-icons/react";
 import { twMerge } from "tailwind-merge";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { LinkPreview } from "@/components/LinkPreview";
 
 export default function ExperienceInfo() {
   const [experienceTabState, setExperienceTab] = useState<string | undefined>(
@@ -142,18 +143,25 @@ export default function ExperienceInfo() {
                     renderMark: {
                       [MARKS.ITALIC]: (text) => (
                         <div className="dark:text-base-100 text-base-400 italic text-sm flex flex-row justify-between mb-2">
-                          {text}
+                  
                           <div className="border-b w-fit hover:text-theme-hover">
-                            <Link
+                            {/* <Link
                               href={
                                 experienceDescrptions[experienceTabState]?.link
                               }
                               target="_blank"
                             >
                               <ArrowUpRight className="inline" size={16} />
-                              {/* {experienceDescrptions[experienceTabState]?.title} */}
-                            </Link>
+                            </Link> */}
+                            <LinkPreview
+                              url={
+                                experienceDescrptions[experienceTabState]?.link
+                              }
+                            >
+                              <LinkSimpleHorizontal className="inline" size={18} />
+                            </LinkPreview>
                           </div>
+                          {text}
                         </div>
                       ),
                     },
@@ -168,7 +176,9 @@ export default function ExperienceInfo() {
                       },
                       [BLOCKS.PARAGRAPH]: (node, children) => {
                         return (
-                          <div className="text-theme text-justify">{children}</div>
+                          <div className="text-theme text-justify">
+                            {children}
+                          </div>
                         );
                       },
                     },

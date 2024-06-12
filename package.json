@@ -11,6 +11,7 @@
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.19.0",
     "@phosphor-icons/react": "^2.0.15",
+    "@radix-ui/react-hover-card": "^1.0.7",
     "@tanstack/react-query": "^5.17.15",
     "clsx": "^2.1.0",
     "contentful": "^10.6.16",
@@ -18,6 +19,7 @@
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
     "next": "14.0.4",
+    "qss": "^3.0.0",
     "react": "^18",
     "react-dom": "^18",
     "react-responsive": "^9.0.2",
