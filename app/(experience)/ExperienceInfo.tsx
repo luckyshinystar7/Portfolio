@@ -6,7 +6,11 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { useMemo, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
-import { Link as LinkIcon, ArrowUpRight, LinkSimpleHorizontal } from "@phosphor-icons/react";
+import {
+  Link as LinkIcon,
+  ArrowUpRight,
+  LinkSimpleHorizontal,
+} from "@phosphor-icons/react";
 import { twMerge } from "tailwind-merge";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { LinkPreview } from "@/components/LinkPreview";
@@ -142,26 +146,20 @@ export default function ExperienceInfo() {
                   {
                     renderMark: {
                       [MARKS.ITALIC]: (text) => (
-                        <div className="dark:text-base-100 text-base-400 italic text-sm flex flex-row justify-between mb-2">
-                  
+                        <div className="dark:text-base-100 text-base-400 italic text-sm flex flex-row-reverse md:flex-row justify-between mb-2 ">
                           <div className="border-b w-fit hover:text-theme-hover">
-                            {/* <Link
-                              href={
-                                experienceDescrptions[experienceTabState]?.link
-                              }
-                              target="_blank"
-                            >
-                              <ArrowUpRight className="inline" size={16} />
-                            </Link> */}
                             <LinkPreview
                               url={
                                 experienceDescrptions[experienceTabState]?.link
                               }
                             >
-                              <LinkSimpleHorizontal className="inline" size={18} />
+                              <LinkSimpleHorizontal
+                                className="inline"
+                                size={18}
+                              />
                             </LinkPreview>
                           </div>
-                          {text}
+                          <div>{text}</div>
                         </div>
                       ),
                     },

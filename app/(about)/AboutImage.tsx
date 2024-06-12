@@ -65,7 +65,7 @@ export default function AboutImage() {
       setImages(items);
     }
   }, [data]);
-  console.log("data", images, data?.about?.hoverPhoto?.url);
+
   isLoading && <div>Loading...</div>;
   error && <div>error</div>;
 

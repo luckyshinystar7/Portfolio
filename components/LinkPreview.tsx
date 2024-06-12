@@ -70,7 +70,8 @@ export const LinkPreview = ({
   const handleMouseMove = (event: any) => {
     const targetRect = event.target.getBoundingClientRect();
     const eventOffsetX = event.clientX - targetRect.left;
-    const offsetFromCenter = (eventOffsetX - targetRect.width / 2) / 2; // Reduce the effect to make it subtle
+    // const offsetFromCenter = (eventOffsetX - targetRect.width / 2) / 2; // Reduce the effect to make it subtle
+    const offsetFromCenter = (eventOffsetX - targetRect.width / 2) /2; // Reduce the effect to make it subtle
     x.set(offsetFromCenter);
   };
 
@@ -83,7 +84,7 @@ export const LinkPreview = ({
             width={width}
             height={height}
             quality={quality}
-            layout={layout}
+            // layout={layout}
             priority={true}
             alt="hidden image"
           />
@@ -142,7 +143,7 @@ export const LinkPreview = ({
                     width={width}
                     height={height}
                     quality={quality}
-                    layout={layout}
+                    // layout={layout}
                     priority={true}
                     className="rounded-lg"
                     alt="preview image"
