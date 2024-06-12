@@ -2,7 +2,7 @@
 import AboutInfo from "@/app/(about)/AboutInfo";
 import ExperienceInfo from "./(experience)/ExperienceInfo";
 import Link from "next/link";
-import { ArrowCircleDown, ArrowUpRight } from "@phosphor-icons/react";
+import { ArrowCircleDown, ArrowUpRight, EnvelopeSimple, PaperPlaneTilt } from "@phosphor-icons/react";
 import IntervalLabel from "@/components/IntervalLabel";
 import ProjectInfo from "./(projects)/ProjectInfo";
 import { useEffect, useRef, useState } from "react";
@@ -13,9 +13,10 @@ import { motion } from "framer-motion";
 import Parallax from "@/components/Parallax";
 import Email from "./(contact)/Email";
 import AboutImage from "./(about)/AboutImage";
+import { Button } from "@/components/MovingBorder";
 
 const LABELS = [
-  "Frontend Engineer",
+  "Software Engineer",
   "Designer",
   "Photographer",
   "Creative Developer",
@@ -38,6 +39,7 @@ export default function Home() {
 
   return (
     <main>
+      {/* <Background/> */}
       <section
         id="home"
         className="grid grid-cols-2 auto-rows-min md:auto-rows-auto"
@@ -117,7 +119,7 @@ export default function Home() {
             transition={{ duration: 2 }}
             viewport={{ once: true, amount: 0.5 }}
           >
-            <div className="text-sm md:text-base md:mt-auto h-fit">
+            <div className="text-sm md:text-base md:mt-auto h-fit pointer-events-none">
               <AboutInfo />
             </div>
           </motion.div>
@@ -208,15 +210,23 @@ export default function Home() {
             Let&apos;s Connect!
           </motion.h4>
           <h3>Reach out to me on:</h3>
+
           <div className="grow flex flex-col">
             <Link
               href={`mailto:${Email().email}`}
-              className="border-b w-fit ml-auto self-end mt-auto mb-32 hover:anchor-hover text-theme border-theme hover:text-theme-hover"
+              // className="border-b w-fit ml-auto self-end mt-auto mb-32 hover:anchor-hover text-theme border-theme hover:text-theme-hover"
+              className="w-fit ml-auto self-end mt-auto mb-32 hover:anchor-hover text-theme border-theme hover:text-theme-hover bg-opacity-10 rounded-md"
+              passHref
             >
-              <ArrowUpRight size={32} className="inline" />
-              <h3 className="inline ">{Email().email}</h3>
+              <Button>
+                <div className="p-2 flex items-center" >
+                  <EnvelopeSimple size={32} className="inline p-1" />
+                  <h3 className="inline mb-0 ">{Email().email}</h3>
+                </div>
+              </Button>
             </Link>
           </div>
+
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
