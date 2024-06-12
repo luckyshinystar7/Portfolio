@@ -67,7 +67,6 @@ export default function ProjectInfo() {
       ),
   });
 
-  console.log(data, "wtff");
   const { isAboveMd, isBelowMd, md } = useBreakpoint("md");
   const LinkRow = ({
     projectItemDescription,
