@@ -6,9 +6,10 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { createRef, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
-import { Link as LinkIcon, ArrowUpRight } from "@phosphor-icons/react";
+import { Link as LinkIcon, ArrowUpRight, LinkSimpleHorizontal } from "@phosphor-icons/react";
 import { useBreakpoint } from "@/utils/hooks/useBreakpoint";
 import { motion } from "framer-motion";
+import { LinkPreview } from "@/components/LinkPreview";
 
 interface ProjectItemType {
   projectItemDescription: any;
@@ -68,7 +69,7 @@ export default function ProjectInfo() {
     projectItemTitle,
   }: ProjectItemType) => {
     return (
-      <Link href={projectItemHyperlink} target="_blank" passHref>
+      <LinkPreview url={projectItemHyperlink}>
         <li
           className="grid grid-cols-3 md:grid-cols-12 gap-x-8 border-b-2 py-4 pl-4 group hover:text-theme-hover hover:border-theme-hover
           [grid-template-areas:'title_title_link'_'info_info_info'] 
@@ -100,10 +101,10 @@ export default function ProjectInfo() {
             className=" my-auto ml-auto
       [grid-area:link]"
           >
-            <ArrowUpRight className="inline" size={24} />
+            <LinkSimpleHorizontal className="inline" size={24} />
           </div>
         </li>
-      </Link>
+      </LinkPreview>
     );
   };
 

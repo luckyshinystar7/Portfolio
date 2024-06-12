@@ -31,7 +31,7 @@
 
 @layer base {
   body {
-    @apply dark:bg-base-400 dark:text-base-100 bg-base-100 text-base-400;
+    @apply dark:bg-base-400 dark:text-base-100 bg-base-100 text-base-400 overflow-x-hidden;
     transition-property: background-color, filter, backdrop-filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
