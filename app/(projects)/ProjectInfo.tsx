@@ -190,8 +190,6 @@ export default function ProjectInfo() {
             <Pagination
               className="flex flex-row justify-end"
               totalCount={data?.project?.projectCollection?.total}
-              skip={pagination?.skip}
-              setSkip={() => {}}
               pagination={pagination}
               setPagination={setPagination}
             />

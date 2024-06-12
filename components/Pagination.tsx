@@ -11,8 +11,6 @@ const NAVIGATION_DIRECTION = {
 
 type Props = {
   totalCount: number;
-  skip: number;
-  setSkip: (skipValue: number) => void;
   hideText?: boolean;
   className?: string;
   pagination: any;
@@ -21,9 +19,6 @@ type Props = {
 
 export const Pagination = ({
   totalCount,
-  skip,
-  setSkip,
-
   hideText = false,
   className = "",
   pagination,
@@ -97,7 +92,12 @@ export const Pagination = ({
                   pageIndex === 0 &&
                     "rounded bg-neutral-3 font-bold text-primary-100 dark:text-secondary-100"
                 )}
-                onClick={() => setSkip(0)}
+                onClick={() =>
+                  setPagination({
+                    ...pagination,
+                    skip: 0,
+                  })
+                }
               >
                 1
               </button>
@@ -157,10 +157,6 @@ export const Pagination = ({
           onClick={() =>
             setPagination({
               ...pagination,
-              //   skip: Math.min(
-              //     totalCount - pagination?.take,
-              //     pagination?.skip + pagination?.take
-              //   ),
               skip: pagination?.skip + pagination?.take,
             })
           }
