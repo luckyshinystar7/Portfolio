@@ -6,14 +6,19 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { createRef, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import Link from "next/link";
-import { Link as LinkIcon, ArrowUpRight, LinkSimpleHorizontal } from "@phosphor-icons/react";
+import {
+  Link as LinkIcon,
+  ArrowUpRight,
+  LinkSimpleHorizontal,
+  GithubLogo,
+} from "@phosphor-icons/react";
 import { useBreakpoint } from "@/utils/hooks/useBreakpoint";
 import { motion } from "framer-motion";
 import { LinkPreview } from "@/components/LinkPreview";
 
 interface ProjectItemType {
   projectItemDescription: any;
-  projectItemHyperlink: string;
+  projectItemHyperlinks: string[];
   projectItemSkills: string[];
   projectItemTitle: string;
   projectItemThumbnail?: { url: string };
@@ -29,6 +34,7 @@ export default function ProjectInfo() {
             projectItemTitle
             projectItemSkills
             projectItemHyperlink
+            projectItemHyperlinks 
             projectItemDescription {
               json
             }
@@ -64,16 +70,16 @@ export default function ProjectInfo() {
   const { isAboveMd, isBelowMd, md } = useBreakpoint("md");
   const LinkRow = ({
     projectItemDescription,
-    projectItemHyperlink,
     projectItemSkills,
     projectItemTitle,
+    projectItemHyperlinks,
   }: ProjectItemType) => {
     return (
-      <LinkPreview url={projectItemHyperlink}>
+      <div>
         <li
           className="grid grid-cols-3 md:grid-cols-12 gap-x-8 border-b-2 py-4 pl-4 group hover:text-theme-hover hover:border-theme-hover
           [grid-template-areas:'title_title_link'_'info_info_info'] 
-          md:[grid-template-areas:'title_title_title_title_info_info_info_info_info_info_info_link']"
+          md:[grid-template-areas:'title_title_title_title_link_info_info_info_info_info_info_info']"
         >
           <h5
             className="my-auto text-theme group-hover:text-theme-hover
@@ -98,13 +104,26 @@ export default function ProjectInfo() {
             </div>
           </div>
           <div
-            className=" my-auto ml-auto
-      [grid-area:link]"
+            className=" my-auto ml-auto md:ml-0
+      [grid-area:link] flex flex-row justify-between gap-4"
           >
-            <LinkSimpleHorizontal className="inline" size={24} />
+            {projectItemHyperlinks &&
+              projectItemHyperlinks.map((link, index) =>
+                link.includes("github.com") ? (
+                  <Link href={link} key={index}>
+                    <GithubLogo className="inline" size={18} />
+                  </Link>
+                ) : link ? (
+                  <LinkPreview url={link} key={index}>
+                    <LinkSimpleHorizontal className="inline" size={18} />
+                  </LinkPreview>
+                ) : (
+                  <div className="w-[18px]"/>
+                )
+              )}
           </div>
         </li>
-      </LinkPreview>
+      </div>
     );
   };
 
@@ -123,7 +142,7 @@ export default function ProjectInfo() {
               .map((item: ProjectItemType, index: number) => (
                 <LinkRow
                   projectItemDescription={item?.projectItemDescription}
-                  projectItemHyperlink={item?.projectItemHyperlink}
+                  projectItemHyperlinks={item?.projectItemHyperlinks}
                   projectItemSkills={item?.projectItemSkills}
                   projectItemTitle={item?.projectItemTitle}
                   key={item?.projectItemTitle}
@@ -136,7 +155,7 @@ export default function ProjectInfo() {
                 .map((item: ProjectItemType, index: number) => (
                   <LinkRow
                     projectItemDescription={item?.projectItemDescription}
-                    projectItemHyperlink={item?.projectItemHyperlink}
+                    projectItemHyperlinks={item?.projectItemHyperlinks}
                     projectItemSkills={item?.projectItemSkills}
                     projectItemTitle={item?.projectItemTitle}
                     key={item?.projectItemTitle}
@@ -160,7 +179,7 @@ export default function ProjectInfo() {
             (item: ProjectItemType, index: number) => (
               <LinkRow
                 projectItemDescription={item?.projectItemDescription}
-                projectItemHyperlink={item?.projectItemHyperlink}
+                projectItemHyperlinks={item?.projectItemHyperlinks}
                 projectItemSkills={item?.projectItemSkills}
                 projectItemTitle={item?.projectItemTitle}
                 key={item?.projectItemTitle}
