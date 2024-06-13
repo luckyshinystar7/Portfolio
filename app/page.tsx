@@ -28,7 +28,7 @@ const LABELS = ["Software Developer", "Designer", "Photographer"];
 
 export default function Home() {
   const [darkState, setDarkState] = useState<boolean>(false);
-
+  const [darkHoverState, setDarkHoverState] = useState<boolean>(false);
   useEffect(() => {
     if (
       localStorage.getItem("color-theme") === "dark" ||
@@ -40,6 +40,24 @@ export default function Home() {
       setDarkState(false);
     }
   }, []);
+
+  const socialDragRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+
+  const modifyTarget = (target: any) => {
+    if (contactRef.current && socialDragRef.current) {
+      const appRect = contactRef.current.getBoundingClientRect();
+      const pipRect = socialDragRef.current.getBoundingClientRect();
+      const pipMiddleX = pipRect.width / 2;
+      const pipMiddleY = pipRect.height / 2;
+      if (target + pipMiddleX > appRect.width / 2) {
+        return appRect.width;
+      } else if (target + pipMiddleY > appRect.height / 2) {
+        return appRect.height;
+      }
+      return 0;
+    }
+  };
 
   return (
     <main>
@@ -69,18 +87,30 @@ export default function Home() {
         </div>
         <div className="col-span-2 md:col-span-1 mt-32 md:my-auto mx-auto">
           <motion.button
+            // drag
             aria-label="dark mode toggle"
-            className="button-icon hover:text-theme-hover"
+            className="button-icon hover:text-theme-hover group"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2 }}
             viewport={{ once: true, amount: 0.5 }}
+            whileHover={{ scale: 1.2, transition: { y: 6 } }}
             onClick={() => {
               toggleDarkMode();
               setDarkState(!darkState);
             }}
           >
-            {!!darkState ? <Sun size={"20rem"} /> : <Moon size={"20rem"} />}
+            {!!darkState ? (
+              <Sun
+                size={"20rem"}
+                className="group-hover:animate-bounce ease-in-out"
+              />
+            ) : (
+              <Moon
+                size={"20rem"}
+                className="group-hover:animate-bounce ease-in-out"
+              />
+            )}
           </motion.button>
         </div>
       </section>
@@ -162,7 +192,7 @@ export default function Home() {
                 viewport={{ once: true, amount: 0.5 }}
               >
                 <ExperienceInfo />
-               {/* <ExperienceInfoTabs/> */}
+                {/* <ExperienceInfoTabs/> */}
                 {/* <div className="text-end mt-16">
                   <Link
                     className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-base-300 bg-base-200 bg-opacity-65 dark:bg-opacity-65 
@@ -197,7 +227,7 @@ export default function Home() {
         </section>
       </Parallax>
       <Parallax>
-        <section id="contact" className="flex flex-col">
+        <section id="contact" className="flex flex-col" ref={contactRef}>
           <motion.h4
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -217,7 +247,7 @@ export default function Home() {
             ]}
           />
 
-          <div className="grow flex flex-col">
+          <motion.div className="grow flex flex-col">
             <Link
               href={`mailto:${Email().email}`}
               // className="border-b w-fit ml-auto self-end mt-auto mb-32 hover:anchor-hover text-theme border-theme hover:text-theme-hover"
@@ -231,13 +261,18 @@ export default function Home() {
                 </div>
               </Button>
             </Link>
-          </div>
+          </motion.div>
 
           <motion.div
+            ref={socialDragRef}
             initial={{ opacity: 0 }}
+            dragConstraints={contactRef}
+            dragMomentum={false}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 2 }}
             viewport={{ once: true, amount: 0.5 }}
+            drag
+            className="bg-base-200 dark:bg-base-300 p-2 w-fit rounded-md cursor-move"
           >
             <ContactInfo />
           </motion.div>
