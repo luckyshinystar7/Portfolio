@@ -160,6 +160,7 @@ export default function ProjectInfo() {
                     <LinkSimpleHorizontal
                       className="inline text-base-400 dark:text-base-100 hover:text-theme-hover"
                       size={18}
+                      alt={link}
                     />
                   </LinkPreview>
                 ) : (

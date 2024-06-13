@@ -41,11 +41,11 @@ export default function ContactInfo() {
   const renderLogo = (logo: string) => {
     switch (logo) {
       case "Github":
-        return <GithubLogo size={24} />;
+        return <GithubLogo size={24} alt="GitHub Profile"/>;
       case "Linkedin":
-        return <LinkedinLogo size={24} />;
+        return <LinkedinLogo size={24} alt="Linkedin Profile"/>;
       case "Instagram":
-        return <InstagramLogo size={24} />;
+        return <InstagramLogo size={24} alt="Instagram Profile"/>;
       default:
         return <></>;
     }

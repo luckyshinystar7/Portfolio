@@ -156,6 +156,10 @@ export default function ExperienceInfo() {
                               <LinkSimpleHorizontal
                                 className="inline hover:text-theme-hover"
                                 size={18}
+                                alt={
+                                  experienceDescrptions[experienceTabState]
+                                    ?.link
+                                }
                               />
                             </LinkPreview>
                           </div>
