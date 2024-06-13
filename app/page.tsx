@@ -24,6 +24,7 @@ import { Typewriter, TypewriterSmooth } from "@/components/Typewriter";
 import { Tabs } from "@/components/Tabs";
 import ExperienceInfoTabs from "./(experience)/ExperienceInfoTabs";
 import { Boxes } from "@/components/Boxes";
+import { TextSequenceEffect } from "@/components/TextSequence";
 
 const LABELS = ["Software Developer", "Designer", "Photographer"];
 
@@ -58,7 +59,10 @@ export default function Home() {
               cursorClassName="hidden"
               words={[{ text: "Hi" }, { text: "," }, { text: "I'm" }]}
             />
-            <h1>Frank Wei</h1>
+            <TextSequenceEffect
+              words="Frank Wei"
+              className="text-6xl md:text-8xl"
+            />
           </div>
           <motion.div
             initial={{ opacity: 0 }}
