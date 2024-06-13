@@ -137,7 +137,7 @@ export default function Home() {
             transition={{ duration: 2 }}
             viewport={{ once: true, amount: 0.5 }}
           >
-            <div className="w-full aspect-[3/4]">
+            <div className="w-full">
               <AboutImage />
             </div>
           </motion.div>

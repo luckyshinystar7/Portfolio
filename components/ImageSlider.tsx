@@ -2,7 +2,7 @@
 import { cn } from "@/utils/cn";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
- 
+
 export const ImagesSlider = ({
   images,
   children,
@@ -23,23 +23,23 @@ export const ImagesSlider = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [loadedImages, setLoadedImages] = useState<string[]>([]);
- 
+
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex + 1 === images.length ? 0 : prevIndex + 1
     );
   };
- 
+
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex - 1 < 0 ? images.length - 1 : prevIndex - 1
     );
   };
- 
+
   useEffect(() => {
     loadImages();
   }, []);
- 
+
   const loadImages = () => {
     setLoading(true);
     const loadPromises = images.map((image) => {
@@ -50,7 +50,7 @@ export const ImagesSlider = ({
         img.onerror = reject;
       });
     });
- 
+
     Promise.all(loadPromises)
       .then((loadedImages) => {
         setLoadedImages(loadedImages as string[]);
@@ -66,9 +66,9 @@ export const ImagesSlider = ({
         handlePrevious();
       }
     };
- 
+
     window.addEventListener("keydown", handleKeyDown);
- 
+
     // autoplay
     let interval: any;
     if (autoplay) {
@@ -76,13 +76,13 @@ export const ImagesSlider = ({
         handleNext();
       }, 5000);
     }
- 
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       clearInterval(interval);
     };
   }, []);
- 
+
   const slideVariants = {
     initial: {
       scale: 0,
@@ -113,9 +113,9 @@ export const ImagesSlider = ({
       },
     },
   };
- 
+
   const areImagesLoaded = loadedImages.length > 0;
- 
+
   return (
     <div
       className={cn(
@@ -132,7 +132,7 @@ export const ImagesSlider = ({
           className={cn("absolute inset-0 bg-black/60 z-40", overlayClassName)}
         />
       )}
- 
+
       {areImagesLoaded && (
         <AnimatePresence>
           <motion.img
@@ -143,6 +143,7 @@ export const ImagesSlider = ({
             exit={direction === "up" ? "upExit" : "downExit"}
             variants={slideVariants}
             className="image h-full w-full absolute inset-0 object-cover object-center"
+            alt={`image-slider_` + loadedImages[currentIndex]}
           />
         </AnimatePresence>
       )}
