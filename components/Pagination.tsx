@@ -68,6 +68,7 @@ export const Pagination = ({
       )}
       <div className="flex items-center gap-3">
         <button
+          name="previous page"
           type="button"
           className="disabled:opacity-10"
           onClick={() => {
@@ -152,6 +153,7 @@ export const Pagination = ({
           )}
         </div>
         <button
+          name="next page"
           type="button"
           className="disabled:opacity-10"
           onClick={() =>

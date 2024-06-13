@@ -21,12 +21,7 @@ import AboutImage from "./(about)/AboutImage";
 import { Button } from "@/components/MovingBorder";
 import { Typewriter, TypewriterSmooth } from "@/components/Typewriter";
 
-
-const LABELS = [
-  "Software Developer",
-  "Designer",
-  "Photographer",
-];
+const LABELS = ["Software Developer", "Designer", "Photographer"];
 
 export default function Home() {
   const [darkState, setDarkState] = useState<boolean>(false);
@@ -48,32 +43,30 @@ export default function Home() {
       {/* <Background/> */}
       <section
         id="home"
-        className="grid grid-cols-2 auto-rows-min md:auto-rows-auto" 
+        className="grid grid-cols-2 auto-rows-min md:auto-rows-auto"
       >
         <div className="col-span-2 md:col-span-1  md:my-auto">
           <div className="">
             <Typewriter
-              className="text-left text-lg md:text-xl flex items-start" 
+              className="text-left text-lg md:text-xl flex items-start"
               cursorClassName="hidden"
-              words={[
-                { text: "Hi" },
-                { text: "," },
-                { text: "I'm" },
-              ]}
+              words={[{ text: "Hi" }, { text: "," }, { text: "I'm" }]}
             />
             <h1>Frank Wei</h1>
           </div>
-          <motion.h3
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 2 }}
             viewport={{ once: true, amount: 0.5 }}
+            className="text-lg md:text-xl"
           >
             <IntervalLabel labels={LABELS} />
-          </motion.h3>
+          </motion.div>
         </div>
         <div className="col-span-2 md:col-span-1 md:my-auto mx-auto">
           <motion.button
+            name="dark mode toggle"
             className="button-icon hover:text-theme-hover"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
