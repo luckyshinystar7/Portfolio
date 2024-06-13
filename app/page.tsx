@@ -269,7 +269,7 @@ export default function Home() {
           <motion.div
             drag
             dragConstraints={contactRef}
-            className="cursor-move invisible md:visible"
+            className="cursor-move hidden md:block"
           >
             <Boxes darkState={darkState} />
           </motion.div>
