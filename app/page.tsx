@@ -6,6 +6,7 @@ import {
   ArrowCircleDown,
   ArrowUpRight,
   EnvelopeSimple,
+  Moon,
   PaperPlaneTilt,
 } from "@phosphor-icons/react";
 import IntervalLabel from "@/components/IntervalLabel";
@@ -20,6 +21,9 @@ import Email from "./(contact)/Email";
 import AboutImage from "./(about)/AboutImage";
 import { Button } from "@/components/MovingBorder";
 import { Typewriter, TypewriterSmooth } from "@/components/Typewriter";
+import { Tabs } from "@/components/Tabs";
+import ExperienceInfoTabs from "./(experience)/ExperienceInfoTabs";
+import { Boxes } from "@/components/Boxes";
 
 const LABELS = ["Software Developer", "Designer", "Photographer"];
 
@@ -37,6 +41,8 @@ export default function Home() {
       setDarkState(false);
     }
   }, []);
+
+  const contactRef = useRef<HTMLDivElement>(null);
 
   return (
     <main>
@@ -66,21 +72,29 @@ export default function Home() {
         </div>
         <div className="col-span-2 md:col-span-1 mt-32 md:my-auto mx-auto">
           <motion.button
+            // drag
             aria-label="dark mode toggle"
-            className="button-icon hover:text-theme-hover"
+            className="button-icon hover:text-theme-hover group"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2 }}
             viewport={{ once: true, amount: 0.5 }}
+            whileHover={{ scale: 1.2, transition: { y: 6 } }}
             onClick={() => {
               toggleDarkMode();
               setDarkState(!darkState);
             }}
           >
             {!!darkState ? (
-              <Sun size={"20rem"} />
+              <Sun
+                size={"20rem"}
+                // className="group-hover:animate-bounce ease-in-out"
+              />
             ) : (
-              <Sunglasses size={"20rem"} />
+              <Moon
+                size={"20rem"}
+                // className="group-hover:animate-bounce ease-in-out"
+              />
             )}
           </motion.button>
         </div>
@@ -163,6 +177,7 @@ export default function Home() {
                 viewport={{ once: true, amount: 0.5 }}
               >
                 <ExperienceInfo />
+                {/* <ExperienceInfoTabs/> */}
                 {/* <div className="text-end mt-16">
                   <Link
                     className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-base-300 bg-base-200 bg-opacity-65 dark:bg-opacity-65 
@@ -197,17 +212,18 @@ export default function Home() {
         </section>
       </Parallax>
       <Parallax>
-        <section id="contact" className="flex flex-col">
+        <section id="contact" className="flex flex-col" ref={contactRef}>
           <motion.h4
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 2 }}
             viewport={{ once: true, amount: 0.5 }}
+            className="z-20 bg-base-100 dark:bg-base-400 w-fit bg-opacity-80 dark:bg-opacity-80"
           >
             Let&apos;s Connect!
           </motion.h4>
           <Typewriter
-            className="text-left text-2xl md:text-3xl flex items-start font-bold"
+            className="text-left text-2xl md:text-3xl flex items-start font-bold z-20 bg-base-100 dark:bg-base-400 w-fit bg-opacity-80 dark:bg-opacity-80"
             words={[
               { text: "Reach" },
               { text: "out" },
@@ -217,31 +233,38 @@ export default function Home() {
             ]}
           />
 
-          <div className="grow flex flex-col">
+          <motion.div className="grow flex flex-col">
             <Link
               href={`mailto:${Email().email}`}
               // className="border-b w-fit ml-auto self-end mt-auto mb-32 hover:anchor-hover text-theme border-theme hover:text-theme-hover"
-              className="w-fit ml-auto self-end mt-auto mb-32"
+              className="w-fit ml-auto self-end mt-auto mb-32 z-20 "
               passHref
             >
-              <Button className="bg-base-100 dark:bg-base-400 rounded-md text-theme hover:anchor-hover hover:text-theme-hover">
+              <Button className="bg-base-100 dark:bg-base-400 rounded-md text-theme hover:anchor-hover hover:text-theme-hover bg-opacity-80 dark:bg-opacity-80">
                 <div className="p-2 flex items-center">
                   <EnvelopeSimple size={32} className="inline p-1" />
                   <h3 className="inline mb-0 ">{Email().email}</h3>
                 </div>
               </Button>
             </Link>
-          </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
+            dragConstraints={contactRef}
+            dragMomentum={false}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 2 }}
             viewport={{ once: true, amount: 0.5 }}
+            drag
+            className="bg-base-200 dark:bg-base-300 p-2 w-fit rounded-md cursor-move z-20 bg-opacity-80 dark:bg-opacity-80"
           >
             <ContactInfo />
           </motion.div>
-          {/* <ContactInfo /> */}
+
+          <motion.div drag dragConstraints={contactRef} className="cursor-move">
+            <Boxes darkState={darkState} />
+          </motion.div>
         </section>
       </Parallax>
     </main>
