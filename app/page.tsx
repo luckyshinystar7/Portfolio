@@ -64,7 +64,7 @@ export default function Home() {
             <IntervalLabel labels={LABELS} />
           </motion.div>
         </div>
-        <div className="col-span-2 md:col-span-1 md:my-auto mx-auto">
+        <div className="col-span-2 md:col-span-1 mt-32 md:my-auto mx-auto">
           <motion.button
             aria-label="dark mode toggle"
             className="button-icon hover:text-theme-hover"
