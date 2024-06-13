@@ -148,7 +148,7 @@ export default function ProjectInfo() {
             {projectItemHyperlinks &&
               projectItemHyperlinks.map((link, index) =>
                 link.includes("github.com") ? (
-                  <Link href={link} key={index}>
+                  <Link title="github link" href={link} key={index}>
                     <GithubLogo
                       className="inline text-base-400 dark:text-base-100 hover:text-theme-hover"
                       size={18}
