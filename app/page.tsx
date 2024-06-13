@@ -23,12 +23,13 @@ import { Button } from "@/components/MovingBorder";
 import { Typewriter, TypewriterSmooth } from "@/components/Typewriter";
 import { Tabs } from "@/components/Tabs";
 import ExperienceInfoTabs from "./(experience)/ExperienceInfoTabs";
+import { Boxes } from "@/components/Boxes";
 
 const LABELS = ["Software Developer", "Designer", "Photographer"];
 
 export default function Home() {
   const [darkState, setDarkState] = useState<boolean>(false);
-  const [darkHoverState, setDarkHoverState] = useState<boolean>(false);
+
   useEffect(() => {
     if (
       localStorage.getItem("color-theme") === "dark" ||
@@ -41,23 +42,7 @@ export default function Home() {
     }
   }, []);
 
-  const socialDragRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-
-  const modifyTarget = (target: any) => {
-    if (contactRef.current && socialDragRef.current) {
-      const appRect = contactRef.current.getBoundingClientRect();
-      const pipRect = socialDragRef.current.getBoundingClientRect();
-      const pipMiddleX = pipRect.width / 2;
-      const pipMiddleY = pipRect.height / 2;
-      if (target + pipMiddleX > appRect.width / 2) {
-        return appRect.width;
-      } else if (target + pipMiddleY > appRect.height / 2) {
-        return appRect.height;
-      }
-      return 0;
-    }
-  };
 
   return (
     <main>
@@ -103,12 +88,12 @@ export default function Home() {
             {!!darkState ? (
               <Sun
                 size={"20rem"}
-                className="group-hover:animate-bounce ease-in-out"
+                // className="group-hover:animate-bounce ease-in-out"
               />
             ) : (
               <Moon
                 size={"20rem"}
-                className="group-hover:animate-bounce ease-in-out"
+                // className="group-hover:animate-bounce ease-in-out"
               />
             )}
           </motion.button>
@@ -233,11 +218,12 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 2 }}
             viewport={{ once: true, amount: 0.5 }}
+            className="z-20 bg-base-100 dark:bg-base-400 w-fit bg-opacity-80 dark:bg-opacity-80"
           >
             Let&apos;s Connect!
           </motion.h4>
           <Typewriter
-            className="text-left text-2xl md:text-3xl flex items-start font-bold"
+            className="text-left text-2xl md:text-3xl flex items-start font-bold z-20 bg-base-100 dark:bg-base-400 w-fit bg-opacity-80 dark:bg-opacity-80"
             words={[
               { text: "Reach" },
               { text: "out" },
@@ -251,10 +237,10 @@ export default function Home() {
             <Link
               href={`mailto:${Email().email}`}
               // className="border-b w-fit ml-auto self-end mt-auto mb-32 hover:anchor-hover text-theme border-theme hover:text-theme-hover"
-              className="w-fit ml-auto self-end mt-auto mb-32"
+              className="w-fit ml-auto self-end mt-auto mb-32 z-20 "
               passHref
             >
-              <Button className="bg-base-100 dark:bg-base-400 rounded-md text-theme hover:anchor-hover hover:text-theme-hover">
+              <Button className="bg-base-100 dark:bg-base-400 rounded-md text-theme hover:anchor-hover hover:text-theme-hover bg-opacity-80 dark:bg-opacity-80">
                 <div className="p-2 flex items-center">
                   <EnvelopeSimple size={32} className="inline p-1" />
                   <h3 className="inline mb-0 ">{Email().email}</h3>
@@ -264,7 +250,6 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            ref={socialDragRef}
             initial={{ opacity: 0 }}
             dragConstraints={contactRef}
             dragMomentum={false}
@@ -272,11 +257,14 @@ export default function Home() {
             transition={{ duration: 2 }}
             viewport={{ once: true, amount: 0.5 }}
             drag
-            className="bg-base-200 dark:bg-base-300 p-2 w-fit rounded-md cursor-move"
+            className="bg-base-200 dark:bg-base-300 p-2 w-fit rounded-md cursor-move z-20 bg-opacity-80 dark:bg-opacity-80"
           >
             <ContactInfo />
           </motion.div>
-          {/* <ContactInfo /> */}
+
+          <motion.div drag dragConstraints={contactRef} className="cursor-move">
+            <Boxes darkState={darkState} />
+          </motion.div>
         </section>
       </Parallax>
     </main>
