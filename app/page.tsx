@@ -72,7 +72,7 @@ export default function Home() {
             <IntervalLabel labels={LABELS} />
           </motion.h3>
         </div>
-        <div className="col-span-2 md:col-span-1 mt-16 md:my-auto mx-auto">
+        <div className="col-span-2 md:col-span-1 md:my-auto mx-auto">
           <motion.button
             className="button-icon hover:text-theme-hover"
             initial={{ opacity: 0 }}
@@ -131,9 +131,6 @@ export default function Home() {
             </div>
           </motion.div>
           <motion.div
-            //   className="w-full bg-base-300 dark:bg-base-100 rounded-md bg-opacity-65 dark:bg-opacity-65
-            //   min-h-96
-            // [grid-area:image] p-8"
             className="mt-auto [grid-area:image] flex flex-col justify-between gap-8"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
