@@ -116,7 +116,7 @@ export default function ExperienceInfo() {
                   onClick={() => setExperienceTab(item?.cvItemTitle)}
                   className="w-full h-full text-start p-4"
                 >
-                  <h5>{item?.cvItemTitle}</h5>
+                  <div className="text-lg md:text-xl">{item?.cvItemTitle}</div>
                   {/* <div>{documentToReactComponents(item?.cvItemDescription.json)}</div> */}
                 </motion.button>
                 {item?.cvItemTitle === experienceTabState && (

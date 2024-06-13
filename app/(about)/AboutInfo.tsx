@@ -114,7 +114,7 @@ export default function AboutInfo() {
           href={node?.data?.uri}
           target="_blank"
           className="text-theme hover:anchor-hover pointer-events-auto"
-          title="portfolio github link"
+          title={node?.data?.uri}
         >
           {children}
         </Link>

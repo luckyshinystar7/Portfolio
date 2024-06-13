@@ -105,7 +105,6 @@ export default function ProjectInfo() {
     }
   }, [data?.project?.projectCollection?.total, pagination.skip]);
 
-  console.log(pagination);
   const LinkRow = ({
     projectItemDescription,
     projectItemSkills,
@@ -119,12 +118,12 @@ export default function ProjectInfo() {
           [grid-template-areas:'title_title_link'_'info_info_info'] 
           md:[grid-template-areas:'title_title_title_title_link_info_info_info_info_info_info_info']"
         >
-          <h5
-            className="my-auto text-theme group-hover:text-theme-hover
+          <div
+            className="text-lg md:text-xl my-auto text-theme group-hover:text-theme-hover
       [grid-area:title]"
           >
             {projectItemTitle}
-          </h5>
+          </div>
           <div
             className="flex-col gap-2 flex
       [grid-area:info]"
