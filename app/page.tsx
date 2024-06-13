@@ -48,10 +48,10 @@ export default function Home() {
       {/* <Background/> */}
       <section
         id="home"
-        className="grid grid-cols-2 auto-rows-min md:auto-rows-auto"
+        className="grid grid-cols-2 auto-rows-min md:auto-rows-auto" 
       >
-        <div className="col-span-2 md:col-span-1">
-          <div className="md:mt-64">
+        <div className="col-span-2 md:col-span-1  md:my-auto">
+          <div className="">
             <Typewriter
               className="text-left text-lg md:text-xl flex items-start" 
               cursorClassName="hidden"
