@@ -115,7 +115,7 @@ export default function ExperienceInfo() {
                   animate={{ opacity: 1 }}
                   transition={{ staggerChildren: 1, delayChildren: 1 }}
                   onClick={() => setExperienceTab(item?.cvItemTitle)}
-                  className="w-full h-full text-start p-4"
+                  className="w-full h-full text-start p-4 md:py-6"
                 >
                   <div className="text-lg md:text-xl">{item?.cvItemTitle}</div>
                   {/* <div>{documentToReactComponents(item?.cvItemDescription.json)}</div> */}
