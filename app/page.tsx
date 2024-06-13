@@ -66,7 +66,7 @@ export default function Home() {
         </div>
         <div className="col-span-2 md:col-span-1 md:my-auto mx-auto">
           <motion.button
-            name="dark mode toggle"
+            aria-label="dark mode toggle"
             className="button-icon hover:text-theme-hover"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
