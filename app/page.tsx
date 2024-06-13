@@ -6,6 +6,7 @@ import {
   ArrowCircleDown,
   ArrowUpRight,
   EnvelopeSimple,
+  Moon,
   PaperPlaneTilt,
 } from "@phosphor-icons/react";
 import IntervalLabel from "@/components/IntervalLabel";
@@ -20,6 +21,8 @@ import Email from "./(contact)/Email";
 import AboutImage from "./(about)/AboutImage";
 import { Button } from "@/components/MovingBorder";
 import { Typewriter, TypewriterSmooth } from "@/components/Typewriter";
+import { Tabs } from "@/components/Tabs";
+import ExperienceInfoTabs from "./(experience)/ExperienceInfoTabs";
 
 const LABELS = ["Software Developer", "Designer", "Photographer"];
 
@@ -77,11 +80,7 @@ export default function Home() {
               setDarkState(!darkState);
             }}
           >
-            {!!darkState ? (
-              <Sun size={"20rem"} />
-            ) : (
-              <Sunglasses size={"20rem"} />
-            )}
+            {!!darkState ? <Sun size={"20rem"} /> : <Moon size={"20rem"} />}
           </motion.button>
         </div>
       </section>
@@ -163,6 +162,7 @@ export default function Home() {
                 viewport={{ once: true, amount: 0.5 }}
               >
                 <ExperienceInfo />
+               {/* <ExperienceInfoTabs/> */}
                 {/* <div className="text-end mt-16">
                   <Link
                     className="hover:text-orange-600 hover:dark:text-orange-400 dark:bg-base-300 bg-base-200 bg-opacity-65 dark:bg-opacity-65 
