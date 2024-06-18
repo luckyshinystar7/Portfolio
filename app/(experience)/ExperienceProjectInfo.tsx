@@ -1,14 +1,10 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { request } from "graphql-request";
-import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { createRef, useEffect, useMemo, useRef, useState } from "react";
-import clsx from "clsx";
 import Link from "next/link";
 import {
-  Link as LinkIcon,
-  ArrowUpRight,
   LinkSimpleHorizontal,
   GithubLogo,
 } from "@phosphor-icons/react";
@@ -25,7 +21,7 @@ interface ProjectItemType {
   projectItemThumbnail?: { url: string };
 }
 
-export default function ProjectInfo() {
+export default function ExperienceProjectInfo() {
   const query = `query project($id: String!, $skip: Int!, $take: Int!) {
     project(id: $id) {
       projectCollection(limit: $take, skip:$skip,) {
