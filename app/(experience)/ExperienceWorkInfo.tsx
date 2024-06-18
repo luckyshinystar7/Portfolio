@@ -14,9 +14,8 @@ import {
 import { twMerge } from "tailwind-merge";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { LinkPreview } from "@/components/LinkPreview";
-import { Tabs } from "@/components/Tabs";
 
-export default function ExperienceInfo() {
+export default function ExperienceWorkInfo() {
   const [experienceTabState, setExperienceTab] = useState<string | undefined>(
     undefined
   );

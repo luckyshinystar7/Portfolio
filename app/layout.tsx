@@ -6,7 +6,7 @@ import Script from "next/script";
 import { setDarkMode } from "@/public/scripts/darkMode";
 import QueryProvider from "@/utils/queryProvider";
 import ContactInfo from "./(contact)/ContactInfo";
-
+import { Boxes } from "@/components/Boxes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +33,6 @@ export default function RootLayout({
         <title>Frank Wei | Portfolio</title>
       </head>
       <body className={inter.className}>
-
         <QueryProvider>
           <LayoutHeader />
           <div id="root" className="breakpoint-x overflow-hidden">
