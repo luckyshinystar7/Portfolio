@@ -1,10 +1,9 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { request } from "graphql-request";
-import Image from "next/image";
 import Link from "next/link";
-import { Envelope, InstagramLogo, LinkedinLogo, GithubLogo } from "@phosphor-icons/react";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { InstagramLogo, LinkedinLogo, GithubLogo } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
 
 export default function ContactInfo() {
   const query = `query contact($id: String!) {
@@ -41,11 +40,11 @@ export default function ContactInfo() {
   const renderLogo = (logo: string) => {
     switch (logo) {
       case "Github":
-        return <GithubLogo size={24} alt="GitHub Profile"/>;
+        return <GithubLogo size={24} alt="GitHub Profile" />;
       case "Linkedin":
-        return <LinkedinLogo size={24} alt="Linkedin Profile"/>;
+        return <LinkedinLogo size={24} alt="Linkedin Profile" />;
       case "Instagram":
-        return <InstagramLogo size={24} alt="Instagram Profile"/>;
+        return <InstagramLogo size={24} alt="Instagram Profile" />;
       default:
         return <></>;
     }

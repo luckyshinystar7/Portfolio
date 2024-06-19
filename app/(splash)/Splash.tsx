@@ -29,7 +29,7 @@ export default function Splash() {
       id="home"
       className="grid grid-cols-2 auto-rows-min md:auto-rows-auto"
     >
-      <div className="col-span-2 md:col-span-1  md:my-auto">
+      <div className="col-span-2 md:col-span-1  md:my-auto z-10">
         <div className="">
           <Typewriter
             className="text-left text-lg md:text-xl flex items-start"
@@ -51,7 +51,7 @@ export default function Splash() {
           <IntervalLabel labels={LABELS} />
         </motion.div>
       </div>
-      <div className="col-span-2 md:col-span-1 mt-32 md:my-auto mx-auto">
+      <div className="col-span-2 md:col-span-1 mt-32 md:my-auto mx-auto z-10">
         <motion.button
           // drag
           aria-label="dark mode toggle"

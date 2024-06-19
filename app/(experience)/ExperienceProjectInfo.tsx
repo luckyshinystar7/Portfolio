@@ -162,24 +162,25 @@ export default function ExperienceProjectInfo() {
 
   return (
     <motion.div layout ref={listRef} transition={{ when: "beforeChildren" }}>
-      <motion.ul
+      <motion.div
         className="flex flex-col"
         initial={{ opacity: 0, left: -100 }}
         animate={{ opacity: 1, left: 0 }}
         transition={{ staggerChildren: 4, delayChildren: 20 }}
       >
-        {data?.project?.projectCollection?.items.map(
-          (item: ProjectItemType, index: number) => (
-            <LinkRow
-              projectItemDescription={item?.projectItemDescription}
-              projectItemHyperlinks={item?.projectItemHyperlinks}
-              projectItemSkills={item?.projectItemSkills}
-              projectItemTitle={item?.projectItemTitle}
-              key={item?.projectItemTitle}
-            />
-          )
-        )}
-
+        <ul>
+          {data?.project?.projectCollection?.items.map(
+            (item: ProjectItemType, index: number) => (
+              <LinkRow
+                projectItemDescription={item?.projectItemDescription}
+                projectItemHyperlinks={item?.projectItemHyperlinks}
+                projectItemSkills={item?.projectItemSkills}
+                projectItemTitle={item?.projectItemTitle}
+                key={item?.projectItemTitle}
+              />
+            )
+          )}
+        </ul>
         <div className="my-4">
           {data && (
             <Pagination
@@ -190,7 +191,7 @@ export default function ExperienceProjectInfo() {
             />
           )}
         </div>
-      </motion.ul>
+      </motion.div>
       <div
         className="pointer-events-none absolute left-0 top-0 -z-10 h-[320px] w-[220px] rounded-lg bg-cover bg-center opacity-0 transition-[background] duration-300"
         ref={revealRef}
