@@ -31,18 +31,18 @@ export default function About() {
     </motion.div> */}
       <motion.div
         className="flex flex-row flex-wrap-reverse md:flex-nowrap gap-x-16
-         [grid-area:bio]"
+         [grid-area:bio] "
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 2 }}
         viewport={{ once: true, amount: 0.5 }}
       >
-        <div className="text-sm md:text-base md:mt-auto h-fit pointer-events-none">
+        <div className="text-sm md:text-base md:mt-auto h-fit pointer-events-none ">
           <AboutInfo />
         </div>
       </motion.div>
       <motion.div
-        className="mt-auto [grid-area:image] flex flex-col justify-between gap-8"
+        className="mt-auto [grid-area:image] flex flex-col justify-between gap-8 "
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 2 }}
