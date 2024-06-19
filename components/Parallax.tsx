@@ -2,7 +2,6 @@
 import { useState, useRef, useLayoutEffect, ReactNode } from "react";
 import {
   motion,
-  useViewportScroll,
   useScroll,
   useTransform,
   useSpring,
@@ -42,6 +41,7 @@ const Parallax = ({ children, offset = 50 }: ParallaxProps): JSX.Element => {
     return () => window.removeEventListener("resize", onResize);
   }, [parallaxRef]);
 
+  console.log('wtf2', elementTop, clientHeight)
   if (prefersReducedMotion) {
     return <>{children}</>;
   }

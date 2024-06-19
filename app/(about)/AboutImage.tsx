@@ -1,15 +1,9 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { request, gql, GraphQLClient } from "graphql-request";
-import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
-import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import Link from "next/link";
-import useInterval from "@/utils/hooks/useInterval";
+import { request } from "graphql-request";
 import { SetStateAction, useEffect, useState } from "react";
-import { AnimatePresence, motion, useScroll } from "framer-motion";
-import { ImageContainer } from "@/components/ImageContainer";
 import { ImagesSlider } from "@/components/ImageSlider";
+import Image from "next/image";
 
 export default function AboutImage() {
   const query = `query about($id: String!) {
@@ -31,16 +25,7 @@ export default function AboutImage() {
   const variables = {
     id: "4MXUZL1kYom5Ycxn8RhKBa",
   } as const;
-  const [counter, setCounter] = useState<number>(0);
-  const [hover, setHover] = useState<boolean>(false);
   const [images, setImages] = useState<any[]>();
-  useInterval(() => {
-    if (counter < data?.about?.photosCollection?.items?.length - 1) {
-      setCounter(counter + 1);
-    } else {
-      setCounter(0);
-    }
-  }, 7000);
 
   const { data, error, isLoading } = useQuery<any>({
     queryKey: ["about", variables?.id],
@@ -71,23 +56,19 @@ export default function AboutImage() {
 
   return (
     images && (
-      <div
-        onMouseOver={() => setHover(true)}
-        onMouseOut={() => setHover(false)}
+      <ImagesSlider
+        className="h-[30rem] md:h-[50rem] rounded-md group transition-all"
+        images={images}
       >
-        {!hover ? (
-          <ImagesSlider
-            className="h-[30rem] md:h-[50rem] rounded-md"
-            images={images}
-          />
-        ) : (
-          <ImageContainer
-            image={data?.about?.hoverPhoto?.url}
+        <div className="invisible group-hover:visible z-10">
+          <Image
+            src={data?.about?.hoverPhoto?.url}
             alt="hover image"
-            className="h-[30rem] md:h-[50rem] rounded-md"
+            fill
+            className="image h-full w-full absolute inset-0 object-cover object-center"
           />
-        )}
-      </div>
+        </div>
+      </ImagesSlider>
     )
   );
 }

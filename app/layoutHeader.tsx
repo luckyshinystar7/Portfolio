@@ -12,7 +12,6 @@ const NAVIGATION = [
   { label: "Home", href: "#" },
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
-  // { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
 export default function LayoutHeader({}: {}) {
@@ -51,9 +50,7 @@ export default function LayoutHeader({}: {}) {
       >
         <div className="flex flex-row ml-auto w-fit justify-end drop-shadow-md px-4 py-2 dark:bg-base-100  dark:text-base-400 bg-base-300 bg-opacity-90 dark:bg-opacity-90 text-base-100 rounded-md">
           {isClient && isBelowMd ? (
-            <button
-              onClick={() => setNavOpen(true)}
-            >
+            <button onClick={() => setNavOpen(true)}>
               <List size={24} />
             </button>
           ) : (
@@ -64,6 +61,7 @@ export default function LayoutHeader({}: {}) {
                     className="hover:drop-shadow-md text-base-100 hover:text-base-100  bg-primary-100 dark:bg-secondary-100 leading-6 bg-opacity-65 group relative overflow-hidden isolate rounded-md"
                     href={item.href}
                     key={index}
+                    passHref  
                   >
                     <div className="flex flex-row gap-1 items-center p-2 z-20">
                       <ArrowUpRight size={18} className="inline" />
@@ -79,6 +77,7 @@ export default function LayoutHeader({}: {}) {
                     className="hover:text-theme leading-6"
                     href={item.href}
                     key={index}
+                    passHref
                   >
                     {item.label}
                   </Link>
