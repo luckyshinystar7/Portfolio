@@ -147,7 +147,7 @@ export default function ExperienceWorkInfo() {
                     renderMark: {
                       [MARKS.ITALIC]: (text) => (
                         <div className="dark:text-base-100 text-base-400 italic text-sm flex flex-row-reverse md:flex-row justify-between mb-2 ">
-                          <div className="border-b hover:border-theme-hover w-fit">
+                          <div>
                             <LinkPreview
                               url={
                                 experienceDescrptions[experienceTabState]?.link
