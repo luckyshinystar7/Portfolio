@@ -63,7 +63,7 @@ export default function ContactInfo() {
   };
 
   return (
-    <motion.ul
+    <motion.div
       variants={container}
       initial="hidden"
       animate="show"
@@ -78,11 +78,11 @@ export default function ContactInfo() {
               passHref
               className="hover:text-theme-hover"
             >
-              <li className="list-none">{renderLogo(item?.socialTitle)}</li>
+              <div>{renderLogo(item?.socialTitle)}</div>
             </Link>
           </motion.div>
         )
       )}
-    </motion.ul>
+    </motion.div>
   );
 }
