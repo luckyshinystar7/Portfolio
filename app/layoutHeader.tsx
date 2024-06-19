@@ -9,7 +9,7 @@ import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 
 const NAVIGATION = [
-  { label: "Home", href: "#" },
+  { label: "Home", href: "#top" },
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
@@ -61,7 +61,7 @@ export default function LayoutHeader({}: {}) {
                     className="hover:drop-shadow-md text-base-100 hover:text-base-100  bg-primary-100 dark:bg-secondary-100 leading-6 bg-opacity-65 group relative overflow-hidden isolate rounded-md"
                     href={item.href}
                     key={index}
-                    passHref  
+                    shallow
                   >
                     <div className="flex flex-row gap-1 items-center p-2 z-20">
                       <ArrowUpRight size={18} className="inline" />
@@ -77,7 +77,7 @@ export default function LayoutHeader({}: {}) {
                     className="hover:text-theme leading-6"
                     href={item.href}
                     key={index}
-                    passHref
+                    shallow
                   >
                     {item.label}
                   </Link>
@@ -115,6 +115,7 @@ export default function LayoutHeader({}: {}) {
                       href={item.href}
                       key={index}
                       onClick={() => setNavOpen(false)}
+                      shallow
                     >
                       <ArrowUpRight size={18} className="inline" />
                       {item.label}
@@ -125,6 +126,7 @@ export default function LayoutHeader({}: {}) {
                       href={item.href}
                       key={index}
                       onClick={() => setNavOpen(false)}
+                      shallow
                     >
                       {item.label}
                     </Link>
