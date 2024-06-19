@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
 import Parallax from "@/components/Parallax";
 import Experience from "./(experience)/Experience";
 import About from "./(about)/About";

@@ -62,13 +62,13 @@ export default function Contact() {
         <ContactInfo />
       </motion.div>
 
-      <motion.div
+      {/* <motion.div
         drag
         dragConstraints={contactRef}
         className="cursor-move hidden md:block"
       >
         <Boxes darkState={true} />
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }
