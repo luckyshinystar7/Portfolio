@@ -5,8 +5,6 @@ import LayoutHeader from "./layoutHeader";
 import Script from "next/script";
 import { setDarkMode } from "@/public/scripts/darkMode";
 import QueryProvider from "@/utils/queryProvider";
-import ContactInfo from "./(contact)/ContactInfo";
-import { Boxes } from "@/components/Boxes";
 
 const inter = Inter({ subsets: ["latin"] });
 

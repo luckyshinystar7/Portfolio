@@ -4,10 +4,7 @@ import { request } from "graphql-request";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { createRef, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import {
-  LinkSimpleHorizontal,
-  GithubLogo,
-} from "@phosphor-icons/react";
+import { LinkSimpleHorizontal, GithubLogo } from "@phosphor-icons/react";
 import { useBreakpoint } from "@/utils/hooks/useBreakpoint";
 import { motion } from "framer-motion";
 import { LinkPreview } from "@/components/LinkPreview";
@@ -108,63 +105,58 @@ export default function ExperienceProjectInfo() {
     projectItemHyperlinks,
   }: ProjectItemType) => {
     return (
-      <div>
-        <li
-          className="grid grid-cols-3 md:grid-cols-12 gap-x-8 border-b-2 py-4 pl-4 group hover:text-theme-hover hover:border-theme-hover
+      <li
+        className="grid grid-cols-3 md:grid-cols-12 gap-x-8 border-b-2 py-4 pl-4 group hover:text-theme-hover hover:border-theme-hover
           [grid-template-areas:'title_title_link'_'info_info_info'] 
           md:[grid-template-areas:'title_title_title_title_link_info_info_info_info_info_info_info']"
-        >
-          <div
-            className="text-lg md:text-xl my-auto text-theme group-hover:text-theme-hover
+      >
+        <div
+          className="text-lg md:text-xl my-auto text-theme group-hover:text-theme-hover
       [grid-area:title]"
-          >
-            {projectItemTitle}
-          </div>
-          <div
-            className="flex-col gap-2 flex
+        >
+          {projectItemTitle}
+        </div>
+        <div
+          className="flex-col gap-2 flex
       [grid-area:info]"
-          >
-            {documentToReactComponents(projectItemDescription.json)}
-            <div className="flex flex-row gap-2 flex-wrap">
-              {projectItemSkills?.map((skill: string, index) => (
-                <div
-                  className="pill"
-                  key={`${projectItemTitle}_skill_${index}`}
-                >
-                  {skill}
-                </div>
-              ))}
-            </div>
+        >
+          {documentToReactComponents(projectItemDescription.json)}
+          <div className="flex flex-row gap-2 flex-wrap">
+            {projectItemSkills?.map((skill: string, index) => (
+              <div className="pill" key={`${projectItemTitle}_skill_${index}`}>
+                {skill}
+              </div>
+            ))}
           </div>
-          <div
-            className=" my-auto ml-auto md:ml-0
+        </div>
+        <div
+          className=" my-auto ml-auto md:ml-0
       [grid-area:link] flex flex-row justify-between gap-4"
-          >
-            {projectItemHyperlinks &&
-              projectItemHyperlinks.map((link, index) =>
-                link.includes("github.com") ? (
-                  <Link href={link} key={index}>
-                    <GithubLogo
-                      className="inline text-base-400 dark:text-base-100 hover:text-theme-hover"
-                      size={18}
-                      alt={link}
-                    />
-                  </Link>
-                ) : link ? (
-                  <LinkPreview url={link} key={index}>
-                    <LinkSimpleHorizontal
-                      className="inline text-base-400 dark:text-base-100 hover:text-theme-hover"
-                      size={18}
-                      alt={link}
-                    />
-                  </LinkPreview>
-                ) : (
-                  <div className="w-[18px]" />
-                )
-              )}
-          </div>
-        </li>
-      </div>
+        >
+          {projectItemHyperlinks &&
+            projectItemHyperlinks.map((link, index) =>
+              link.includes("github.com") ? (
+                <Link href={link} key={index}>
+                  <GithubLogo
+                    className="inline text-base-400 dark:text-base-100 hover:text-theme-hover"
+                    size={18}
+                    alt={link}
+                  />
+                </Link>
+              ) : link ? (
+                <LinkPreview url={link} key={index}>
+                  <LinkSimpleHorizontal
+                    className="inline text-base-400 dark:text-base-100 hover:text-theme-hover"
+                    size={18}
+                    alt={link}
+                  />
+                </LinkPreview>
+              ) : (
+                <div className="w-[18px]" />
+              )
+            )}
+        </div>
+      </li>
     );
   };
 
