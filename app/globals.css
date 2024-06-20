@@ -52,7 +52,7 @@
     @apply text-lg md:text-xl;
   }
   section {
-    @apply min-h-screen py-8 md:py-24;
+    @apply min-h-screen py-8;
   }
 }
 :root {
