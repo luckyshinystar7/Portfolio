@@ -56,9 +56,8 @@ export default function AboutImage() {
   error && <div>error</div>;
 
   return (
-    <CardContainer containerClassName="py-0 justify-end">
-      <CardBody className="h-full">
-        {images && (
+
+        images && (
           <ImagesSlider
             className="h-[30rem] md:h-[50rem] rounded-md group transition-all"
             images={images}
@@ -72,8 +71,7 @@ export default function AboutImage() {
               />
             </div>
           </ImagesSlider>
-        )}
-      </CardBody>
-    </CardContainer>
+        )
+
   );
 }
