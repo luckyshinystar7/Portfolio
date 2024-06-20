@@ -13,7 +13,7 @@ export default function Contact() {
   const contactRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="contact" className="flex flex-col" ref={contactRef}>
+    <section id="contact" className="flex flex-col overflow-hidden" ref={contactRef}>
       <motion.h4
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -61,14 +61,6 @@ export default function Contact() {
       >
         <ContactInfo />
       </motion.div>
-
-      {/* <motion.div
-        drag
-        dragConstraints={contactRef}
-        className="cursor-move hidden md:block"
-      >
-        <Boxes darkState={true} />
-      </motion.div> */}
     </section>
   );
 }
