@@ -9,7 +9,7 @@ export default function About() {
       id="about"
       className="grid gap-x-16 grid-cols-1 md:grid-cols-5
   [grid-template-areas:'title'_'image'_'bio'_'playlist']
-  md:[grid-template-areas:'title_title_title_playlist_playlist'_'bio_bio_bio_image_image'] auto-rows-min md:auto-rows-auto"
+  md:[grid-template-areas:'title_title_title_image_image'_'bio_bio_bio_image_image'] auto-rows-min md:auto-rows-auto"
     >
       <motion.h2
         initial={{ opacity: 0 }}
